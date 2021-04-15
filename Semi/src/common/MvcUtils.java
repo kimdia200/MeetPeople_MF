@@ -80,7 +80,6 @@ public class MvcUtils {
 		
 		//1. 이전
 		if(pageNo != 1 ) {
-//			pageBar.append("<a href='"+url+"?cPage="+(pageNo-1)+"'/></a>");
 			pageBar.append("<a href='"+url+"cPage="+(pageNo-1)+"'/>prev</a>\n");
 		}
 		//2. pageNo
