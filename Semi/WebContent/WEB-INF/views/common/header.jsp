@@ -98,6 +98,8 @@
 			
 		<ol>
 			<li><a href="">전체</a></li>
+			<li><a href="<%=request.getContextPath()%>/meeting/meetingEnrollUpdate">mt:enrollUpdate</a></li>
+			<li><a href="<%=request.getContextPath()%>/meeting/meetingView">mt:View</a></li>
 			<li><a href="">음악</a></li>
 			<li><a href="">게임</a></li>
 			<li><a href="">운동</a></li>

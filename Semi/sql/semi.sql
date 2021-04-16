@@ -214,3 +214,5 @@ select * from admin_board;
 insert into admin_board(board_no, title, writer, content) values(seq_admin_board.nextval, '제목16', 'admin', '내용1');
 commit;
 
+
+
