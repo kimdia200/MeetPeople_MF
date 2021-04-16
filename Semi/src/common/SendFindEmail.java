@@ -1,11 +1,5 @@
 package common;
 
-import static common.JDBCTemplate.close;
-import static common.JDBCTemplate.commit;
-import static common.JDBCTemplate.getConnection;
-import static common.JDBCTemplate.rollback;
-
-import java.sql.Connection;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -19,8 +13,8 @@ import member.model.vo.Member;
 
 public class SendFindEmail {
 
-	final String username = "lila230011";
-	final String password = "alvmf1234";
+	final String username = "meetpeople.kh";
+	final String password = "meetpeople.kh";
 	int result = 0;
 
 	public Member sendEmailPassword(Member member) {

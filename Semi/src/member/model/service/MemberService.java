@@ -51,4 +51,42 @@ public class MemberService {
 		close(conn);
 		return member;
 	}
+
+
+	//요한이
+	//멤버 정보수정
+		public int updateMember(Member member) {
+			Connection conn = getConnection();
+			int result = memberDao.updateMember(conn, member);
+			if(result>0)
+				commit(conn);
+			else 
+				rollback(conn);
+			close(conn);
+			return result;
+		}
+
+		//비밀번호 변경
+		public int updatePassword(Member member) {
+			Connection conn = getConnection();
+			int result = memberDao.updatePassword(conn, member);
+			if(result>0)
+				commit(conn);
+			else 
+				rollback(conn);
+			close(conn);
+			return result;
+		}
+
+		//회원탈퇴
+		public int deleteMember(String memberId) {
+			Connection conn = getConnection();
+			int result = memberDao.deleteMember(conn, memberId);
+			if(result>0)
+				commit(conn);
+			else 
+				rollback(conn);
+			close(conn);
+			return result;
+		}
 }

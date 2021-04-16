@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/member/send")
 public class MemberSendEmailSevlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	final String username = "lila230011";
-	final String password = "alvmf1234";
+	final String username = "meetpeople.kh";
+	final String password = "meetpeople.kh";
 
 	
 	

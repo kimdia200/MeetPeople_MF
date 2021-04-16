@@ -52,7 +52,7 @@
 				</tr>
 				<tr>
 					<td><input type="button" value="mypage"
-						onclick="location.href='<%=request.getContextPath()%>/member/memberView';" class="loginbtn" />
+						onclick="location.href='<%=request.getContextPath()%>/member/mypage';" class="loginbtn" />
 						<input type="button" value="logout"
 						onclick="location.href='<%=request.getContextPath()%>/member/logout';" class="loginbtn"/>
 					</td>

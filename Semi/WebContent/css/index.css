@@ -17,6 +17,7 @@ section {
   margin: 0 auto;
   width: 1200px;
   border: 1px solid black;
+  position:relative;
 }
 header ol {
   position:absolute;

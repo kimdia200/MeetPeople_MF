@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+.mypageWrapper{
+	position:relative;
+	height:800px;
+}
+.mypageWrapper2{
+	position:relative;
+	height:500px;
+}
+
+/*
+나의 모임
+*/
+.box {
+  border: 1px solid black;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+/*
+좌측 페이지이동 바
+*/
+aside{
+	border-right:2px solid red;
+	width:250px;
+	height:800px;
+	position:absolute;
+	left:0;
+	top:0;
+}
+.aside2{
+	height:500px;
+}
+.info {
+  background-color: #dcdad9;
+  left: 30px;
+  width: 200px;
+  height: 200px;
+  top: 70px;
+  position: absolute;
+  z-index:2;
+}
+/*
+페이지이동 바 내부 링크
+*/
+.a{
+	position: absolute;
+	left: 5px;
+}
+/*
+전체 테이블
+*/
+table.my {
+  border: 1px solid black;
+  border-collapse: collapse;
+  
+}
+.my tr,
+.my td {
+  border: 1px solid black;
+}
+/*
+기본정보, 개인정보수정, 비밀번호변경 테이블
+*/
+.my{
+	position: absolute;
+	left: 300px;
+	top: 100px;
+	height: 300px;
+	width: 700px; 
+}
+/*
+테이블 소개 글 
+*/
+.me{
+	position: absolute;
+	left: 300px;
+	top: 50px;
+}
+/*
+나의모임 테이블
+*/
+.meet{
+	position: absolute;
+	left: 190px;
+	top: 500px;
+}
+/*
+나의모음 이미지
+*/
+.myImg {
+  height: 200px;
+  width: 200px;
+}
+/*
+버튼모음
+내정보:btn
+개인정보 수정:btn2,3,4
+*/
+.btn{
+	position: absolute;
+	top: 410px;
+	left: 900px;
+}
+.btn2{
+	position: absolute;
+	top: 410px;
+	left: 765px;
+}
+.btn3{
+	position: absolute;
+	top: 410px;
+	left: 850px;
+}
+.btn4{
+	position: absolute;
+	top: 410px;
+	left: 960px;
+}
+/*
+좌측상단 마이페이지
+*/
+.Mp{
+	position: absolute;
+	top: 0;
+	left: 30px;
+}
+/*
+나의모임 텍스트
+*/
+.mtm{
+	position: absolute;
+	top: 450px;
+	left: 190px;
+}
+/*
+개인정보 수정  인풋(이름, 이메일, 휴대폰)
+*/
+.up{
+	margin: 0px;
+	height: 25px;
+}
+/*
+.a2{
+	position: absolute;
+	top: 470px;
+	left: 955px;
+}
+*/
