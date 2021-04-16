@@ -6,6 +6,8 @@ import static common.JDBCTemplate.getConnection;
 import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
+import java.util.Map;
 
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
@@ -15,6 +17,8 @@ public class MemberService {
 	
 	public static final String MEMBER_ROLE = "U";
 	public static final String ADMIN_ROLE = "A";
+	public static final String EVENT_TRUE = "T";
+	public static final String EVENT_FALSE = "F";
 	
 	
 	public Member selectOne(String memberId) {
@@ -86,6 +90,79 @@ public class MemberService {
 				commit(conn);
 			else 
 				rollback(conn);
+			close(conn);
+			return result;
+		}
+		
+		//승우
+		public List<Member> selectList(int start, int end) {
+			Connection conn = getConnection();
+			List<Member> list = memberDao.selectList(conn, start, end);
+			close(conn);
+			return list;
+		}
+
+
+		public int selectMemberCount() {
+			Connection conn = getConnection();
+			int totalContents = memberDao.selectMemberCount(conn);
+			close(conn);
+			return totalContents;
+		}
+
+
+		public List<Member> searchMember(Map<String, String> param, int start, int end) {
+			Connection conn = getConnection();
+			List<Member> list = memberDao.searchMember(conn,param,start,end);
+			close(conn);
+			return list;
+		}
+
+
+		public int searchMemberCount(Map<String, String> param) {
+			Connection conn = getConnection();
+			int totalContents = memberDao.searchMemberCount(param, conn);
+			close(conn);
+			return totalContents;
+		}
+
+
+		public int updateMemberRole(Member member) {
+			Connection conn = getConnection();
+			int result = 0;
+			result = memberDao.updateMemberRole(conn, member);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
+
+		public int updateMemberEvent(Member member) {
+			Connection conn = getConnection();
+			int result = 0;
+			result = memberDao.updateMemberEvent(conn, member);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
+
+		public int updateMemberEvent2(Member member) {
+			Connection conn = getConnection();
+			int result = 0;
+			result = memberDao.updateMemberEvent2(conn, member);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
+		
+		public int deleteMemberAD(String memberId) {
+			Connection conn = getConnection();
+			int result = 0;
+			result = memberDao.deleteMemberAD(conn, memberId);
+			if(result>0) commit(conn);
+			else rollback(conn);
 			close(conn);
 			return result;
 		}

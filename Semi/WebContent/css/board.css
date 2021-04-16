@@ -113,3 +113,33 @@ table#tbl-comment tr:hover button.btn-delete{display:inline;}
 textarea{
 	resize:none;
 }
+
+#pageBar{
+	height:50px;
+}
+
+#pageBar span{
+    border-radius: 15%;
+    padding: 9px 15px;
+    background-color: skyblue;
+    text-decoration: none;
+    color: white;
+}
+#pageBar a{
+	border-radius: 15%;
+    padding: 9px 15px;
+    background-color: white;
+    text-decoration: none;
+    color: black;
+}
+
+#pageBar a:hover{
+    background-color: skyblue;
+    color: white;
+    transition: all ease 0.5s;
+}
+
+#pageBar a:active{
+    background-color: skyblue;
+    color: gray;
+}

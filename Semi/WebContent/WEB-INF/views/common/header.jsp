@@ -107,7 +107,7 @@
 			<li><a href="">자동차</a></li>
 			<li><a href="<%=request.getContextPath()%>/board/boardList">자유게시판</a></li>
 			<li><a href="<%=request.getContextPath()%>/board/adminBoardList">공지사항</a></li>
-			<li><a href="">회원관리</a></li>
+			<li><a href="<%=request.getContextPath()%>/admin/memberList">회원관리</a></li>
 		</ol>
 
 		<script>
