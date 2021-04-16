@@ -43,7 +43,6 @@ public class BoardListServlet extends HttpServlet {
 				for(Board b : list) {
 					b.setCommentCnt(boardService.selectCommentCnt(b.getBoardNo()));
 				}
-				System.out.println("list@servlet : " + list);
 
 				// totalContents 는 현재 게시글이 몇개 있나 count(*)값
 				int totalContents = boardService.selectBoardTotal();

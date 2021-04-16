@@ -19,6 +19,7 @@
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/board.css" />
+<% String writer = (String)request.getAttribute("writer"); %>
 
 
 
@@ -31,7 +32,7 @@
 	<input type="hidden" name="content" value="" id="enroll_content" />
 	
 	<!-- admin부분 추후 접속 로그인 아이디로 변경해야함 -->
-	<input type="hidden" name="writer" value="admin" id="enroll_writer" />
+	<input type="hidden" name="writer" value="<%= writer %>" id="enroll_writer" />
 	<div id="enroll_summerNoteWrapper">
 		<div id="enroll_summernote"></div>
 	</div>

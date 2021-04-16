@@ -1,0 +1,23 @@
+@charset "UTF-8";
+#ho_enroll_box_div {
+	text-align: left;
+	border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	width: 450px;
+}
+#ho_enroll_box_div>h1 {
+	margin: auto;
+}
+#ho_enroll_box_div>.agremment_form {
+	margin: auto;
+}
+/* 필수글자 */
+.ho_necessary{
+	color: red;
+}
+/* 아이디~약관동의 글씨까지 */
+#for_enroll_css_wrapper{
+padding-left: 45px;
+}

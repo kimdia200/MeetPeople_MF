@@ -10,6 +10,7 @@ import java.util.List;
 
 import board.model.dao.BoardDao;
 import board.model.vo.Board;
+import board.model.vo.BoardComment;
 
 public class BoardService {
 	BoardDao boardDao = new BoardDao();
@@ -138,4 +139,155 @@ public class BoardService {
 		return result;
 	}
 
+	//게시물에 해당하는 commentList를 가져오는 메서드
+	public List<BoardComment> selectCommentList(int boardNo) {
+		List<BoardComment> list = null;
+		Connection conn = getConnection();
+		try {
+			list = boardDao.selectCommentList(conn,boardNo);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return list;
+	}
+
+	//댓글작성 하는 메서드
+	public int insertComment(BoardComment bc) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = boardDao.insertComment(conn,bc);
+			if(result>0) {
+				commit(conn);
+			}
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteBoardComment(int boardCommentNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = boardDao.deleteBoardComment(conn,boardCommentNo);
+			if(result>0) {
+				commit(conn);
+			}
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public List<Board> selectAdminBoardList(int start, int end) {
+		List<Board> list = null;
+		Connection conn = getConnection();
+		try {
+			list = boardDao.selectAdminBoardList(conn, start, end);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return list;
+	}
+
+	public int selectAdminBoardTotal() {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = boardDao.selectAdminBoardTotal(conn);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int insertAdminBoard(Board b) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = boardDao.insertAdminBoard(conn,b);
+			if(result>0) {
+				commit(conn);
+			}
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public Board selectAdminBoardOne(int boardNo) {
+		Board board = null;
+		Connection conn = getConnection();
+		try {
+			board = boardDao.selectAdminBoardOne(conn, boardNo);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return board;
+	}
+
+	public List<Integer> selectAdminBoardNumList() {
+		List<Integer> list = null;
+		Connection conn = getConnection();
+		try {
+			list = boardDao.selectAdminBoardNumList(conn);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return list;
+	}
+
+	public int updateAdminBoard(Board board) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = boardDao.updateAdminBoard(conn,board);
+			if(result>0) {
+				commit(conn);
+			}
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int deleteAdminBoard(int boardNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = boardDao.deleteAdminBoard(conn,boardNo);
+			if(result>0) {
+				commit(conn);
+			}
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		}finally {
+			close(conn);
+		}
+		return result;
+	}
 }

@@ -18,6 +18,8 @@ public class BoardEnrollServlet extends HttpServlet {
 
 	//boardList.jsp에서 글등록 버튼 눌렀을때 boardEnroll.jsp로 연결
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String writer=request.getParameter("writer");
+		request.setAttribute("writer", writer);
 		request.getRequestDispatcher("/WEB-INF/views/board/boardEnroll.jsp").forward(request, response);
 	}
 
@@ -38,6 +40,7 @@ public class BoardEnrollServlet extends HttpServlet {
 		b.setTitle(title);
 		b.setWriter(writer);
 		b.setContent(content);
+		System.out.println(b);
 		
 		int result = 0;
 		result=boardService.insertBoard(b);

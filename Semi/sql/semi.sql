@@ -180,7 +180,8 @@ commit;
 
 
 --게시판 내용 추가 실험
-insert into member values('admin', '1234', '관리자', 'ㅇㅇㅇ@.com','01011111111','T','T',sysdate,'A');
+insert into member values('user', '1234', '유저', 'ㅇㅇㅇ@.com','01011111111','T','T',sysdate,'U');
+select * from member;
 insert into user_board(board_no, title, writer, content) values(seq_user_board.nextval, '제목1', 'admin', '내용1'); --11개 넣음
 commit;
 
@@ -196,7 +197,20 @@ commit;
 select * from user_board_comment;
 select count(*) from user_board_comment where board_no=16;
 
+select * from member;
+
 update user_board set title = '제목테스트~', content = '내용내용내용' where board_no = 2;
 
+update member set enroll_date = sysdate where member_id = 'test1';
 
+desc user_board_comment;
+select * from user_board_comment where board_no = 16 start with comment_level = 1 connect by prior comment_no = comment_ref order siblings by reg_date asc;
+
+update user_board_comment set content = '감사합니다' where comment_level = 2;
+
+
+select * from admin_board;
+
+insert into admin_board(board_no, title, writer, content) values(seq_admin_board.nextval, '제목16', 'admin', '내용1');
+commit;
 

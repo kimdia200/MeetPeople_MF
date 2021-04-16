@@ -146,5 +146,6 @@ select * from board_comment order by no desc;
 delete board_comment where no = 12;
 select * from member;
 
+
 select * from board_comment where board_no = 113 start with comment_level = 1 connect by prior no = comment_ref order siblings by reg_date asc
 

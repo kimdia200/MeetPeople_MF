@@ -16,8 +16,10 @@
 	href="<%=request.getContextPath() %>/css/board.css" />
 	<h2>자유게시판</h2>
 <div id="boardListWrapper">
+	<%if(loginMember != null){ %>
 	<input type="button" value="글쓰기" id="btn-add"
-		onclick="location.href='<%= request.getContextPath() %>/board/boardEnroll'" />
+		onclick="location.href='<%= request.getContextPath() %>/board/boardEnroll?writer=<%= loginMember.getMemberId() %>'" />
+	<% } %>
 	<table id="tbl-board">
 		<tr>
 			<th>번호</th>
@@ -34,7 +36,8 @@
 			%>
 		<tr>
 			<td><%= b.getBoardNo()%></td>
-			<td><a
+			<td>
+				<a
 				href="<%= request.getContextPath()%>/board/boardView?no=<%=b.getBoardNo()%>&cPage=<%=cPage %>">
 					<%= b.getTitle() %> <%= b.getCommentCnt() != 0 ? " ("+b.getCommentCnt()+")":"" %>
 			</a></td>
