@@ -27,7 +27,7 @@
 <meta charset="UTF-8" />
 <title>Insert title here</title>
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/index.css" />
+	href="<%=request.getContextPath()%>/css/header.css" />
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
 </head>
 <body>
@@ -132,115 +132,6 @@
 		</script>
 		
 		
-	<style>
-	
-
-		
-#login_frame_div {
-	width: 700px;
-	height: 500px;
-	border: 1px solid black;
-	z-index: 1;
-	background-color: pink;
-	position: fixed;
-	display: none;
-	margin: 0 auto;
-	left: 0;
-	right: 0;
-}
-
-
-/* image */
-#login_image {
-	width: 50%;
-    height: 100%;
-}
-
-
-/* 우측 div */
-#login_form {
-	width: 99%;
-	display: inline-block;
-}
-
-#login_form>h1 {
-	text-align: center;
-}
-
-#login_form>[type=text], #login_form>[type=password] {
-	width: 280px;
-	height: 38px;
-	margin-top: 7px;
-	border: 1px solid #e6e6e6;
-	border-radius: 4px;
-	font-size: 14px;
-	
-}
-
-#login_button, #signup_button{
-	margin: 0px;
-	margin-top:20px;
-	margin-right:10px;
-	width: 80px;
-	height: 40px;
-	background:white;
-	border-radius: 8px;
-	cursor:pointer;
-}
-.loginbtn{
-	width: 70px;
-	height: 30px;
-	background:white;
-	border-radius: 8px;
-	cursor:pointer;
-}
-
-/*로그인유지하기 + 아이디비밀번호찾기*/
-#checkbox_findbox_wrapper {
-	display: flex;
-    margin-top: 25px;
-    margin-left: 35px;
-}
-
-#enroll_div {
-	line-height: 65px;
-    width: 289px;
-    height: 61px;
-    border-radius: 4px;
-    background-color: orange;
-    margin-left: 35px;
-    font-size: 17px;
-}
-.login{
-	float:right;
-}
-.loginEnd{
-	clear:both;
-}
-		
-		/*여기서부터 새로쓰는  위에도 복붙해야함*/
-		
-		/* 로그인버튼 */
-		#login_submit{
-	    width: 289px;
-	    height: 61px;
-	    margin-top: 7px;
-	    /* border: 1px solid #e6e6e6; */
-	    border-radius: 4px;
-	    background-color: orange;
-	    font-size: 17px;
-   		}
-   		
-   		#checkbox_wrapper, #find_span{
-   		font-size: 8px;
-   		}
-   		/*아이디 비밀번호 찾기 오른쪽으로  */
-   		#find_span{
-   		font-size: 8px;
-   		padding-left: 67px;
-   		
-   		}
-</style>
 	</header>
 
 	<section>
