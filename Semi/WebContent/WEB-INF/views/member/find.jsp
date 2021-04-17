@@ -41,28 +41,10 @@
 
 <div>
 	<input type="button" class="goto_button" name="goto_loginpage_button"
-		id="goto_loginpage_button" value="로그인"
-		onclick="goto_loginpage_button()"> <input type="button"
+		id="goto_loginpage_button" value="로그인"> <input type="button"
 		class="goto_button" name="goto_enrollpage_button"
-		id="goto_enrollpage_button" value="무료회원가입"
-		onclick="goto_enrollpage_button()">
+		id="goto_enrollpage_button" value="무료회원가입">
 </div>
 
-
-<script>
-	//모든 제출값 유효성 검사 구현
-	//찾기버튼을 누르면 인증메일이 보내져야함
-	function find_id_button() {
-	};
-	//찾기버튼을 누르면 인증메일이 보내져야함
-	function find_password_button() {
-	};
-	//아이디비밀번호찾기 페이지에서 로그인페이지로 이동 function
-	function goto_loginpage_button() {
-	};
-	//아이디비밀번호찾기 페이지에서 회원가입페이지로 이동 function
-	function goto_enrollpage_button() {
-	};
-</script>
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

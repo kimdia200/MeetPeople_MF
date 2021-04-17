@@ -2,6 +2,7 @@ package member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,14 +29,15 @@ public class MemberFindPasswordServlet extends HttpServlet {
 		//2. 업무로직
 		Member member = new MemberService().findPassword(memberId, memberEmail);
 		
-		
 		//3. 이메일이 존재하면 이메일로 메일보내기.
 		String msg = "";
 		if (member != null) {
+			//링크보내주기
 			member = sendEmail.sendEmailPassword(member);
-			msg = "이메일로 비밀번호 발송되었습니다.";
+			msg = "이메일로 비밀번호 변경링크 메일이 발송되었습니다.";
 			request.getSession().setAttribute("msg", msg);
 			response.sendRedirect(request.getContextPath());
+
 
 		} else {
 			msg = "비밀번호 찾기가 실패하였습니다.";

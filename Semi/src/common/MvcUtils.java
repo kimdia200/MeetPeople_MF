@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.Random;
 
 public class MvcUtils {
 
@@ -101,5 +102,18 @@ public class MvcUtils {
 			pageBar.append("<a href='"+url+"cPage="+pageNo+"'/>next</a>\n");
 		}
 		return pageBar.toString();
+	}
+	
+	//랜덤값 생성기 - 호현
+	
+	public static String randomAlphaWord(int wordLength) {
+		Random r = new Random();
+		StringBuilder sb = new StringBuilder(wordLength);
+		for(int i = 0; i < wordLength; i++) {
+			char tmp = (char) ('a' + r.nextInt('z' - 'a'));
+			sb.append(tmp);
+		}
+		return sb.toString();
+
 	}
 }
