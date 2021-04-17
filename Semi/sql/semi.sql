@@ -7,6 +7,7 @@
 --grant connect, resource to semi;
 
 --semi
+drop table pwd_certification;
 drop table admin_board;
 drop table user_board_comment;
 drop table user_board;
@@ -17,6 +18,7 @@ drop table member;
 drop table category;
 drop table location;
 
+drop sequence seq_pwd_certification;
 drop sequence seq_admin_board;
 drop sequence seq_user_board_comment;
 drop sequence seq_user_board;
@@ -137,8 +139,6 @@ create table user_board_comment(
   constraint fk_board_comment_ref foreign key(comment_ref) REFERENCES user_board_comment(comment_no) on delete set null
 );
 
-
-
 --댓글 시퀀스
 create sequence seq_user_board_comment;
 
@@ -155,7 +155,19 @@ create table admin_board(
 --공지사항 시퀀스
 create sequence seq_admin_board;
 
+--비밀번호변경 인증값 테이블
+create table pwd_certification(
+  no number,
+  id varchar2(15),
+  certification_code varchar2(100),
+  constraint pk_pwd_certification_no primary key(no),
+  constraint fk_pwd_certification_id foreign key(id) references member(member_id) on delete cascade
+);
+
+create sequence seq_pwd_certification;
+
 commit;
+
 
 
 
