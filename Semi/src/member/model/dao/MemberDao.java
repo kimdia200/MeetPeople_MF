@@ -456,5 +456,45 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public int insertCertification(Connection conn, Map<String, String> map) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = prop.getProperty("insertCertification");
+		String id = map.get("id");
+		String randomString = map.get("randomString");
+		
+		try {
+			//insertCertification = insert into pwd_certification values(seq_pwd_certification.nextval, ?, ?)
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);			
+			pstmt.setString(2, randomString);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public String selectCertification(Connection conn, String id) {
+		String certification = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCertification");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			certification = rset.getString("certification_code");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return certification;
+	}
 	
 }

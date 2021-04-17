@@ -72,6 +72,9 @@ public class MemberService {
 
 		//비밀번호 변경
 		public int updatePassword(Member member) {
+			
+			System.out.println(member.getMemberId()+"이건service아디");
+			System.out.println(member.getPassword()+"이건service비번");
 			Connection conn = getConnection();
 			int result = memberDao.updatePassword(conn, member);
 			if(result>0)
@@ -166,4 +169,25 @@ public class MemberService {
 			close(conn);
 			return result;
 		}
+
+
+		public int insertCertification(Map<String, String> map) {
+			Connection conn = getConnection();
+			int result = 0;
+			result = memberDao.insertCertification(conn, map);
+			if(result>0) commit(conn);
+			else rollback(conn);
+			close(conn);
+			return result;
+		}
+
+
+		public String selectCertification(String id) {
+			Connection conn = getConnection();
+			String certification=null;
+			certification = memberDao.selectCertification(conn, id);
+			close(conn);
+			return certification;
+		}
+
 }
