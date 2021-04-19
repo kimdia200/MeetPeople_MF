@@ -50,7 +50,7 @@ public class BoardDao {
 				b.setBoardNo(rset.getInt("board_no"));
 				b.setTitle(rset.getString("title"));
 				b.setWriter(rset.getString("writer"));
-				b.setContent(rset.getString("content"));
+//				b.setContent(rset.getString("content"));
 				b.setRegDate(rset.getDate("reg_date"));
 				list.add(b);
 			}
@@ -306,7 +306,7 @@ public class BoardDao {
 				b.setBoardNo(rset.getInt("board_no"));
 				b.setTitle(rset.getString("title"));
 				b.setWriter(rset.getString("writer"));
-				b.setContent(rset.getString("content"));
+//				b.setContent(rset.getString("content"));
 				b.setRegDate(rset.getDate("reg_date"));
 				list.add(b);
 			}

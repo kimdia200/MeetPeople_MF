@@ -7,6 +7,7 @@
 --grant connect, resource to semi;
 
 --semi
+drop trigger trig_auto_participation;
 drop table pwd_certification;
 drop table admin_board;
 drop table user_board_comment;
@@ -26,12 +27,21 @@ drop sequence seq_participation;
 drop sequence seq_attachment;
 drop sequence seq_meeting;
 
---장소 테이블
+--지역 테이블
 create table location(
     lcode varchar2(10),
-    lname varchar2(10),
+    lname varchar2(30),
     constraint pk_location_code primary key(lcode)
 );
+
+insert into location values('L1', '서울');
+insert into location values('L2', '경기');
+insert into location values('L3', '인천');
+insert into location values('L4', '대전·충청');
+insert into location values('L5', '대구·경북');
+insert into location values('L6', '부산·경남');
+insert into location values('L7', '울산');
+insert into location values('L8', '광주');
 
 --카테고리 테이블
 create table category(
@@ -39,6 +49,14 @@ create table category(
     cname varchar2(20),
     constraint pk_category_code primary key(ccode)
 );
+
+insert into category values('C1', '음악');
+insert into category values('C2', '게임');
+insert into category values('C3', '운동');
+insert into category values('C4', '요리');
+insert into category values('C5', '독서');
+insert into category values('C6', '재테크');
+insert into category values('C7', '자동차');
 
 --회원 테이블
 create table member(
@@ -78,6 +96,7 @@ create table meeting(
     constraint fk_meeting_location foreign key(location_code) references location(lcode)
     
 );
+
 --미팅 시퀀스
 create sequence seq_meeting;
 
@@ -107,8 +126,20 @@ create table participation(
     constraint ck_partici_status check(status in ('Y','N'))
 );
 
+
 --참가자 테이블 시퀀스
 create sequence seq_participation;
+
+--미팅 테이블에 insert시(= 모임게시글 작성시) 작성자는 참가자테이블에 자동 등록 되는 트리거 생성
+create or replace trigger trig_auto_participation
+    after
+    insert on meeting
+    for each row
+begin
+    insert into participation
+    values (seq_participation.nextval, :new.meeting_no, :new.writer, sysdate, 'Y');
+end;
+/
 
 --자유게시판 테이블
 create table user_board(
@@ -168,8 +199,10 @@ create sequence seq_pwd_certification;
 
 commit;
 
-
-
+insert into meeting values(seq_meeting.nextval, '피아노 배우실분13', 'admin', '피아노 배우실분구합니다.', sysdate, '홍대','2021/05/05', 6, 10000, 'C1', 'L1');
+commit;
+select * from meeting;
+rollback;
 
 
 
@@ -226,5 +259,41 @@ select * from admin_board;
 insert into admin_board(board_no, title, writer, content) values(seq_admin_board.nextval, '제목16', 'admin', '내용1');
 commit;
 
+select * from pwd_certification;
+
+select * from meeting;
+
+select * from meeting where location_code like '%%' and category_code like '%%' order by reg_date;
+
+select rownum, l.* from location l where rownum between 1 and 10;
+
+select * from meeting;
+
+select * from (select rownum rnum, m.* from (select * from meeting order by meeting_no desc) m) where rnum between 1 and 10;
+
+select * from meeting m left join category c on m.category_code = c.ccode left join location l on m.location_code = l.lcode order by m.meeting_no desc;
+
+select * from attachment;
+insert into attachment values(seq_attachment.nextval, 13, '샘플13', 'sample.png', 'Y');
+commit;
+
+select * from meeting;
+select * from participation;
+update participation set meeting_no=22 where partici_no = 15;
+insert into participation values(seq_participation.nextval, 13, 'admin', sysdate, 'Y');
+commit;
+rollback;
+
+create or replace trigger trig_auto_participation
+    after
+    insert on meeting
+    for each row
+begin
+    insert into participation
+    values (seq_participation.nextval, :new.meeting_no, :new.writer, sysdate, 'Y');
+end;
+/
+select seq_meeting.currval from dual;
+insert into meeting values(seq_meeting.nextval, '피아노 배우실분14', 'admin', '피아노 배우실분구합니다.', sysdate, '홍대','2021/05/05', 6, 10000, 'C1', 'L1');
 
 

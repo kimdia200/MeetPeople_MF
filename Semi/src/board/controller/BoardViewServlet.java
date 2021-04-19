@@ -25,7 +25,12 @@ public class BoardViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1. 값처리
 		int boardNo = Integer.parseInt(request.getParameter("no"));
-		int cPage = Integer.parseInt(request.getParameter("cPage"));
+		int cPage;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		} catch (NumberFormatException e) {
+			cPage=1;
+		}
 		
 		//2. 업무로직
 		Board board = boardService.selectBoardOne(boardNo);

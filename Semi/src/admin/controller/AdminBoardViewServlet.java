@@ -24,7 +24,12 @@ public class AdminBoardViewServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// 1. 값처리
 		int boardNo = Integer.parseInt(request.getParameter("no"));
-		int cPage = Integer.parseInt(request.getParameter("cPage"));
+		int cPage;
+		try {
+			cPage = Integer.parseInt(request.getParameter("cPage"));
+		} catch (NumberFormatException e) {
+			cPage=1;
+		}
 
 		// 2. 업무로직
 		Board board = boardService.selectAdminBoardOne(boardNo);

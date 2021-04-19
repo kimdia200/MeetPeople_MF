@@ -1,10 +1,12 @@
 @charset "UTF-8";
 
-/* BoardList */
+/* BoardList 게시판 게시글 목록 나오는 곳*/
 #boardListWrapper {
 	width: 800px;
-	height: 350px;
+	/*height: 350px;*/
 	margin: 0 auto;
+	
+	padding-bottom: 50px;
 }
 
 #btn-add {
@@ -19,46 +21,91 @@
 #tbl-board {
 	font-size: 15px;
 	clear: both;
+	border-collapse: collapse;
+}
+
+#tbl-board th{
+	border-top: 3px solid gray;
+	border-bottom: 2px solid gray;
+	background-color: lightgray;
+    font-size: 15px;
+}
+
+#tbl-board td{
+	padding: 5px;
 }
 
 #tbl-board td:nth-of-type(1) {
 	width: 50px;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+	background-color : rgb(255, 214, 136);
+	font-size:12px;
 }
 
 #tbl-board td:nth-of-type(2) {
 	width: 550px;
 	padding-left : 20px;
 	text-align:left;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
 }
 
 #tbl-board td:nth-of-type(3) {
 	width: 100px;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
 }
 
 #tbl-board td:nth-of-type(4) {
 	width: 100px;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
 }
+
+#tbl-board tr:nth-of-type(2n){
+	background-color: rgb(235, 235, 235);
+}
+
+#tbl-board tr:nth-of-type(2n):hover{
+	background-color: rgb(255, 228, 179);
+}
+
+#tbl-board tr:nth-of-type(2n+1):hover{
+	background-color: rgb(255, 255, 128);
+}
+
 .cPage{
 	margin-right: 7px;
 }
 
 
-/* boardEnroll */
+
+/* boardEnroll  게시판 등록, 수정 */
 #enroll_title{
-	width: 1200px; 
+	/*width: 1200px;*/
 	height: 50px; 
 	font-size: 20px;
+	
+	width:1198px;
 }
 #enroll_summerNoteWrapper{
 	margin: 0 auto; 
 	text-align: left
 }
 
-/* boardView */
+
+
+
+
+
+
+
+/* boardView  게시글 볼때*/
 #boardViewDesc div:nth-of-type(1) {
 	margin-left: 20px;
 	text-align: left;
@@ -94,7 +141,7 @@
 div#boardViewRe #btn-insert{width:60px; height:50px; color:white; background:#3300ff; position:relative; top:-20px;}
 
 table#tbl-comment{width:580px; margin:0 auto; border-collapse:collapse; } 
-table#tbl-comment tr td{border-bottom:1px solid; border-top:1px solid white; padding:5px; text-align:left; line-height:120%;}
+table#tbl-comment tr td{border-bottom:1px solid lightgray; border-top:1px solid white; padding:5px; text-align:left; line-height:120%;}
 table#tbl-comment tr td:first-of-type {padding: 5px 5px 5px 50px;}
 table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;}
 table#tbl-comment button.btn-reply{display:none;}
@@ -116,6 +163,7 @@ textarea{
 
 #pageBar{
 	height:50px;
+	margin-top:30px;
 }
 
 #pageBar span{

@@ -19,6 +19,7 @@ section {
 	margin: 0 auto;
 	width: 1200px;
 	border: 1px solid black;
+	position:relative;
 }
 
 header ol {
@@ -171,4 +172,9 @@ a:active {
 #find_span {
 	font-size: 8px;
 	padding-left: 67px;
+}
+
+
+button, [type=button], [type=submit]{
+	cursor: pointer;
 }
