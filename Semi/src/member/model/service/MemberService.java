@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+import meeting.model.vo.Attachment;
+import meeting.model.vo.Meeting;
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
 
@@ -188,6 +190,55 @@ public class MemberService {
 			certification = memberDao.selectCertification(conn, id);
 			close(conn);
 			return certification;
+		}
+
+
+		public List<Meeting> selectMylist() {
+			List<Meeting> list = null;
+			Connection conn = getConnection();
+			try {
+				list=memberDao.selectMylist(conn);
+				if(list!=null && list.size()!=0) {
+					System.out.println("모임리스트 불러오기 성공");
+				}else {
+					System.out.println("리스트 불러오기 실패 혹은 리스트 사이즈0");
+				}
+			} catch (Exception e) {
+				throw e;
+			} finally {
+				close(conn);
+			}
+			return list;
+		}
+		
+		public Attachment selectMyAttach(int meetingNo) {
+			Attachment attach = null;
+			Connection conn = getConnection();
+			try {
+				attach = memberDao.selectMyAttach(conn, meetingNo);
+			} catch (Exception e) {
+				throw e;
+			} finally {
+				close(conn);
+			}
+			return attach;
+		}
+		
+		public int memberCount() {
+			Connection conn = getConnection();
+			int result = 0;
+			result = memberDao.memberCount(conn);
+			close(conn);
+			return result;
+		}
+
+
+		public int meetingCount() {
+			Connection conn = getConnection();
+			int result = 0;
+			result = memberDao.meetingCount(conn);
+			close(conn);
+			return result;
 		}
 
 }

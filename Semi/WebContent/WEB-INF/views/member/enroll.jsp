@@ -8,12 +8,12 @@
 <form id="ho_enroll_from"
 	action="<%=request.getContextPath()%>/member/enroll" method="POST">
 	<div class="ho_enroll_box_div" id="ho_enroll_box_div">
-		<h1>딱 이것만 체크하면 가입완료</h1>
+		<h1>딱 이것만 작성하면 가입완료!</h1>
 		<div class="ho_id_form">
 		
 		<div id="for_enroll_css_wrapper">
 			<h3>아이디</h3>
-			<input type="text" name="ho_id_input" id="ho_id_input" placeholder="사용하실 아이디를 입력해주세요." value="" required> 
+			<input type="text" class="input" name="ho_id_input" id="ho_id_input" placeholder="사용하실 아이디를 입력해주세요." value="" required> 
 			<!-- text박스의 id입력한거랑 idTest값이 같으면 중복검사 성공 -->
 			<input type="hidden" name="idTest" value="0" />
 			<input type="button" name="ho_id_check_button" id="ho_id_check_button" value="중복검사" required/> <br>
@@ -23,24 +23,24 @@
 
 			<div class="ho_password_form">
 				<h3>비밀번호</h3>
-				<input type="password" name="ho_password_input1"
+				<input type="password" class="input" name="ho_password_input1"
 					id="ho_password_input1" placeholder="비밀번호를 입력해주세요.(8자 이상)" required><br>
 					<label for="" id="pwd_chk1"></label>
-				 <input type="password" name="ho_password_input2"
+				 <input type="password" class="input" name="ho_password_input2"
 					id="ho_password_input2" placeholder="비밀번호를 한번 더 입력해주세요." required> <br>
 					<label for="" id="pwd_chk2"></label>
 			</div>
 
 			<div class="ho_name_form">
 				<h3>이름</h3>
-				<input type="text" name="ho_name_input" id="ho_name_input"
+				<input type="text" class="input" name="ho_name_input" id="ho_name_input"
 					placeholder="이름을 입력해 주세요." required> <br>
 					<label for="" id="name_chk"></label>
 			</div>
 
 			<div class="email_form">
 				<h3>이메일</h3>
-				<input type="email" name="ho_eamil_input" id="ho_eamil_input"
+				<input type="email" class="input" name="ho_eamil_input" id="ho_eamil_input"
 					placeholder="이메일을 입력해주세요." required> 
 					<input type="button" name="ho_email_check_button" id="ho_email_check_button" value="인증하기"/>
 					<br />
@@ -52,7 +52,7 @@
 
 			<div class="ho_phone_form">
 				<h3>휴대폰번호</h3>
-				<input type="number" name="ho_phone_input" id="ho_phone_input"
+				<input type="number" class="input" name="ho_phone_input" id="ho_phone_input"
 					placeholder="휴대폰 번호 '-'표 없이 입력해 주세요." required> <br>
 					<label for="" id="phone_chk"></label>
 			</div>
@@ -68,29 +68,31 @@
 					id="ho_agreement_input1" onclick="chkAll()"/> <label for="ho_agreement_input1">모두
 					동의합니다.</label> <br>
 				<hr>
-				<input type="checkbox" name="ho_agreement_input2"
-					id="ho_agreement_input2" required /> <label
+				<input type="checkbox" class ="checkbox_ho" name="ho_agreement_input2"
+					id="ho_agreement_input2" onclick="chkOne()" required />
+					
+					 <label
 					for="ho_agreement_input2">만 14세 이상입니다.</label> <label
 					for="ho_agreement_input2" class="ho_necessary">(필수)</label> <br>
-				<input type="checkbox" name="ho_agreement_input3"
-					id="ho_agreement_input3" required /> <label
+				<input type="checkbox" class ="checkbox_ho" name="ho_agreement_input3"
+					id="ho_agreement_input3"  onclick="chkOne()" required /> <label
 					for="ho_agreement_input3"><u>서비스 이용약관</u>에 동의합니다.</label> <label
 					for="ho_agreement_input3" class="ho_necessary">(필수)</label> <br>
-				<input type="checkbox" name="ho_agreement_input4"
-					id="ho_agreement_input4" required /> <label
+				<input type="checkbox" class ="checkbox_ho" name="ho_agreement_input4"
+					id="ho_agreement_input4"  onclick="chkOne()" required /> <label
 					for="ho_agreement_input4"><u>개인정보 수집•이용</u> 에 동의합니다.</label> <label
 					for="ho_agreement_input4" class="ho_necessary">(필수)</label> <br>
-				<input type="checkbox" name="ho_agreement_input5"
-					id="ho_agreement_input5" value="T"> <label
+				<input type="checkbox" class ="checkbox_ho" name="ho_agreement_input5"
+					id="ho_agreement_input5"  onclick="chkOne()" value="T"> <label
 					for="ho_agreement_input5">이벤트 할인 혜택 알림 수신에 동의합니다.</label> <label
 					for="ho_agreement_input5" class="ho_choice">(선택)</label> <br>
-				<input type="checkbox" name="ho_agreement_input6"
-					id="ho_agreement_input6" value="T" /> <label
+				<input type="checkbox" class ="checkbox_ho" name="ho_agreement_input6"
+					id="ho_agreement_input6"  onclick="chkOne()" value="T" /> <label
 					for="ho_agreement_input5">장기 미접속 시 계정 활성 상태 유지합니다. </label> <label
 					for="ho_agreement_input5" class="ho_choice">(선택)</label> <br>
 			</fieldset>
 		</div>
-				<br> <input type="submit" value="버튼을 누르면 회원가입이 완료됩니다."id="ho_submit_button">
+				<br> <input type="submit" id="enroll_sumit_button" value="버튼을 누르면 회원가입이 완료됩니다."id="ho_submit_button">
 		</div>
 	</div>
 </form>
@@ -254,6 +256,18 @@
             $("#ho_agreement_input2, #ho_agreement_input3, #ho_agreement_input4, #ho_agreement_input5, #ho_agreement_input6").prop("checked", false);
         }
     }
+	
+	
+	//하나라도 체크헤제 시 모두동의하기 헤제취소
+	function chkOne() {
+		
+		var checkall = document.querySelector("#ho_agreement_input1");
+		var checkboxes = document.querySelectorAll(".checkbox_ho");
+		var checkedCheckBox = document.querySelectorAll(".checkbox_ho:checked");
+		
+		checkall.checked = (checkboxes.length == checkedCheckBox.length);
+		};
+	
 	
 	
 	//제출버튼 클릭시 모든 값 유무 확인

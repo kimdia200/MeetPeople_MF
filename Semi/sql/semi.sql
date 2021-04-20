@@ -127,6 +127,7 @@ create table participation(
 );
 
 
+
 --참가자 테이블 시퀀스
 create sequence seq_participation;
 
@@ -284,16 +285,17 @@ insert into participation values(seq_participation.nextval, 13, 'admin', sysdate
 commit;
 rollback;
 
-create or replace trigger trig_auto_participation
-    after
-    insert on meeting
-    for each row
-begin
-    insert into participation
-    values (seq_participation.nextval, :new.meeting_no, :new.writer, sysdate, 'Y');
-end;
-/
+
 select seq_meeting.currval from dual;
 insert into meeting values(seq_meeting.nextval, '피아노 배우실분14', 'admin', '피아노 배우실분구합니다.', sysdate, '홍대','2021/05/05', 6, 10000, 'C1', 'L1');
+insert into participation values(seq_participation.nextval, 7, 'dygks12', sysdate, 'Y');
+commit;
+select * from participation;
+select * from member;
+
+
+select * from meeting m left join location l on m.location_code = l.lcode left join category c on m.category_code = c.ccode
+where m.category_code like '%%' and m.location_code like '%%' and m.title like '%%';
+
 
 

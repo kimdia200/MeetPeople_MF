@@ -35,27 +35,14 @@ public class IndexRecentMeetingServlet extends HttpServlet {
 			m.setAttach(meetingService.selectAttachOne(m.getMeetingNo()));
 			
 			out.println("<div class='boxContents'>");
-			out.println("<a href='"+request.getContextPath()+"/meetingView?no="+m.getMeetingNo()+"'>");
+			out.println("<a href='"+request.getContextPath()+"/meeting/meetingView?no="+m.getMeetingNo()+"'>");
 			if(m.getAttach()!=null) {
 				out.println("<img src=\""+request.getContextPath()+"/upload/"+m.getAttach().getRenamedFilename()+"\" width=220px height=150px/>");
 			}else {
-				out.println("<img src=\""+request.getContextPath()+"/upload/sample.png\" width=220px height=150px/>");
+				out.println("<img src=\""+request.getContextPath()+"/upload/no_img.png\" width=220px height=150px/>");
 			}
 			out.println("<span>"+m.getTitle()+"</span></a></div>");
 		}
-//		<script>
-//			var move3 = 1;
-//			function right3(){
-//				if(move3 >= 1 && move3 <= 5 ){
-//					$("#recent").attr("style","transform:translateX("+(-240)*(move3++)+"px);")
-//				}
-//			}
-//			function left3(){
-//				if(move3 >= 2 && move3 <= 6 ){
-//					$("#recent").attr("style","transform:translateX("+(-240)*(--move3-1)+"px);")
-//				}
-//			}
-//		</script>
 		out.println("<script>");
 		out.println("var move3 =1");
 		out.println("function right3(){");

@@ -16,6 +16,8 @@ import java.util.Properties;
 
 import board.model.dao.BoardDao;
 import common.SemiException;
+import meeting.model.vo.Attachment;
+import meeting.model.vo.Meeting;
 import member.model.vo.Member;
 
 public class MemberDao {
@@ -496,5 +498,106 @@ public class MemberDao {
 		}
 		return certification;
 	}
+
+	public List<Meeting> selectMylist(Connection conn) {
+		List<Meeting> list = new ArrayList<Meeting>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMylist");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Meeting m = new Meeting();
+				//인덱스페이지 에서는 이거 두개만 필요함
+				m.setMeetingNo(rset.getInt("meeting_no"));
+				m.setTitle(rset.getString("title"));
+				list.add(m);
+			}
+			
+		} catch (Exception e) {
+			throw new SemiException("미팅 리스트 불러오기 실패", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		} 
+		
+		return list;
+	}
+
+	public Attachment selectMyAttach(Connection conn, int meetingNo) {
+		Attachment attach = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		//select * from attachment where meeting_no = ? and status = 'Y'
+		String sql = prop.getProperty("selectMyAttach");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, meetingNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				attach = new Attachment();
+				attach.setAttachNo(rset.getInt("attach_no"));
+				attach.setMeetingNo(meetingNo);
+				attach.setOriginalFilename(rset.getString("original_filename"));
+				attach.setRenamedFilename(rset.getString("renamed_filename"));
+				attach.setStatus(rset.getString("status"));
+			}
+			
+		} catch (Exception e) {
+			throw new SemiException("미팅 리스트 불러오기 실패", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		} 
+		
+		return attach;
+	}
+	
+	//총 회원수 카운트하는곳
+		public int memberCount(Connection conn) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			
+			String query = prop.getProperty("countMember");
+
+			try {
+				pstmt = conn.prepareStatement(query);
+				rset = pstmt.executeQuery();
+				if(rset.next()){
+					result = rset.getInt(1);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			return result;
+		}
+
+		public int meetingCount(Connection conn) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			
+			String query = prop.getProperty("meetingCount");
+
+			try {
+				pstmt = conn.prepareStatement(query);
+				rset = pstmt.executeQuery();
+				if(rset.next()){
+					result = rset.getInt(1);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+			return result;
+		}
 	
 }

@@ -65,6 +65,7 @@ table#tbl-member{
     width: 100%;
 }
 #tbl-member td>input{
+	cursor: pointer;
 	width: 70px;
     height: 25px;
     background-color: whitegray;
@@ -76,7 +77,7 @@ table#tbl-member{
 #tbl-member td>input:hover{
     background-color: red;
     color: white;
-    border: 1px solid red;
+    border: 1px solid transparent;
     transition: all ease 0.3s;
 }
 
@@ -88,6 +89,7 @@ select{
 	width: 55px;
     height: 25px;
     border: 1px solid #999;
+    outline: 0;
 }
 select.event1, select.event2{
 	width: 68px;

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -89,5 +90,62 @@ public class MeetingDao {
 		} 
 		
 		return attach;
+	}
+
+	public List<Meeting> selectMeetingList(Connection conn, int start, int end, String location, String category, String search) {
+		List<Meeting> list = new ArrayList<Meeting>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMeetingList");
+		sql=sql.replace("@", category);
+		sql=sql.replace("#", location);
+		sql=sql.replace("$", search);
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				Meeting m = new Meeting();
+				//인덱스페이지 에서는 이거 두개만 필요함
+				m.setMeetingNo(rset.getInt("meeting_no"));
+				m.setTitle(rset.getString("title"));
+				m.setTime(rset.getDate("time"));
+				list.add(m);
+			}
+			
+		} catch (Exception e) {
+			throw new SemiException("미팅 리스트 불러오기 실패", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		} 
+		
+		return list;
+	}
+
+	public int selectMeetingTotalContent(Connection conn, String location, String category, String search) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMeetingTotalContent").replace("@", location).replace("#", category).replace("$", search);
+		System.out.println(sql);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				result = rset.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			throw new SemiException("미팅리스트 totalContent 불러오기 실패", e);
+		}
+		
+		return result;
 	}
 }

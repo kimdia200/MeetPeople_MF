@@ -61,10 +61,12 @@
 			   		if(bc.getCommentLevel() ==1){
 			%>  	<tr class="level1">
 						<td>
-							<sub class="comment-writer"><%= bc.getWriter() %></sub>
-							<sub class="comment-date"><%= bc.getRegDate() %></sub>
-							<br />
-							<%= bc.getContent() %>
+							<div class="comment-level1">
+								<sub class="comment-writer"><%= bc.getWriter() %></sub>
+								<sub class="comment-date"><%= bc.getRegDate() %></sub>
+								<br />
+								<%= bc.getContent() %>
+							</div>
 						</td>
 						<td>
 							<button class="btn-reply" value="<%= bc.getCommentNo() %>">답글</button>
@@ -76,10 +78,12 @@
 			   		<%}else { %>
 			   			<tr class="level2">
 						<td>
-							<sub class="comment-writer"><%= bc.getWriter() %></sub>
-							<sub class="comment-date"><%= bc.getRegDate() %></sub>
-							<br />
-							<%= bc.getContent() %>
+							<div class="comment-level2">
+								<sub class="comment-writer"><%= bc.getWriter() %></sub>
+								<sub class="comment-date"><%= bc.getRegDate() %></sub>
+								<br />
+								<%= bc.getContent() %>
+							</div>
 						</td>
 						<% if(removable){ %>
 						<td>

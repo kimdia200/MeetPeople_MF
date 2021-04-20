@@ -78,7 +78,7 @@ pageEncoding="UTF-8"%>
 				transform: scale(1, 1);
 			}
 		}
-		.boxWrapper span{
+		.boxContents span{
 			position:absolute;
 			bottom:8px;
 			right:8px;
@@ -86,7 +86,7 @@ pageEncoding="UTF-8"%>
 			font-weight: bold;
 			text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 		}
-		.boxWrapper img{
+		.boxContents img{
 			border-radius: 10px;
 		}
 		section{

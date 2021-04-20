@@ -1,3 +1,5 @@
+<%@page import="meeting.model.vo.Meeting"%>
+<%@page import="java.util.List"%>
 <%@page import="member.model.service.MemberService"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.sql.Date"%>
@@ -6,6 +8,9 @@
 	pageEncoding="UTF-8"%>
 <%-- 헤더 --%>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%
+List<Meeting> list = (List<Meeting>) request.getAttribute("list");
+%>
 <%-- css --%>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/mypage.css" />
@@ -71,25 +76,46 @@
 		<%-- 수정!!! --%>
 		<table class="meet">
 			<tr>
+		<%-- --%>
+			<% if(list != null) { 
+				for(Meeting m : list) {
+			%>
 				<td class="box">
-					<a href='<%=request.getContextPath() %>'><img class="myImg" src="<%= request.getContextPath() %>/images/Logo.png" /></a>
+				<div class="imagebox">
+					<a href='<%=request.getContextPath() %>/meeting/meetingView?no=<%=m.getMeetingNo()%>'><img class="myImg" src="<%= request.getContextPath() %>/upload/<%= m.getAttach().getRenamedFilename() %>" /></a>
+				</div>
+				<div class="textbox">
+					<a class="meetATag" href="<%=request.getContextPath()%>/meeting/meetingView?no=<%=m.getMeetingNo()%>"><%= m.getTitle() %></a>
+				</div>
 				</td>
-				<td class="box">
-					<a href='<%=request.getContextPath() %>'><img class="myImg" src="<%= request.getContextPath() %>/images/Logo.png"/></a>
-				</td>
-				<td class="box">
-					<a href='<%=request.getContextPath() %>'><img class="myImg" src="<%= request.getContextPath() %>/images/Logo.png" /></a>
-				</td>
-				<td class="box">
-					<a href='<%=request.getContextPath() %>'><img class="myImg" src="<%= request.getContextPath() %>/images/Logo.png"/></a>
-				</td>
-			</tr>
+			<%   
+				  }
+				} else { 
+			%>
 			<tr>
-				<td class="meetATag"><a href="<%=request.getContextPath()%>">등원하실 분 모집!!ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</a></td>
-				<td class="meetATag"><a href="<%=request.getContextPath()%>">남산타워 모임!!</a></td>
-				<td class="meetATag"><a href="<%=request.getContextPath()%>">볼링치실분~~</a></td>
-				<td class="meetATag"><a href="<%=request.getContextPath()%>">간술하실분~!</a></td>
+				<td colspan="6" style="text-align:center;">신청한 모임이 없습니다.</td>
 			</tr>
+			<% } %>
+			</tr>
+			<%-- 
+			<tr>
+				<td class="box">
+					<a href='<%=request.getContextPath() %>'><img class="myImg" src="<%= request.getContextPath() %>/images/Logo.png"/></a>
+					<br />
+					<a class="meetATag" href="<%=request.getContextPath()%>">볼링</a>
+				</td>
+				<td class="box">
+					<a href='<%=request.getContextPath() %>'><img class="myImg" src="<%= request.getContextPath() %>/images/Logo.png" /></a>
+					<br />
+					<a class="meetATag" href="<%=request.getContextPath()%>">술</a>
+				</td>
+				<td class="box">
+					<a href='<%=request.getContextPath() %>'><img class="myImg" src="<%= request.getContextPath() %>/images/Logo.png"/></a>
+					<br />
+					<a class="meetATag" href="<%=request.getContextPath()%>">공부</a>
+				</td>
+			</tr>
+			--%>
 		</table>
 	</form>
 </div>
