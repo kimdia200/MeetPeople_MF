@@ -10,6 +10,7 @@ public class Board {
 	private String content;
 	private Date regDate;
 	private int commentCnt;
+	private int readCnt;
 	
 	//기본생성자
 	public Board() {
@@ -27,6 +28,18 @@ public class Board {
 		this.commentCnt = commentCnt;
 	}
 	
+	
+	public Board(int boardNo, String title, String writer, String content, Date regDate, int commentCnt, int readCnt) {
+		super();
+		this.boardNo = boardNo;
+		this.title = title;
+		this.writer = writer;
+		this.content = content;
+		this.regDate = regDate;
+		this.commentCnt = commentCnt;
+		this.readCnt = readCnt;
+	}
+
 	//Getter and Setter
 	public int getBoardNo() {
 		return boardNo;
@@ -64,11 +77,19 @@ public class Board {
 	public void setCommentCnt(int commentCnt) {
 		this.commentCnt = commentCnt;
 	}
-	
-	//toString()
+
+	public int getReadCnt() {
+		return readCnt;
+	}
+
+	public void setReadCnt(int readCnt) {
+		this.readCnt = readCnt;
+	}
+
+	//toString
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", title=" + title + ", writer=" + writer + ", content=" + content
-				+ ", regDate=" + regDate + ", commentCnt=" + commentCnt + "]";
+				+ ", regDate=" + regDate + ", commentCnt=" + commentCnt + ", readCnt=" + readCnt + "]";
 	}
 }

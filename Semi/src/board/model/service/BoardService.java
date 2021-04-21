@@ -290,4 +290,34 @@ public class BoardService {
 		}
 		return result;
 	}
+
+	public int updateReadCnt(int boardNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result=boardDao.updateReadCnt(conn, boardNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int updateAdminReadCnt(int boardNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = boardDao.updateAdminReadCnt(conn, boardNo);
+			commit(conn);
+		} catch(Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return 0;
+	}
 }

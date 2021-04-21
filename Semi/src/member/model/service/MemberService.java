@@ -193,11 +193,11 @@ public class MemberService {
 		}
 
 
-		public List<Meeting> selectMylist() {
+		public List<Meeting> selectMylist(String memberId) {
 			List<Meeting> list = null;
 			Connection conn = getConnection();
 			try {
-				list=memberDao.selectMylist(conn);
+				list=memberDao.selectMylist(conn, memberId);
 				if(list!=null && list.size()!=0) {
 					System.out.println("모임리스트 불러오기 성공");
 				}else {

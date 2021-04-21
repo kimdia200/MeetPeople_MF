@@ -32,6 +32,7 @@ public class AdminBoardViewServlet extends HttpServlet {
 		}
 
 		// 2. 업무로직
+		int result = boardService.updateAdminReadCnt(boardNo);
 		Board board = boardService.selectAdminBoardOne(boardNo);
 		request.setAttribute("board", board);
 

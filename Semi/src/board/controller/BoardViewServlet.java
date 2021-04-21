@@ -33,6 +33,9 @@ public class BoardViewServlet extends HttpServlet {
 		}
 		
 		//2. 업무로직
+		
+		int result=boardService.updateReadCnt(boardNo);
+		
 		Board board = boardService.selectBoardOne(boardNo);
 		board.setCommentCnt(boardService.selectCommentCnt(boardNo));
 		request.setAttribute("board", board);

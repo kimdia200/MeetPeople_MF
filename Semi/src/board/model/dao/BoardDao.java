@@ -52,6 +52,7 @@ public class BoardDao {
 				b.setWriter(rset.getString("writer"));
 //				b.setContent(rset.getString("content"));
 				b.setRegDate(rset.getDate("reg_date"));
+				b.setReadCnt(rset.getInt("read_cnt"));
 				list.add(b);
 			}
 		} catch (SQLException e) {
@@ -147,6 +148,7 @@ public class BoardDao {
 				board.setWriter(rset.getString("writer"));
 				board.setContent(rset.getString("content"));
 				board.setRegDate(rset.getDate("reg_date"));
+				board.setReadCnt(rset.getInt("read_cnt"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -308,6 +310,7 @@ public class BoardDao {
 				b.setWriter(rset.getString("writer"));
 //				b.setContent(rset.getString("content"));
 				b.setRegDate(rset.getDate("reg_date"));
+				b.setReadCnt(rset.getInt("read_cnt"));
 				list.add(b);
 			}
 		} catch (SQLException e) {
@@ -448,6 +451,44 @@ public class BoardDao {
 		} finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	public int updateReadCnt(Connection conn, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateReadCnt");
+		//update user_board set read_cnt=read_cnt+1 where board_no = ?
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("조회수 조회에 실패하였습니다.",e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateAdminReadCnt(Connection conn, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "update admin_board set read_cnt=read_cnt+1 where board_no = ? ";
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("조회수 조회에 실패하였습니다.", e);
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 

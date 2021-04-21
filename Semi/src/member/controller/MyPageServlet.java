@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import meeting.model.vo.Attachment;
 import meeting.model.vo.Meeting;
 import member.model.service.MemberService;
+import member.model.vo.Member;
 
 
 @WebServlet("/member/mypage")
@@ -22,7 +24,9 @@ public class MyPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Meeting> list = null;
 		//인덱스 페이지에는 최근 생성된 4개를 보여줄거임
-		list = memberService.selectMylist();
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("loginMember");
+		list = memberService.selectMylist(member.getMemberId());
 		System.out.println("mypage@servlet = " + list);
 		
 		for(Meeting m : list) {

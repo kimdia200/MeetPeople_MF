@@ -148,4 +148,175 @@ public class MeetingDao {
 		
 		return result;
 	}
+
+	public Meeting selectOne(Connection conn, int meetingNo) {
+		Meeting m=null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectOne");
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, meetingNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				m = new Meeting();
+				m.setMeetingNo(meetingNo);
+				m.setTitle(rset.getString("title"));
+				m.setWriter(rset.getString("writer"));
+				m.setContent(rset.getString("content"));
+				m.setRegDate(rset.getDate("reg_date"));
+				m.setPlace(rset.getString("place"));
+				m.setTime(rset.getDate("time"));
+				m.setMaxPeople(rset.getInt("max_people"));
+				m.setCost(rset.getInt("cost"));
+				m.setCategoryCode(rset.getString("category_code"));
+				m.setCategoryName(rset.getString("cname"));
+				m.setLocationCode(rset.getString("location_code"));
+				m.setLocationName(rset.getString("lname"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("미팅정보 조회에 실패하였습니다.",e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+	}
+
+	public int selectParticiCnt(Connection conn, int meetingNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int cnt = 0;
+		String sql = prop.getProperty("selectParticiCnt");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, meetingNo);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				cnt = rset.getInt("count(*)");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("참여중인 인원 불러오기 실패", e);
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return cnt;
+	}
+
+	public List<String> selectParticiList(Connection conn, int meetingNo) {
+		List<String> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectParticiList");
+		System.out.println(sql);
+		
+		//select * from participation where meeting_no=?
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, meetingNo);
+			rset = pstmt.executeQuery();
+			list=new ArrayList<String>();
+			while(rset.next()) {
+				list.add(rset.getString("partici_id"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("참여중인 인원목록 불러오기 실패", e);
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+	}
+
+	public int insertParticipation(Connection conn, String memberId, int meetingNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertParticipation");
+		//insert into participation values(seq_participation.nextval, ?, ?, sysdate, 'Y')
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, meetingNo);
+			pstmt.setString(2, memberId);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("모임 참여 실패", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateUnParticipation(Connection conn, String memberId, int meetingNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateUnParticipation");
+		System.out.println(sql);
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, meetingNo);
+			pstmt.setString(2, memberId);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("모임 취소 실패", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteMeeting(Connection conn, int meetingNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMeeting");
+		System.out.println(sql);
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, meetingNo);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("모임 삭제 실패", e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateMeeting(Connection conn, Meeting m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateMeeting");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, m.getTitle());
+			pstmt.setString(2, m.getContent());
+			pstmt.setString(3, m.getPlace());
+			pstmt.setDate(4, m.getTime());
+			pstmt.setInt(5, m.getMaxPeople());
+			pstmt.setInt(6, m.getCost());
+			pstmt.setString(7, m.getCategoryCode());
+			pstmt.setString(8, m.getLocationCode());
+			pstmt.setInt(9, m.getMeetingNo());
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("업데이트에 실패했습니다.",e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

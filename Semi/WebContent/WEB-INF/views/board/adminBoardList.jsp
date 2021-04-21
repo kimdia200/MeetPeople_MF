@@ -27,6 +27,7 @@
 			<th>제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
+			<th>조회수</th>
 		</tr>
 		<%if(list == null || list.isEmpty()){%>
 		<tr>
@@ -44,6 +45,7 @@
 			</a></td>
 			<td><%= b.getWriter() %></td>
 			<td><%= b.getRegDate() %></td>
+			<td><%=b.getReadCnt() %></td>
 		</tr>
 		<%}} %>
 	</table>

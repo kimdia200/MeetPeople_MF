@@ -499,7 +499,7 @@ public class MemberDao {
 		return certification;
 	}
 
-	public List<Meeting> selectMylist(Connection conn) {
+	public List<Meeting> selectMylist(Connection conn, String memberId) {
 		List<Meeting> list = new ArrayList<Meeting>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -508,6 +508,7 @@ public class MemberDao {
 		try {
 			
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

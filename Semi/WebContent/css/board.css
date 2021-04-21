@@ -84,6 +84,19 @@
 	border-bottom: 2px solid gray;
 }
 
+#tbl-board td:nth-of-type(5) {
+	width: 55px;
+	/*border: 1px solid black;*/
+	border-top: 2px solid gray;
+	border-bottom: 2px solid gray;
+}
+
+/*테이블 크기고정 */
+#tbl-board td{
+	word-break:break-all;
+	
+}
+
 
 #tbl-board tr:nth-of-type(2n){
 	background-color: rgb(235, 235, 235);

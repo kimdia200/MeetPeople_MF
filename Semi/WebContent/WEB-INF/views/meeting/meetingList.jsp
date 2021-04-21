@@ -260,6 +260,7 @@
 </style>
 
 <script>
+	//searchKeyword, searchBtn
 	$("#searchBtn").click(function(){
 		var keyword = $("#searchKeyword").val();
 		

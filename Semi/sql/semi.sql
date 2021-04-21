@@ -149,6 +149,7 @@ create table user_board(
     writer varchar2(15),
     content clob, 
     reg_date date default sysdate, 
+    read_cnt number default 0,
     --vo에서는 Comment_count추가할것
     constraint pk_user_board_no primary key(board_no),
     constraint fk_writer foreign key(writer) references member(member_id) on delete set null
@@ -180,7 +181,8 @@ create table admin_board(
     title varchar2(50), 
     writer varchar2(15),
     content clob, 
-    reg_date date default sysdate, 
+    reg_date date default sysdate,
+    read_cnt number default 0,
     constraint pk_admin_board_no primary key(board_no),
     constraint fk_admin_writer foreign key(writer) references member(member_id) on delete set null
 );
@@ -298,4 +300,19 @@ select * from meeting m left join location l on m.location_code = l.lcode left j
 where m.category_code like '%%' and m.location_code like '%%' and m.title like '%%';
 
 
+
+select * from participation;
+
+select * from (select rownum rnum, m.* from (select * from meeting order by meeting_no desc) m) where rnum between 1 and 4;
+
+select * from (select rownum, p.* from (select * from participation  where partici_id = 'admin' order by partici_no desc) p where rownum between 1 and 4) p left join meeting m on p.meeting_no = m.meeting_no;
+
+
+delete participation where partici_no=22;
+commit;
+
+
+select * from user_board order by board_no desc;
+update user_board set read_cnt=100 where board_no=103;
+commit;
 
