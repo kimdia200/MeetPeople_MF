@@ -166,6 +166,9 @@ public class MeetingService {
 		Connection conn = getConnection();
 		try {
 			result = meetingDao.updateMeeting(conn, m);
+			if(m.getAttach()!=null) {
+				result=meetingDao.insertAttach(conn,m.getAttach());
+			}
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);
@@ -176,4 +179,36 @@ public class MeetingService {
 		return result;
 	}
 
+	public int deleteAttachment(String attachNo) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = meetingDao.deleteAttachment(conn, attachNo);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public int insertMeeting(Meeting m) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = meetingDao.insertMeeting(conn, m);
+			if(m.getAttach()!=null) {
+				result=meetingDao.insertAttach2(conn,m.getAttach());
+			}
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
 }

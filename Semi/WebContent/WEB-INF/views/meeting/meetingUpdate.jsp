@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.GregorianCalendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="meeting.model.vo.Meeting"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -18,13 +20,22 @@ pageEncoding="UTF-8"%>
 	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/meetingView.css" />
+			<form action="<%=request.getContextPath()%>/meeting/meetingUpdate" method="post" id="updateFrm" enctype="multipart/form-data">
 
 		
 	<div id="meetingViewWrapper">
 		<div id="meetingViewLeft">
 			<div id="imgWrapper">
-				<img src="<%=request.getContextPath() %>/upload/no_img.png"/>
-			</div>	
+				<img src="<%=request.getContextPath() %>/upload/<%=m.getAttach().getRenamedFilename()%>"/>
+			</div>
+			<div style="display:flex;">
+				<input type="file" name="upFile">
+				<%if(m.getAttach().getRenamedFilename().equals("no_img.png")==false){ %>
+	 			<%= m.getAttach().getOriginalFilename()%>
+				<input type="checkbox" name="delfile" id="delFile" value="<%= m.getAttach().getAttachNo()%>"/>
+				<label for="delFile">삭제</label>
+				<% } %>
+			</div>
 			<div id="contentWrapper">
 			</div>	
 		</div>
@@ -32,7 +43,6 @@ pageEncoding="UTF-8"%>
 		
 		<div id="meetingViewRight">
 			<div id="description">
-			<form action="<%=request.getContextPath()%>/meeting/meetingUpdate" method="post" id="updateFrm">
 
 				<input type="text" name="title" id="title" required placeholder="제목을 입력해주세요" value="<%=m.getTitle()%>"/>			
 				<table>
@@ -71,9 +81,8 @@ pageEncoding="UTF-8"%>
 					</tr>
 					<tr>
 						<th>일자</th>
-						<!-- 2021-04-23T23:32 -->
-						<%SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-ddThh:mm"); %>
-						<td><input type="datetime-local" name="time" id="time" value="<%=sdf.format(m.getTime())%>" required/></td>
+						<% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm"); %>
+						<td><input type="datetime-local" name="time" id="time" value="<%=sdf.format(m.getTime()) %>" required/></td>
 					</tr>
 					<tr>
 						<th>참가비용</th>
@@ -87,13 +96,13 @@ pageEncoding="UTF-8"%>
 				<input type="hidden" name="no" value="<%=m.getMeetingNo()%>" />
 				<input type="hidden" name="writer" value="<%=loginMember.getMemberId() %>" />
 				<input type="hidden" name="content" value="" id="realContent"/>
-			</form>
 			</div>
 		</div>
 	</div>
+			</form>
 	<div id="updateDeleteWrapper">
 		<input type="button" value="수정"  onclick="updatee();" />
-		<input type="button" value="취소"  onclick="deletee();" />
+		<input type="button" value="취소"  onclick="cancel();" />
 	</div>
 	
 	<script>
@@ -103,7 +112,7 @@ pageEncoding="UTF-8"%>
 	        height: 500,
 	        focus: true,
 	        disableResizeEditor: true,
-	    }).summernote("code","<%=m.getContent()%>");
+	    }).summernote("code",'<%=m.getContent()%>');
 	})
 	
 	function updatee(){
@@ -115,6 +124,25 @@ pageEncoding="UTF-8"%>
 		if(confirm("게시물을 수정하시겠습니까?")){
 			$("#updateFrm").submit();
 		}
+	}
+	
+	$("[name=upFile]").change(function(){
+		console.log($(this).val());
+		if($(this).val() != ""){
+			//파일을 선택하면 체크상태로 변경하고 더이상 변경이 불가능 하게 해버림
+			$("#delFile").prop("checked",true)
+				.on('click',function(){
+				return false;
+			})
+		}else{
+			//파일을 해제하면 체크가능 상태가 되고 변경이 가능하다
+			$("#delFile").prop("checked",false)
+				.off('click');
+		}
+	});
+	function cancel(){
+		<% String referer = request.getHeader("Referer");%>
+		location.href="<%=referer%>";
 	}
 	</script>
 

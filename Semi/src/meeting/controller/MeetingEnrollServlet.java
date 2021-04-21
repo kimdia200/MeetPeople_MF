@@ -19,26 +19,13 @@ import meeting.model.service.MeetingService;
 import meeting.model.vo.Attachment;
 import meeting.model.vo.Meeting;
 
-@WebServlet("/meeting/meetingUpdate")
-public class MeetingUpdateServlet extends HttpServlet {
+@WebServlet("/meeting/meetingEnroll")
+public class MeetingEnrollServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private MeetingService meetingService = new MeetingService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int meetingNo = Integer.parseInt(request.getParameter("meetingNo"));
-		Meeting meeting = meetingService.selectOne(meetingNo);
-		Attachment attach = meetingService.selectAttachOne(meetingNo);
-		if(attach ==null) {
-			attach = new Attachment();
-			attach.setRenamedFilename("no_img.png");
-		}
-		meeting.setAttach(attach);
-		
-		int particiCnt = meetingService.selectParticiCnt(meetingNo);
-		meeting.setCountParticipation(particiCnt);
-		System.out.println(meeting);
-		request.setAttribute("meeting", meeting);
-		request.getRequestDispatcher("/WEB-INF/views/meeting/meetingUpdate.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/meeting/meetingEnroll.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,7 +49,6 @@ public class MeetingUpdateServlet extends HttpServlet {
 													policy);
 		
 		
-		int no = Integer.parseInt(multipartRequest.getParameter("no"));
 		String title = multipartRequest.getParameter("title");
 		String content = multipartRequest.getParameter("content");
 		String category = multipartRequest.getParameter("category");
@@ -78,10 +64,6 @@ public class MeetingUpdateServlet extends HttpServlet {
 		String renamedFileName = multipartRequest.getFilesystemName("upFile");
 		System.out.println("originalFileName@servlet = "+originalFileName);
 		
-		//삭제할 첨부파일 번호
-		String attachNo = multipartRequest.getParameter("delfile");
-		System.out.println("attachNo@servelt = "+attachNo);
-		
 		int year = Integer.parseInt(t.substring(0, 4));
 		int month = Integer.parseInt(t.substring(5,7));
 		int dayOfMonth = Integer.parseInt(t.substring(8,10));
@@ -91,10 +73,9 @@ public class MeetingUpdateServlet extends HttpServlet {
 		Calendar cal = new GregorianCalendar(year, month-1, dayOfMonth, hourOfDay, minute);
 		Date time = new Date(cal.getTimeInMillis());
 		
-		Meeting m =new Meeting(no, title, writer, content, null, place, time, max, cost, category, null, location, null, 0, null);
+		Meeting m =new Meeting(0, title, writer, content, null, place, time, max, cost, category, null, location, null, 0, null);
 		if(originalFileName != null) {
 			Attachment attach = new Attachment();
-			attach.setMeetingNo(no);
 			attach.setOriginalFilename(originalFileName);
 			attach.setRenamedFilename(renamedFileName);
 			m.setAttach(attach);
@@ -103,20 +84,17 @@ public class MeetingUpdateServlet extends HttpServlet {
 		System.out.println(m);
 		System.out.println(m.getAttach());
 		int result =0;
-		if(attachNo != null) {
-			result = meetingService.deleteAttachment(attachNo);
-		}
 		
-		result = meetingService.updateMeeting(m);
+		result = meetingService.insertMeeting(m);
 		
 		HttpSession session = request.getSession();
 		if(result>0) {
-			session.setAttribute("msg", "모임 내용 수정이 완료되었습니다.");
+			session.setAttribute("msg", "모임 등록이 완료되었습니다.");
 		}else {
-			session.setAttribute("msg", "모임 내용 수정을 실패했습니다.");
+			session.setAttribute("msg", "모임 등록을 실패했습니다.");
 		}
 		
-		response.sendRedirect(request.getContextPath()+"/meeting/meetingView?no="+m.getMeetingNo());
+		response.sendRedirect(request.getContextPath()+"/meeting/meetingList");
 	}
 
 }

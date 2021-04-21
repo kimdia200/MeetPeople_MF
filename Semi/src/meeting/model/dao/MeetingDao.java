@@ -319,4 +319,87 @@ public class MeetingDao {
 		
 		return result;
 	}
+
+	public int deleteAttachment(Connection conn, String attachNo) {
+		int result=0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, attachNo);
+			result=pstmt.executeUpdate();
+		}  catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("첨부파일 삭제 실패했습니다.",e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertAttach(Connection conn, Attachment attach) {
+		int result=0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttach");
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, attach.getMeetingNo());
+			pstmt.setString(2, attach.getOriginalFilename());
+			pstmt.setString(3, attach.getRenamedFilename());
+			result=pstmt.executeUpdate();
+		}  catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("첨부파일 삭제 실패했습니다.",e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertMeeting(Connection conn, Meeting m) {
+		int result =0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMeeting");
+		//
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getTitle());
+			pstmt.setString(2,m.getWriter());
+			pstmt.setString(3, m.getContent());
+			pstmt.setString(4, m.getPlace());
+			pstmt.setDate(5, m.getTime());
+			pstmt.setInt(6, m.getMaxPeople());
+			pstmt.setInt(7, m.getCost());
+			pstmt.setString(8, m.getCategoryCode());
+			pstmt.setString(9, m.getLocationCode());
+			result=pstmt.executeUpdate();
+		}  catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("첨부파일 삭제 실패했습니다.",e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertAttach2(Connection conn, Attachment attach) {
+		int result=0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttach2");
+		System.out.println(sql);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, attach.getOriginalFilename());
+			pstmt.setString(2, attach.getRenamedFilename());
+			result=pstmt.executeUpdate();
+		}  catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("첨부파일 삭제 실패했습니다.",e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

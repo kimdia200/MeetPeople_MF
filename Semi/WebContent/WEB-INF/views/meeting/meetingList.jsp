@@ -84,8 +84,11 @@
 	<div id="rightWrapper">
 		<h3>미플 모임</h3>
 		<div id="search">
-			<input type="text" name="" id="searchKeyword" placeholder="검색할 키워드를 입력하세요!"/>
+			<input type="text" name="" id="searchKeyword2" placeholder="검색할 키워드를 입력하세요!"/>
 			<button type="button" id="searchBtn">검색</button>
+			<%if(loginMember != null){ %>
+			<button type="button" id="createMeeting" onclick="createMeeting();">모임생성</button>
+			<%} %>
 		</div>
 		<%if(list.isEmpty()==false && list!=null){ %>
 		<div class="boxWrapper">
@@ -262,15 +265,21 @@
 <script>
 	//searchKeyword, searchBtn
 	$("#searchBtn").click(function(){
-		var keyword = $("#searchKeyword").val();
+		var keyword = $("#searchKeyword2").val();
+		console.log(keyword);
 		
 		location.href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=<%=location%>&search="+keyword;
 	});
 	$(document).ready(function(){
 		<% if(search.length()!=0) {%>
-			$("#searchKeyword").val("<%=search%>")
+			$("#searchKeyword").val("<%=search%>");
+			$("#searchKeyword2").val("<%=search%>");
 		<% } %>
 	});
+	//모임생성
+	function createMeeting(){
+		location.href="<%=request.getContextPath()%>/meeting/meetingEnroll";
+	}
 </script>
 <style>
 #listWrapper{
