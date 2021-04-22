@@ -7,6 +7,7 @@ import static common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import board.model.dao.BoardDao;
 import board.model.vo.Board;
@@ -319,5 +320,95 @@ public class BoardService {
 			close(conn);
 		}
 		return 0;
+	}
+	
+	/*마이페이지 내가 쓴 글*/
+
+	public List<Board> selectMyBoardList(String writer, int start, int end) {
+		List<Board> list = null;
+		Connection conn = getConnection();
+		try {
+			list = boardDao.selectMyBoardList(writer, conn, start, end);
+		}
+		catch (Exception e) {
+			throw e;
+		} finally {
+			close(conn);
+		}
+		
+		return list;
+	}
+
+	/*내가 쓴 글 페이지*/
+	
+	public int selectMyBoardTotal() {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = boardDao.selectMyBoardTotal(conn);
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	/*게시판 검색*/
+	
+	public List<Board> searchBoardList(Map<String, String> param, int start, int end) {
+		Connection conn = getConnection();
+		List<Board> list = boardDao.searchBoardList(conn, param, start, end);
+		close(conn);
+		return list;
+	}
+
+	/*게시판 검색 페이지*/
+	
+	public int searchBoardListCount(Map<String, String> param) {
+		Connection conn = getConnection();
+		int totalContents = 0;
+		totalContents = boardDao.searchBoardListCount(conn, param);
+		close(conn);
+		return totalContents;
+	}
+
+	/*관리자 게시판 검색*/
+	
+	public List<Board> searchAdminBoardList(Map<String, String> param, int start, int end) {
+		Connection conn = getConnection();
+		List<Board> list = boardDao.searchAdminBoardList(conn, param, start, end);
+		close(conn);
+		return list;
+	}
+
+	/*관리자 게시판 검색 페이지*/
+	
+	public int searchAdminBoardListCount(Map<String, String> param) {
+		Connection conn = getConnection();
+		int totalContents = 0;
+		totalContents = boardDao.searchAdminBoardListCount(conn, param);
+		close(conn);
+		return totalContents;
+	}
+
+	/*내가 쓴글 검색*/
+	
+	public List<Board> searchMyBoardList(String writer, Map<String, String> param, int start, int end) {
+		Connection conn = getConnection();
+		List<Board> list = boardDao.searchMyBoardList(conn, writer, param, start, end);
+		close(conn);
+		return list;
+	}
+
+	/*내가 쓴글 검색 페이지*/
+	
+	public int searchMyBoardListCount(String writer, Map<String, String> param) {
+		Connection conn = getConnection();
+		int totalContents = boardDao.searchMyBoardListCount(conn, writer, param);
+		close(conn);
+		return totalContents;
 	}
 }

@@ -97,6 +97,7 @@ create table meeting(
     
 );
 
+
 --미팅 시퀀스
 create sequence seq_meeting;
 
@@ -316,3 +317,20 @@ select * from user_board order by board_no desc;
 update user_board set read_cnt=100 where board_no=103;
 commit;
 
+select * from attachment;
+select * from meeting m left join category c on m.category_code = c.ccode left join location l on m.location_code = l.lcode where meeting_no = 23;
+select * from participation order by partici_no desc;
+
+select * from participation where meeting_no=23 and status='Y';
+
+update meeting set title = ? ,content = ?, place = ?, time = ?, max_people = ?, cost = ?, category_code = ?, location_code = ? where meeting_no = ?;
+
+select * from meeting order by meeting_no desc;
+select * from participation;
+select * from attachment;
+commit;
+rollback;
+
+insert into attachment values(seq_attachment.nextval, 13, '11', '22', 'Y');
+
+update meeting set content='게임 하실분?' where meeting_no = 42;

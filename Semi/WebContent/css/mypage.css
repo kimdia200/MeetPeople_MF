@@ -218,3 +218,12 @@ table.updatePasswordTable{
 	left: 955px;
 }
 */
+
+/*추가*/
+/*내가 쓴글*/
+
+.mypageWrapper3 #boardListWrapper {
+    width: 800px;
+    margin: 65px 25% 0;
+    padding-bottom: 50px;
+}

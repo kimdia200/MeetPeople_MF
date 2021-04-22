@@ -21,6 +21,8 @@
 		<a class="a" href="<%=request.getContextPath()%>/member/memberUpdate">개인정보 수정</a> 
 		<br />
 		<br /> 
+		<a class="a" href="<%=request.getContextPath()%>/member/myBoardList">내가 쓴글</a> 
+		<br />
 		<%-- 
 		<a class="a" href="<%=request.getContextPath()%>/member/meeting">신청한	모임</a>
 		--%>

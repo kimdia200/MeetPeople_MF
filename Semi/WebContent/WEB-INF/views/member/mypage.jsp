@@ -25,6 +25,8 @@ List<Meeting> list = (List<Meeting>) request.getAttribute("list");
 		<a class="a" href="<%=request.getContextPath()%>/member/memberUpdate">개인정보 수정</a> 
 		<br />
 		<br /> 
+		<a class="a" href="<%=request.getContextPath()%>/member/myBoardList">내가 쓴글</a> 
+		<br />
 		<%-- 
 		<a class="a" href="<%=request.getContextPath()%>/member/meeting">신청한	모임</a>
 		--%>
@@ -75,9 +77,11 @@ List<Meeting> list = (List<Meeting>) request.getAttribute("list");
 		--%>
 		<%-- 수정!!! --%>
 		<table class="meet">
-			<tr>
 		<%-- --%>
-			<% if(list != null) { 
+			<tr>
+		<%System.out.println("참여 모임:"+list);%>
+			<% if(list != null && list.size()!=0) { 
+				System.out.println("if문 실행");
 				for(Meeting m : list) {
 			%>
 				<td class="box">
@@ -88,34 +92,12 @@ List<Meeting> list = (List<Meeting>) request.getAttribute("list");
 					<a class="meetATag" href="<%=request.getContextPath()%>/meeting/meetingView?no=<%=m.getMeetingNo()%>"><%= m.getTitle() %></a>
 				</div>
 				</td>
-			<%   
-				  }
-				} else { 
+			<%	}} else { 
+				System.out.println("else문 실행");
 			%>
-			<tr>
-				<td colspan="6" style="text-align:center;">신청한 모임이 없습니다.</td>
-			</tr>
+				<td colspan="4" style="text-align:center;">신청한 모임이 없습니다.</td>
 			<% } %>
 			</tr>
-			<%-- 
-			<tr>
-				<td class="box">
-					<a href='<%=request.getContextPath() %>'><img class="myImg" src="<%= request.getContextPath() %>/images/Logo.png"/></a>
-					<br />
-					<a class="meetATag" href="<%=request.getContextPath()%>">볼링</a>
-				</td>
-				<td class="box">
-					<a href='<%=request.getContextPath() %>'><img class="myImg" src="<%= request.getContextPath() %>/images/Logo.png" /></a>
-					<br />
-					<a class="meetATag" href="<%=request.getContextPath()%>">술</a>
-				</td>
-				<td class="box">
-					<a href='<%=request.getContextPath() %>'><img class="myImg" src="<%= request.getContextPath() %>/images/Logo.png"/></a>
-					<br />
-					<a class="meetATag" href="<%=request.getContextPath()%>">공부</a>
-				</td>
-			</tr>
-			--%>
 		</table>
 	</form>
 </div>

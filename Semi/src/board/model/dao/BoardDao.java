@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import board.model.vo.Board;
@@ -491,5 +492,267 @@ public class BoardDao {
 		
 		return result;
 	}
+	
+/*마이페이지 내가 쓴 글*/
+	
+	public List<Board> selectMyBoardList(String writer, Connection conn, int start, int end) {
+		List<Board> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyBoardList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, writer);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rset=pstmt.executeQuery();
+			while(rset.next()) {
+				Board b = new Board();
+				b.setBoardNo(rset.getInt("board_no"));
+				b.setTitle(rset.getString("title"));
+				b.setWriter(rset.getString("writer"));
+//				b.setContent(rset.getString("content"));
+				b.setRegDate(rset.getDate("reg_date"));
+				b.setReadCnt(rset.getInt("read_cnt"));
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("내가 쓴글을 불러오지 못했습니다.",e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	/*내가 쓴 글 페이지*/
+	
+	public int selectMyBoardTotal(Connection conn) {
+		int totalContents = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMyBoardTotal");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			Board b = new Board();
+			pstmt.setString(1, b.getWriter());
+			
+			rset = pstmt.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("내가 쓴글 총 글수를 불러오지 못했습니다.",e);
+		} finally {
+			close(pstmt);
+		}
+		
+		return totalContents;
+	}
+
+	/*게시판 검색*/
+	
+	public List<Board> searchBoardList(Connection conn, Map<String, String> param, int start, int end) {
+		List<Board> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("searchBoardList");
+		query = setQuery(query, param.get("searchType"), param.get("searchKeyword"));
+//		select B.* from( select rownum rnum, B.* from( select * from user_board where title like '%테%' order by board_no desc) B)B where rnum between ? and ?;
+		System.out.println("query = "+ query);
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+			while (rset.next()) {
+				Board board = new Board();
+				board.setBoardNo(rset.getInt("board_no"));
+				board.setTitle(rset.getString("title"));
+				board.setWriter(rset.getString("writer"));
+				board.setRegDate(rset.getDate("reg_date"));
+				board.setReadCnt(rset.getInt("read_cnt"));
+				list.add(board);
+			}
+		} catch (Exception e) {
+			throw new SemiException("검색 리스트 조회 실패", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	/*게시판 검색 페이지*/
+	
+	public int searchBoardListCount(Connection conn, Map<String, String> param) {
+		int totalContents = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("searchBoardListCnt");
+		query = setQuery(query, param.get("searchType"), param.get("searchKeyword"));
+		//select count(*) from user_board where title like '%테%';
+		System.out.println("tc query = "+ query);
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContents = rset.getInt("cnt");
+			}
+		} catch (Exception e) {
+			throw new SemiException("검색 페이지 조회 실패", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalContents;
+	}
+	
+	/*게시판 검색 공통부분*/
+	
+	public String setQuery(String query, String searchType, String searchKeyword) {
+		switch(searchType) {
+		case "boardWriter"	: query = query.replace("#", " writer like '%"+searchKeyword+"%'"); break;
+		case "boardTitle"	: query = query.replace("#", " title like '%"+searchKeyword+"%'"); break;
+		}
+		return query;
+	}
+
+	/*관리자 게시판 검색*/
+	
+	public List<Board> searchAdminBoardList(Connection conn, Map<String, String> param, int start, int end) {
+		List<Board> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("searchAdminBoardList");
+		query = setQuery(query, param.get("searchType"), param.get("searchKeyword"));
+		System.out.println(query);
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+			while(rset.next()) {
+				Board board = new Board();
+				board.setBoardNo(rset.getInt("board_no"));
+				board.setTitle(rset.getString("title"));
+				board.setWriter(rset.getString("writer"));
+				board.setRegDate(rset.getDate("reg_date"));
+				board.setReadCnt(rset.getInt("read_cnt"));
+				list.add(board);
+			}
+		} catch (Exception e) {
+			throw new SemiException("검색 리스트 조회 실패", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	/*관리자 게시판 검색 페이지*/
+	
+	public int searchAdminBoardListCount(Connection conn, Map<String, String> param) {
+		int totalContents = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("searchAdminBoardListCnt");
+		query = setQuery(query, param.get("searchType"), param.get("searchKeyword"));
+		System.out.println(query);
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalContents = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			throw new SemiException("검색 페이지 조회 실패", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalContents;
+	}
+
+	/*내가 쓴글 검색*/
+	
+	public List<Board> searchMyBoardList(Connection conn, String writer, Map<String, String> param, int start, int end) {
+		List<Board> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("searchMyBoardList");
+		query = setQuery(query, param.get("searchType"), param.get("searchKeyword"));
+		System.out.println(query);
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, writer);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+			while(rset.next()) {
+				Board board = new Board();
+				board.setBoardNo(rset.getInt("board_no"));
+				board.setTitle(rset.getString("title"));
+				board.setWriter(rset.getString("writer"));
+				board.setRegDate(rset.getDate("reg_date"));
+				board.setReadCnt(rset.getInt("read_cnt"));
+				list.add(board);
+			}
+		} catch (Exception e) {
+			throw new SemiException("검색 리스트 조회 실패", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	/*내가 쓴글 검색 페이지*/
+	
+	public int searchMyBoardListCount(Connection conn, String writer, Map<String, String> param) {
+		int totalContents = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = prop.getProperty("searchMyBoardListCnt");
+		query = setQuery(query, param.get("searchType"), param.get("searchKeyword"));
+		System.out.println(query);
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, writer);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				totalContents = rset.getInt("cnt");
+			}
+		} catch (Exception e) {
+			throw new SemiException("검색 페이지 조회 실패", e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return totalContents;
+	}
+
 
 }

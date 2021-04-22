@@ -4,96 +4,7 @@
 pageEncoding="UTF-8"%>
 
 
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
-	<style>
-		.titleWrapper{
-			display:flex;
-		}
-		.titleWrapper h4 {
-			width:300px
-			text-align:left;
-			padding:0;
-			margin-top:50px;
-			margin-bottom:10px;
-			margin-right:1025px;
-			padding-left:20px;
-		}
-		.titleWrapper div{
-			width:25px;
-			height: 25px;
-			margin :0 ;
-			padding:0;
-			margin-top:50px;
-			margin-bottom:20px;
-			margin-right:-1px;
-			border:1px solid black;
-			text-align:center;
-			line-height: 25px;
-		}
-		.titleWrapper div:hover, .titleWrapper div:hover *{
-			background:tomato;
-			color:white;
-			cursor:pointer;
-		}
-		.titleWrapper a:hover{
-			text-decoration: none;
-		}
-		.boxWrapper{
-			width:1200px;
-			height:150px;
-			display: flex;
-			transition-duration: 1s;
-			transition-timing-function: ease;
-			margin-left:8px;
-		}
-		.boxContents{
-			position:relative;
-			width:220px;
-			height:150px;
-			margin:0;
-			padding:0;
-			margin-right: 16px;
-			border:2px solid black;
-			border-radius: 5px;
-			background:black;
-		}
-		.boxContents:hover{
-			animation-name: ani;
-			animation-duration: 0.5s;
-			animation-iteration-count: infinite;
-			animation-timing-function: ease;
-		}
-		.boxContents:hover span{
-			color:black;
-			text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
-		}
-		@keyframes ani{
-			0%{
-				transform: scale(1, 1);
-			}
-			50%{
-				transform: scale(1.1, 1.1);
-			}
-			100%{
-				transform: scale(1, 1);
-			}
-		}
-		.boxContents span{
-			position:absolute;
-			bottom:8px;
-			right:8px;
-			color:white;
-			font-weight: bold;
-			text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
-		}
-		.boxContents img{
-			border-radius: 10px;
-		}
-		section{
-			overflow: hidden;
-		}
-	</style>
-	
+<%@ include file="/WEB-INF/views/common/header0.jsp"%>
 	<!-- 지역별 -->
 	<div class="titleWrapper">
 		<h4>지역　　</h4> <div onclick="left1()">&lt</div><div onclick="right1()">&gt</div>
@@ -185,13 +96,13 @@ pageEncoding="UTF-8"%>
 	
 	<!-- 게시판 영역 -->
 	<div class="boardWrapper">
-		<div class="board">
+		<div class="board" id="board_index">
 			<h3>자유게시판</h3>
 			<div id="userBoard">
 			</div>
 		</div>	
 		
-		<div class="board">
+		<div class="board" id="notice_index">
 			<h3>공지사항</h3>
 			<div id="adminBoard">
 			</div>
@@ -223,6 +134,7 @@ pageEncoding="UTF-8"%>
 					console.log(xhr, status, error);
 				}
 			});
+			
 			//공지사항 불러오기
 			$.ajax({
 				url: "<%= request.getContextPath() %>/member/indexAdminBoard",
@@ -236,31 +148,6 @@ pageEncoding="UTF-8"%>
 			});
 		});
 	</script>
-	
-	<style>
-		.boardWrapper{
-			width:1200px;
-			height:500px;
-			border:1px solid black;
-			display:flex;
-			position:relative;
-			margin: 0 auto;
-		}
-		.boardWrapper .board{
-			width:500px;
-			height:500px;
-			border:1px solid red;
-			margin: 0 auto;
-		}
-		#userBoard, #adminBoard{
-			text-align:left;
-			margin-left:20px;
-		}
-		#userBoard h4, #adminBoard h4{
-			margin-top:0px;
-			margin-bottom:10px;
-		}
-	</style>
 	
 	<script>
 		//#locationList 좌우 움직이는 스크립트

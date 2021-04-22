@@ -13,8 +13,12 @@
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css">
 <style>
-	div#search-memberId {display: <%= type != null && "memberId".equals(type) ? "inline-block" : "none" %>;}
-	div#search-memberName{display: <%= type != null && "memberName".equals(type) ? "inline-block" : "none" %>;}
+div#search-memberId {
+	display: <%= type == null || "memberId".equals(type) ? "inline-block" : "none" %>;
+}
+div#search-memberName{
+	display: <%= "memberName".equals(type) ? "inline-block" : "none" %>;
+}
 </style>
 <script>
 $(document).ready(function(){
@@ -99,7 +103,6 @@ $(document).ready(function(){
     <div id="search-container">
             검색타입 : 
             <select id="searchType">
-                <option value="">선택</option>
                 <option value="memberId" <%= "memberId".equals(type) ? "selected" : "" %>>아이디</option>
                 <option value="memberName" <%= "memberName".equals(type) ? "selected" : "" %>>회원명</option>
             </select>
