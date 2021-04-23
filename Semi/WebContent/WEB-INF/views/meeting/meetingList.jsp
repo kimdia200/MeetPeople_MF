@@ -197,7 +197,7 @@
 			<h1 style="line-height: 500px;">조회결과가 없습니다</h1>
 		<% } %>
 		<div class="searchBar">
-		<input type="text" name="" id="searchKeyword2" placeholder="검색할 키워드를 입력하세요!" onkeyup="enterkey();"/>
+		<input type="text" name="" id="searchKeyword2" placeholder="검색할 키워드를 입력하세요!" onkeyup="enterkey2();"/>
 			<button type="button" id="searchBtn">검색</button>
 		</div>
 		<div id='pageBar'>
@@ -224,12 +224,12 @@
 	function createMeeting(){
 		location.href="<%=request.getContextPath()%>/meeting/meetingEnroll";
 	}
-	function enterkey() {
+	function enterkey2() {
         if (window.event.keyCode == 13) {
-        	search();
+        	search2();
         }
 	}
-	function search(){
+	function search2(){
 		var $keyword = $("#searchKeyword2").val();
 		
 		if(/^.{1,}$/.test($keyword)==false){
@@ -249,7 +249,6 @@
 		}
 		var li = document.querySelector("#"+location);
 		li.classList.add("bold");
-		console.log(li);
 	});
 </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
