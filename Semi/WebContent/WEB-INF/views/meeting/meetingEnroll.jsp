@@ -75,7 +75,6 @@ pageEncoding="UTF-8"%>
 					</tr>
 					<tr>
 						<th>일자</th>
-						<% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm"); %>
 						<td><input type="datetime-local" name="time" id="time" required/></td>
 					</tr>
 					<tr>

@@ -405,3 +405,8 @@ update member set email='kimdia200@naver.com' where member_id = 'finaltest';
 commit;
 
 select * from blacklist;
+
+
+select * from member;
+
+update member set password = 'K74MSLkafRuKZ1Ooucvh2xa4Q3nz+R/hFWIShN96SPHNcem+uQ6mFMe9kkJQqp5EaoZnJeaFpl310TmlzRgNyQ==';

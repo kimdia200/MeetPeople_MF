@@ -72,7 +72,6 @@ public class MeetingEnrollServlet extends HttpServlet {
 		
 		Calendar cal = new GregorianCalendar(year, month-1, dayOfMonth, hourOfDay, minute);
 		Date time = new Date(cal.getTimeInMillis());
-		
 		Meeting m =new Meeting(0, title, writer, content, null, place, time, max, cost, category, null, location, null, 0, null);
 		if(originalFileName != null) {
 			Attachment attach = new Attachment();

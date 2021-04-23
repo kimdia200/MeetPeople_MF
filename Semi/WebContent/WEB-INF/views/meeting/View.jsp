@@ -82,7 +82,7 @@ pageEncoding="UTF-8"%>
 			<%} %>
 		</div>
 	</div>
-	<%if(loginMember!=null && (loginMember.getMemberId().equals(m.getWriter())) || loginMember.getMemberRole().equals(MemberService.ADMIN_ROLE)) {%>
+	<%if(loginMember!=null && (loginMember.getMemberId().equals(m.getWriter())||loginMember.getMemberRole().equals(MemberService.ADMIN_ROLE))) {%>
 
 	<div id="updateDeleteWrapper">
 		<input type="button" value="수정"  onclick="updatee();" />

@@ -1,6 +1,7 @@
 package meeting.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -44,6 +45,9 @@ public class MeetingViewServlet extends HttpServlet {
 		meeting.setCountParticipation(particiCnt);
 		
 		System.out.println(meeting);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(meeting.getTime());
+		System.out.println("약속시간 :" + cal);
 		
 		List<String> list = meetingService.selectParticiList(meetingNo);
 		System.out.println(list);

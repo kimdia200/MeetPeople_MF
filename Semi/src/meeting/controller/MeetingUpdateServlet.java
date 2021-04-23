@@ -81,7 +81,7 @@ public class MeetingUpdateServlet extends HttpServlet {
 		//삭제할 첨부파일 번호
 		String attachNo = multipartRequest.getParameter("delfile");
 		System.out.println("attachNo@servelt = "+attachNo);
-		
+		//2021-04-30T16:00
 		int year = Integer.parseInt(t.substring(0, 4));
 		int month = Integer.parseInt(t.substring(5,7));
 		int dayOfMonth = Integer.parseInt(t.substring(8,10));
@@ -90,6 +90,9 @@ public class MeetingUpdateServlet extends HttpServlet {
 		
 		Calendar cal = new GregorianCalendar(year, month-1, dayOfMonth, hourOfDay, minute);
 		Date time = new Date(cal.getTimeInMillis());
+		
+		System.out.println("cal = "+cal);
+		System.out.println("time = "+time);
 		
 		Meeting m =new Meeting(no, title, writer, content, null, place, time, max, cost, category, null, location, null, 0, null);
 		if(originalFileName != null) {

@@ -6,10 +6,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
 
@@ -167,7 +171,16 @@ public class MeetingDao {
 				m.setContent(rset.getString("content"));
 				m.setRegDate(rset.getDate("reg_date"));
 				m.setPlace(rset.getString("place"));
-				m.setTime(rset.getDate("time"));
+
+				//resultSet의 getDate메서드는 시분초를 가져오지 못한다...
+				int year = Integer.parseInt(rset.getString("time").substring(0, 4));
+				int month = Integer.parseInt(rset.getString("time").substring(5,7));
+				int dayOfMonth = Integer.parseInt(rset.getString("time").substring(8,10));
+				int hourOfDay = Integer.parseInt(rset.getString("time").substring(11,13));
+				int minute = Integer.parseInt(rset.getString("time").substring(14,16));
+				Calendar cal = new GregorianCalendar(year, month-1, dayOfMonth, hourOfDay, minute);
+				m.setTime(new Date(cal.getTimeInMillis()));
+				
 				m.setMaxPeople(rset.getInt("max_people"));
 				m.setCost(rset.getInt("cost"));
 				m.setCategoryCode(rset.getString("category_code"));
@@ -298,17 +311,21 @@ public class MeetingDao {
 		int result = 0;
 		String sql = prop.getProperty("updateMeeting");
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
+		String date ="to_date('"+sdf.format(new java.util.Date(m.getTime().getTime()))+"','yy/mm/dd HH24:MI')";
+		sql=sql.replace("#", date);
+		System.out.println("SQL@updateDao = "+sql);
+		
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, m.getTitle());
 			pstmt.setString(2, m.getContent());
 			pstmt.setString(3, m.getPlace());
-			pstmt.setDate(4, m.getTime());
-			pstmt.setInt(5, m.getMaxPeople());
-			pstmt.setInt(6, m.getCost());
-			pstmt.setString(7, m.getCategoryCode());
-			pstmt.setString(8, m.getLocationCode());
-			pstmt.setInt(9, m.getMeetingNo());
+			pstmt.setInt(4, m.getMaxPeople());
+			pstmt.setInt(5, m.getCost());
+			pstmt.setString(6, m.getCategoryCode());
+			pstmt.setString(7, m.getLocationCode());
+			pstmt.setInt(8, m.getMeetingNo());
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -362,6 +379,11 @@ public class MeetingDao {
 		int result =0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertMeeting");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
+		String date ="to_date('"+sdf.format(new java.util.Date(m.getTime().getTime()))+"','yy/mm/dd HH24:MI')";
+		sql=sql.replace("#", date);
+		System.out.println("SQL@inserDAO = "+sql);
 		//
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -369,11 +391,10 @@ public class MeetingDao {
 			pstmt.setString(2,m.getWriter());
 			pstmt.setString(3, m.getContent());
 			pstmt.setString(4, m.getPlace());
-			pstmt.setDate(5, m.getTime());
-			pstmt.setInt(6, m.getMaxPeople());
-			pstmt.setInt(7, m.getCost());
-			pstmt.setString(8, m.getCategoryCode());
-			pstmt.setString(9, m.getLocationCode());
+			pstmt.setInt(5, m.getMaxPeople());
+			pstmt.setInt(6, m.getCost());
+			pstmt.setString(7, m.getCategoryCode());
+			pstmt.setString(8, m.getLocationCode());
 			result=pstmt.executeUpdate();
 		}  catch (SQLException e) {
 			e.printStackTrace();

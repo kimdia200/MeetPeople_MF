@@ -83,7 +83,7 @@ pageEncoding="UTF-8"%>
 					</tr>
 					<tr>
 						<th>일자</th>
-						<% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm"); %>
+						<% SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm"); %>
 						<td><input type="datetime-local" name="time" id="time" value="<%=sdf.format(m.getTime()) %>" required/></td>
 					</tr>
 					<tr>
@@ -91,7 +91,7 @@ pageEncoding="UTF-8"%>
 						<td>
 							<div class="flex">
 								<span class="won">￦</span>
-								<input type="number" name="cost" id="cost" required min="0" step="1000" placeholder="참가비용"/>
+								<input type="number" name="cost" id="cost" required min="0" step="1000" placeholder="참가비용" value="<%=m.getCost() %>"/>
 								<span class="won2">원</span>
 							</div>
 						</td>
