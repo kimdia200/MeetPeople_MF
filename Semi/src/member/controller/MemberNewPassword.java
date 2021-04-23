@@ -78,7 +78,7 @@ public class MemberNewPassword extends HttpServlet {
 			msg = "비밀번호 변경에 실패했습니다.";	
 		
 		session.setAttribute("msg", msg);
-		response.sendRedirect(request.getContextPath());
+		response.sendRedirect(request.getContextPath()+"/");
 		
 	}
 

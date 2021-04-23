@@ -27,7 +27,7 @@
 <head>
 <meta charset="UTF-8" />
 
-<title>Insert title here</title>
+<title>미플</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/header0.css" />
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
@@ -47,7 +47,7 @@
 	
 	<div id="background_image_wrapper_ho"><img src="<%=request.getContextPath() %>/images/backgroundimage.png" id="ho_header_background"/>
 	<div id="airplane_icon"><img src="<%=request.getContextPath() %>/images/airplane.png" id="airplane_icon_image"/></div></div>
-				<a href="<%=request.getContextPath()%>" id="ho_header_logo_a"><img src="<%=request.getContextPath() %>/images/Logo.png" id="ho_Logo"/></a>
+				<a href="<%=request.getContextPath()%>/" id="ho_header_logo_a"><img src="<%=request.getContextPath() %>/images/Logo.png" id="ho_Logo"/></a>
 	<div class="ho_login">
 			<%
 				if (loginMember == null) {

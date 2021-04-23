@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
 import member.model.service.MemberService;
@@ -24,26 +27,25 @@ public class SendFindEmail {
 	public Member sendEmailPassword(Member member) {
 		String id = member.getMemberId();
 		String email = member.getEmail();
-		
-		//랜덤값 부여
+
+		// 랜덤값 부여
 		String randomString = MvcUtils.randomAlphaWord(30);
-		
-		//db에 저장
+
+		// db에 저장
 		Map<String, String> map = new HashMap<>();
-		map.put("id",id);
-		map.put("randomString",randomString);
+		map.put("id", id);
+		map.put("randomString", randomString);
 		int result = 0;
 		result = memberService.insertCertification(map);
-		if(result>0) {
+		if (result > 0) {
 			System.out.println("인증코드 테이블 저장 성공");
-		}else {
+		} else {
 			System.out.println("인증코드 테이블 저장 실패");
 		}
-		
-		
-		String mail = "http://localhost:9090/semi/member/newpassword?id="+id+"&randomString="+randomString+"&email="+email;
 
-		
+		String mail = "http://meetpeople.kro.kr/member/newpassword?id=" + id + "&randomString=" + randomString
+				+ "&email=" + email;
+
 		// 메일용 api
 		Properties props = new Properties();
 
@@ -67,8 +69,14 @@ public class SendFindEmail {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("MEPLE"));//
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));// 받는사람이메일 입력받는곳
-			message.setSubject("[미플] 비밀번호 변경 링크 메일입니다.");// 제목
+			message.setSubject("[미플] 비밀번호 변경 링크 메일입니다!");// 제목
 			message.setText(mail+"  해당링크를 클릭해서 비밀번호를 변경하세요.");// 내용
+
+//			message.setContent(new MimeMultipart());
+//			Multipart mp = (Multipart) message.getContent();
+//			mp.addBodyPart(
+//					getContents("<html><head></head><body><h1>"+mail+"</h1></body></html>"));
+
 			System.out.println("send!!!");
 			Transport.send(message);
 			System.out.println("SEND");
@@ -79,9 +87,6 @@ public class SendFindEmail {
 
 		return member;
 	}
-	
-	
-	
 
 	public Member sendEmailId(Member member) {
 		String id = member.getMemberId();
@@ -122,6 +127,15 @@ public class SendFindEmail {
 		}
 
 		return member;
+	}
+
+	private BodyPart getContents(String html) throws MessagingException {
+		BodyPart mbp = new MimeBodyPart();
+		// setText를 이용할 경우 일반 텍스트 내용으로 설정된다.
+		// mbp.setText(html);
+		// html 형식으로 설정
+		mbp.setContent(html, "text/html; charset=utf-8");
+		return mbp;
 	}
 
 }

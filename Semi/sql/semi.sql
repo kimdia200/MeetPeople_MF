@@ -410,3 +410,7 @@ select * from blacklist;
 select * from member;
 
 update member set password = 'K74MSLkafRuKZ1Ooucvh2xa4Q3nz+R/hFWIShN96SPHNcem+uQ6mFMe9kkJQqp5EaoZnJeaFpl310TmlzRgNyQ==';
+commit;
+rollback;
+select * from meeting order by meeting_no desc;
+update meeting set time = '21/04/24 15:04' where meeting_no=61;

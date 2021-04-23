@@ -31,7 +31,7 @@
     		  auth="Container"
     		  type="javax.sql.DataSource"
     		  driverClassName="oracle.jdbc.OracleDriver"
-    		  url="jdbc:oracle:thin:@52.79.162.84:1521:xe"
+    		  url="jdbc:oracle:thin:@15.164.40.55:1521:xe"
     		  username="semi"
     		  password="semi"
     		  maxTotal="20"

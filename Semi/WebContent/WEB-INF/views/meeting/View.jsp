@@ -71,12 +71,12 @@ pageEncoding="UTF-8"%>
 				<input type="hidden" name="meetingNo" value="<%=m.getMeetingNo()%>" />
 			</form>
 			<!-- 작성자 본인은 취소 불가, 신청시 디비추가 -->
-			<% if(m.getTime().getTime()< new java.util.Date().getTime()
+			<%if(loginMember!=null && (list.contains(loginMember.getMemberId()) && m.getTime().getTime() > new java.util.Date().getTime())) {%>
+			<input type="button" value="취소" class="meetingViewBtn" id="cancel" onclick="cancel();"/>
+			<%} else if(m.getTime().getTime()< new java.util.Date().getTime()
 				 || m.getCountParticipation()>=m.getMaxPeople()
 					){%>
 			<input type="button" value="마감" class="meetingViewBtn" id="deadline"/>
-			<%}else if(loginMember!=null && list.contains(loginMember.getMemberId())){ %>
-			<input type="button" value="취소" class="meetingViewBtn" id="cancel" onclick="cancel();"/>
 			<%}else{ %>
 			<input type="button" value="신청" class="meetingViewBtn" id="submit" onclick="apply();"/>
 			<%} %>

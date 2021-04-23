@@ -56,7 +56,7 @@ public class MemberEnrollServlet extends HttpServlet {
 		
 		request.getSession().setAttribute("msg", msg);
 		
-		response.sendRedirect(request.getContextPath());
+		response.sendRedirect(request.getContextPath()+"/");
 	}
 
 }

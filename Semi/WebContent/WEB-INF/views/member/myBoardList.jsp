@@ -49,7 +49,7 @@ div#search-boardTitle{
 	<input type="button" value="글쓰기" id="btn-add"
 		onclick="location.href='<%= request.getContextPath() %>/board/boardEnroll?writer=<%= loginMember.getMemberId() %>'" />
 	<% } %>
-	<table id="tbl-board">
+	<table id="tbl-board" style="width:800px;">
 		<tr>
 			<th>번호</th>
 			<th>제목</th>

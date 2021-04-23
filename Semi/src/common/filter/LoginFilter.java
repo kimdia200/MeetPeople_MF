@@ -39,11 +39,7 @@ import member.model.vo.Member;
 public class LoginFilter implements Filter {
 
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		//로그인 여부 확인하기
 		HttpServletRequest httpReq = (HttpServletRequest)request;
 		HttpServletResponse httpRes = (HttpServletResponse)response;
 		
@@ -52,10 +48,9 @@ public class LoginFilter implements Filter {
 		
 		if(loginMember == null) {
 			session.setAttribute("msg", "로그인후 사용할 수 있습니다.");
-			httpRes.sendRedirect(httpReq.getContextPath());
+			httpRes.sendRedirect(httpReq.getContextPath()+"/");
 			return;
 		}
-		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}
 

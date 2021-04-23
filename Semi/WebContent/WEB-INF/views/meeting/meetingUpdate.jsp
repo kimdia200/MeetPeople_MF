@@ -100,7 +100,7 @@ pageEncoding="UTF-8"%>
 						<th>최대인원</th>
 						<td>
 							<div class="flex">
-								<input type="number" name="max" id="max" min="2" value="2" required/>
+								<input type="number" name="max" id="max" min="2" value="<%=m.getMaxPeople() %>" required/>
 								<span class="person">명</span>
 							</div>
 						</td>

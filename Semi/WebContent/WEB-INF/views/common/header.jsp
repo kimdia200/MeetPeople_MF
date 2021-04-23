@@ -26,7 +26,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
-<title>Insert title here</title>
+<title>미플</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/header.css" />
 <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.js"></script>
@@ -49,7 +49,7 @@
 				</table>
 			</div>
 	
-			<a href="<%=request.getContextPath()%>"><img src="<%=request.getContextPath() %>/images/Logo.png" id="Logo"/></a>
+			<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath() %>/images/Logo.png" id="Logo"/></a>
 			<div class="login">
 			<%
 				if (loginMember == null) {
