@@ -184,7 +184,7 @@ $(document).ready(function(){
 							</select>
                         </td>
                         <td><%= m.getEnrollDate() %></td>
-                        <td><input type="button" data-member-id="<%= m.getMemberId() %>" class="delMember" value="강제탈퇴" /></td>
+                        <td><input type="button" data-member-id="<%= m.getEmail() %>" class="delMember" value="강제추방" /></td>
                     </tr>
  
                 <%		

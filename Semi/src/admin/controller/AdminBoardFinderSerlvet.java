@@ -18,7 +18,7 @@ import common.MvcUtils;
 /**
  * Servlet implementation class AdminBoardFinderSerlvet
  */
-@WebServlet("/admin/boardFinder")
+@WebServlet("/board/adminBoardFinder")
 public class AdminBoardFinderSerlvet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();

@@ -4,6 +4,7 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/footer.css" />
 </section>
+<hr style="margin-top:40px" />
 <footer>
         <div class="meeple-footer container">
         <div class="infofooter">
@@ -33,14 +34,12 @@
         </div>
     </div>
     
-    <div class="last">
-        <hr id="lasthr">
-        <h2 id="last">Copyright 2021. &lt; KH-SEMI-PROJECT &gt; all rights reserved.</h2>
-    </div>
     <script 
      src="https://kit.fontawesome.com/39a2f80180.js"
      crossorigin="anonymous"
      ></script>
 </footer>
+        <hr style="margin-top:40px; width:100%;">
+        <h2 id="last">Copyright 2021. &lt; KH-SEMI-PROJECT &gt; all rights reserved.</h2>
   </body>
 </html>

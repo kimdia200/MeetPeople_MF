@@ -43,7 +43,7 @@ div#search-boardTitle{
 }
 </style>
 <div class="mypageWrapper3">
-	<h3 class="me">내가 쓴 글</h3>
+	<h3 class="me2">내가 쓴 글</h3>
 <div id="boardListWrapper">
 	<%if(loginMember != null){ %>
 	<input type="button" value="글쓰기" id="btn-add"
@@ -59,7 +59,7 @@ div#search-boardTitle{
 		</tr>
 		<%if(list == null || list.isEmpty()){%>
 		<tr>
-			<td colspan="6" style="text-align: center">조회된 게시글이 없습니다.</td>
+			<td colspan="6" style="text-align: center; width:1200px">조회된 게시글이 없습니다.</td>
 		</tr>
 		<%}else{ 
 			for(Board b:list){
@@ -96,7 +96,6 @@ div#search-boardTitle{
 	<div id='pageBar'>
 		<%= request.getAttribute("pageBar") != null ? request.getAttribute("pageBar") : ""%>
 	</div>
-
 </div>
 <script>
 

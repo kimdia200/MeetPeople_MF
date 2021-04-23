@@ -74,15 +74,16 @@ pageEncoding="UTF-8"%>
 			<% if(m.getTime().getTime()< new java.util.Date().getTime()
 				 || m.getCountParticipation()>=m.getMaxPeople()
 					){%>
-			<input type="button" value="마감" class="meetingViewBtn"/>
+			<input type="button" value="마감" class="meetingViewBtn" id="deadline"/>
 			<%}else if(loginMember!=null && list.contains(loginMember.getMemberId())){ %>
-			<input type="button" value="취소" class="meetingViewBtn" onclick="cancel();"/>
+			<input type="button" value="취소" class="meetingViewBtn" id="cancel" onclick="cancel();"/>
 			<%}else{ %>
-			<input type="button" value="신청" class="meetingViewBtn" onclick="apply();"/>
+			<input type="button" value="신청" class="meetingViewBtn" id="submit" onclick="apply();"/>
 			<%} %>
 		</div>
 	</div>
-	<%if(loginMember!=null && loginMember.getMemberId().equals(m.getWriter())) {%>
+	<%if(loginMember!=null && (loginMember.getMemberId().equals(m.getWriter())) || loginMember.getMemberRole().equals(MemberService.ADMIN_ROLE)) {%>
+
 	<div id="updateDeleteWrapper">
 		<input type="button" value="수정"  onclick="updatee();" />
 		<input type="button" value="삭제"  onclick="deletee();" />

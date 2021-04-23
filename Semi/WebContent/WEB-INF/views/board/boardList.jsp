@@ -40,7 +40,7 @@ div#search-boardWriter{
 		</tr>
 		<%if(list == null || list.isEmpty()){%>
 		<tr>
-			<td colspan="6" style="text-align: center">조회된 게시글이 없습니다.</td>
+			<td colspan="6" style="text-align: center; height: 441px; font-size: 25px;">조회된 게시글이 없습니다.</td>
 		</tr>
 		<%}else{ 
 			for(Board b:list){
@@ -69,14 +69,14 @@ div#search-boardWriter{
 			<div id="search-boardTitle">
 				<form action="<%=request.getContextPath() %>/board/boardFinder">
 					<input type="hidden" name="searchType" value="boardTitle">
-					<input type="text" name="searchKeyword" placeholder="검색할 제목 입력" value="<%= "boardTitle".equals(type) ? kw : "" %>">
+					<input type="text" class="searchKeyword" name="searchKeyword" placeholder="검색할 제목 입력" value="<%= "boardTitle".equals(type) ? kw : "" %>">
 					<button type="submit">검색</button>
 				</form>
 			</div>
 			<div id="search-boardWriter">
 				<form action="<%=request.getContextPath() %>/board/boardFinder">
 					<input type="hidden" name="searchType" value="boardWriter">
-					<input type="text" name="searchKeyword" placeholder="검색할 작성자 입력" value="<%= "boardWriter".equals(type) ? kw : "" %>">
+					<input type="text" class="searchKeyword" name="searchKeyword" placeholder="검색할 작성자 입력" value="<%= "boardWriter".equals(type) ? kw : "" %>">
 					<button type="submit">검색</button>
 				</form>
 			</div>

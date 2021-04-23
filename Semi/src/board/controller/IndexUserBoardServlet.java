@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import board.model.service.BoardService;
 import board.model.vo.Board;
 
-@WebServlet("/member/indexUserBoard")
+@WebServlet("/board/indexUserBoard")
 public class IndexUserBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BoardService boardService = new BoardService();
@@ -29,13 +29,18 @@ public class IndexUserBoardServlet extends HttpServlet {
 			Board b = list.get(i);
 			b.setCommentCnt(boardService.selectCommentCnt(b.getBoardNo()));
 			if(i!=list.size()-1) {
-				out.println("<h4><a href='"+request.getContextPath()+"/board/boardView?no="+b.getBoardNo()+"'>"+b.getTitle()+
+				out.println("<h4><div class='index_board_width'><div><a href='"+request.getContextPath()+"/board/boardView?no="+b.getBoardNo()+"'>"+b.getTitle()+
 						(b.getCommentCnt()!=0 ? " ("+b.getCommentCnt()+")" : "")+
-						"</a></h4>");
+						"</a></div></div>");
+				out.println("<span class="+"index_board"+">"+b.getWriter()+" / "+b.getRegDate()+"</span></h4>");
+				
+				
 			}else {
-				out.print("<h4><a href='"+request.getContextPath()+"/board/boardView?no="+b.getBoardNo()+"'>"+b.getTitle()+
+				
+				out.println("<h4><div class='index_board_width'><div><a href='"+request.getContextPath()+"/board/boardView?no="+b.getBoardNo()+"'>"+b.getTitle()+
 						(b.getCommentCnt()!=0 ? " ("+b.getCommentCnt()+")" : "")+
-						"</a></h4>");
+						"</a></div></div>");
+				out.print("<span class="+"index_board"+">"+b.getWriter()+" / "+b.getRegDate()+"</span></h4>");
 			}
 		}
 	}

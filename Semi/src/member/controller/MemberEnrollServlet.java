@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.MvcUtils;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
@@ -27,7 +28,7 @@ public class MemberEnrollServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId = request.getParameter("ho_id_input");
-		String memberPassword = request.getParameter("ho_password_input1");
+		String memberPassword = MvcUtils.getSha512(request.getParameter("ho_password_input1"));
 		String memberName = request.getParameter("ho_name_input");
 		String memberEmail = request.getParameter("ho_eamil_input");
 		String memberPhone = request.getParameter("ho_phone_input");

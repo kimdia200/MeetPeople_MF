@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.MvcUtils;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
@@ -25,7 +26,7 @@ public class MemberLoginServlet extends HttpServlet {
 		
 		//1. 사용자 입력값 받기
 		String memberId = request.getParameter("id_input");
-		String memberPassword = request.getParameter("password_input");
+		String memberPassword = MvcUtils.getSha512(request.getParameter("password_input"));
 		String saveId = request.getParameter("saveid");
 		
 		//2. meberId로 회원객체 조회

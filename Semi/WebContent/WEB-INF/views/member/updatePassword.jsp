@@ -55,7 +55,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" style="text-align: center;"><input
-					type="submit" value="변경" /></td>
+					type="submit" value="변경" class="btn" /></td>
 			</tr>
 		</table>
 	</form>

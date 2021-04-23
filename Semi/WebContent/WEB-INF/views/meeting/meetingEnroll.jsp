@@ -4,7 +4,6 @@
 <%@page import="meeting.model.vo.Meeting"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<% Meeting m = (Meeting)request.getAttribute("meeting"); %>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <link
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
@@ -26,9 +25,9 @@ pageEncoding="UTF-8"%>
 	<div id="meetingViewWrapper">
 		<div id="meetingViewLeft">
 			<div id="imgWrapper">
-				<img src="<%=request.getContextPath() %>/upload/no_img.png"/>
+				<img id ="imgTag" src="<%=request.getContextPath() %>/upload/no_img.png"/>
 			</div>
-			<div style="display:flex;">
+			<div id="imgSrcWrapper">
 				<input type="file" name="upFile">
 			</div>
 			<div id="contentWrapper">
@@ -81,11 +80,22 @@ pageEncoding="UTF-8"%>
 					</tr>
 					<tr>
 						<th>참가비용</th>
-						<td><input type="number" name="cost" id="cost" required min="0" step="1000" placeholder="참가비용"/>원</td>
+						<td>
+							<div class="flex">
+								<span class="won">￦</span>
+								<input type="number" name="cost" id="cost" required min="0" step="1000" placeholder="참가비용"/>
+								<span class="won2">원</span>
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<th>최대인원</th>
-						<td><input type="number" name="max" id="max" min="2" value="2" required/>명</td>
+						<td>
+							<div class="flex">
+								<input type="number" name="max" id="max" min="2" value="2" required/>
+								<span class="person">명</span>
+							</div>
+						</td>
 					</tr>
 				</table>
 				<input type="hidden" name="writer" value="<%=loginMember.getMemberId() %>" />
@@ -98,7 +108,7 @@ pageEncoding="UTF-8"%>
 		<input type="button" value="등록"  onclick="enroll();" />
 		<input type="button" value="취소"  onclick="cancel();" />
 	</div>
-	
+		
 	<script>
 	$(document).ready(function(){
 		$("#contentWrapper").summernote({
@@ -107,8 +117,36 @@ pageEncoding="UTF-8"%>
 	        focus: true,
 	        disableResizeEditor: true,
 	    });
-	})
+		
+	});
 	
+		$("[name=upFile]").on('change',function(){
+			var value = $("[name=upFile]").val();
+			if(value.length != 0){
+				var form = $('#updateFrm')[0];
+			    var formData = new FormData(form);
+ 				$.ajax({
+					url: "<%= request.getContextPath() %>/meeting/tempFile",
+					enctype: 'multipart/form-data',
+		            processData: false,
+		            contentType: false,
+					data : formData,
+					method: "POST",
+					
+					success: function(data){
+						console.log(data);
+						$("#imgTag").attr('src','<%=request.getContextPath() %>/upload/'+data+"?time="+new Date());
+					},
+					
+					error: function(xhr, status, error){
+						console.log("error call!");
+						console.log(xhr, status, error);
+					}
+				});
+			}else{
+				$("#imgTag").attr('src','<%=request.getContextPath() %>/upload/no_img.png');
+			}
+		});
 	function enroll(){
 		var content = $("#contentWrapper").summernote("code");
 		$("#realContent").val(content);

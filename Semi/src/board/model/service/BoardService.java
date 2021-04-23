@@ -319,7 +319,7 @@ public class BoardService {
 		} finally {
 			close(conn);
 		}
-		return 0;
+		return result;
 	}
 	
 	/*마이페이지 내가 쓴 글*/

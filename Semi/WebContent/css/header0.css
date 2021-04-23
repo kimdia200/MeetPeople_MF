@@ -21,6 +21,7 @@ margin: 0 auto;
     width: 1200px;
     position: relative;
     z-index: 12;
+    font-family: 'Noto Sans KR';
 }
 
 #ho_header ol {
@@ -53,6 +54,7 @@ bottom: -166px;
 
 #ho_login{
     margin-top: 12px;
+    font-family: 'Noto Sans KR';
 }
 
 
@@ -64,10 +66,13 @@ bottom: -166px;
     cursor: pointer;
     font-weight: 900;
     position: relative;
+    font-family: 'Noto Sans KR';
 }
 footer {
 	margin: 0 auto;
 	width: 1200px;
+	margin-top: 20px;
+	z-index:28;
 }
 
 a:link {
@@ -500,7 +505,7 @@ section{
 }
 .boardWrapper .board{
 	width: 565px;
-    height: 500px;
+    height: 526px;
     border: 1px solid lightgray;
     margin: 0 auto;
     border-radius: 15px;
@@ -726,13 +731,53 @@ left: 135px;
 	font-size: 24px;
     height: 51px;
     margin-top: 0px;
-    background-color: lightgray;
+    background-color: #fd9000;
     padding-top: 25px;
+    border-bottom: 3px solid gray;
+    color:white;
     }
     
     
-    .test_writer{
+	.index_board{
+    right: 63px;
+    position: absolute;
+    font-size: 13px;
+    margin-top: 2px;
+    padding-right: 4px;
+	}
+	
+	
+	.index_board_width{
+/* 	width: 275px;
+    overflow: hidden; */
+    display: inline-flex;
+	
+	}
+	
+	.index_board_width >div > a {
+	width: 263px;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 16px;
+    padding-left: 4px;
+	}
+    
+    #lasthr{
+    width: 100%;
+    margin-bottom: 0px;
+    margin-top: 35px;
     
     }
+    
+    #last{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    margin-top: 13px;
+    margin-bottom: 20px;
+    text-align: center;
+    }
+    
     
     

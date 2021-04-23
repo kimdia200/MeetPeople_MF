@@ -416,8 +416,6 @@ public class BoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateAdminBoard");
-		System.out.println(sql);
-		System.out.println(board);
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -459,7 +457,6 @@ public class BoardDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateReadCnt");
-		//update user_board set read_cnt=read_cnt+1 where board_no = ?
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -477,7 +474,7 @@ public class BoardDao {
 	public int updateAdminReadCnt(Connection conn, int boardNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = "update admin_board set read_cnt=read_cnt+1 where board_no = ? ";
+		String sql = prop.getProperty("updateAdminReadCnt");
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
@@ -485,7 +482,7 @@ public class BoardDao {
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new SemiException("조회수 조회에 실패하였습니다.", e);
+			throw new SemiException("조회수 증가에 실패하였습니다.", e);
 		} finally {
 			close(pstmt);
 		}
@@ -546,6 +543,7 @@ public class BoardDao {
 			e.printStackTrace();
 			throw new SemiException("내가 쓴글 총 글수를 불러오지 못했습니다.",e);
 		} finally {
+			close(rset);
 			close(pstmt);
 		}
 		
@@ -560,7 +558,6 @@ public class BoardDao {
 		ResultSet rset = null;
 		String query = prop.getProperty("searchBoardList");
 		query = setQuery(query, param.get("searchType"), param.get("searchKeyword"));
-//		select B.* from( select rownum rnum, B.* from( select * from user_board where title like '%테%' order by board_no desc) B)B where rnum between ? and ?;
 		System.out.println("query = "+ query);
 		
 		try {
@@ -580,6 +577,7 @@ public class BoardDao {
 				list.add(board);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new SemiException("검색 리스트 조회 실패", e);
 		} finally {
 			close(rset);
@@ -597,7 +595,6 @@ public class BoardDao {
 		ResultSet rset = null;
 		String query = prop.getProperty("searchBoardListCnt");
 		query = setQuery(query, param.get("searchType"), param.get("searchKeyword"));
-		//select count(*) from user_board where title like '%테%';
 		System.out.println("tc query = "+ query);
 		
 		try {
@@ -608,6 +605,7 @@ public class BoardDao {
 				totalContents = rset.getInt("cnt");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new SemiException("검색 페이지 조회 실패", e);
 		} finally {
 			close(rset);
@@ -654,6 +652,7 @@ public class BoardDao {
 				list.add(board);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new SemiException("검색 리스트 조회 실패", e);
 		} finally {
 			close(rset);
@@ -680,6 +679,7 @@ public class BoardDao {
 				totalContents = rset.getInt("cnt");
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			throw new SemiException("검색 페이지 조회 실패", e);
 		} finally {
 			close(rset);
@@ -717,6 +717,7 @@ public class BoardDao {
 				list.add(board);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new SemiException("검색 리스트 조회 실패", e);
 		} finally {
 			close(rset);
@@ -745,6 +746,7 @@ public class BoardDao {
 				totalContents = rset.getInt("cnt");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new SemiException("검색 페이지 조회 실패", e);
 		} finally {
 			close(rset);
@@ -753,6 +755,4 @@ public class BoardDao {
 		
 		return totalContents;
 	}
-
-
 }

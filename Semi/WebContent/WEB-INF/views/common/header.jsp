@@ -1,3 +1,4 @@
+<%@page import="member.model.service.MemberService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="member.model.vo.Member"%>
@@ -32,12 +33,14 @@
 </head>
 <body>
 	<header>
+	<div id="background_header_div">
+	<div id="header_icon"><img src="/semi/images/icon3.png" id="icon4_image" class="icon_image"></div>
 		<%-- 검색창 --%>
 			<div class="boxContainer">
 				<table class="elementsContainer">
 					<tr>
 						<td>
-							<input id="searchKeyword" type="text" placeholder="Search" class="search" onkeyup="enterkey();" />
+							<input id="searchKeyword" type="text" placeholder="키워드를 입력해주세요" class="search" onkeyup="enterkey();" />
 						</td>
 						<td>
 							<img class="material-icons" src="<%=request.getContextPath() %>/images/baseline_search_black_24dp.png"  onclick="search();"/>
@@ -61,10 +64,10 @@
 			<%-- 로그인 성공시 --%>
 			<table id="login">
 				<tr>
-					<td><%=loginMember.getName()%>님, 안녕하세요.</td>
+					<td class="header_td"><%=loginMember.getName()%>님, 안녕하세요.</td>
 				</tr>
 				<tr>
-					<td><input type="button" value="mypage"
+					<td class="header_td"><input type="button" value="mypage"
 						onclick="location.href='<%=request.getContextPath()%>/member/mypage';" class="loginbtn" />
 						<input type="button" value="logout"
 						onclick="location.href='<%=request.getContextPath()%>/member/logout';" class="loginbtn"/>
@@ -117,28 +120,31 @@
 		</div>	
 			
 		<ol>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList">전체</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingEnrollUpdate">mt:enrollUpdate</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingView">mt:View</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C1">음악</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C2">게임</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C3">운동</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C4">요리</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C5">독서</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C6">재테크</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C7">자동차</a></li>
-			<li><a href="<%=request.getContextPath()%>/board/boardList">자유게시판</a></li>
-			<li><a href="<%=request.getContextPath()%>/board/adminBoardList">공지사항</a></li>
-			<li><a href="<%=request.getContextPath()%>/admin/memberList">회원관리</a></li>
+			<li><a href="<%=request.getContextPath()%>/meeting/meetingList" id="header_li1">전체</a></li>
+			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C1" id="header_li2">음악</a></li>
+			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C2" id="header_li3">게임</a></li>
+			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C3" id="header_li4">운동</a></li>
+			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C4" id="header_li5">요리</a></li>
+			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C5" id="header_li6">독서</a></li>
+			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C6" id="header_li7">재테크</a></li>
+			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=C7" id="header_li8">자동차</a></li>
+			<li><a href="<%=request.getContextPath()%>/board/boardList" id="header_li9">자유게시판</a></li>
+			<li><a href="<%=request.getContextPath()%>/board/adminBoardList" id="header_li10">공지사항</a></li>
+			
+			<%if(loginMember!=null && loginMember.getMemberRole().equals(MemberService.ADMIN_ROLE)) { %>
+			<li><a href="<%=request.getContextPath()%>/admin/memberList" id="header_li11">회원관리</a></li>
+			<%} %>
 		</ol>
+		</div>
 
 		<script>
-						<%if(msg!=null){%>
+			<%if(msg!=null){%>
 				alert("<%=msg%>");
 			<%}%>
-			$(signup_button).click(function(){
-				location.href="<%=request.getContextPath()%>/member/enroll";
-			});
+			<%if(loginMember==null){%>
+				$(signup_button).click(function(){
+					location.href="<%=request.getContextPath()%>/member/enroll";
+				});
 			$(login_button).click(function() {
 				var top = screen.availHeight / 2 - 250;
 				$("#login_frame_div").attr('style', 'display:flex; top:'+top+'px;');
@@ -162,12 +168,13 @@
 				$("#login_frame_div").attr('style', 'display:none;');
 				$("#login_frame_wrapper").attr('style', 'display:none;');
 			});
+			<%}%>
 			
 			
 			
 			$(document).ready(function(){
 				//총인원과 총모임 ajax
-				
+				<%if(loginMember==null){%>
 				$.ajax({
 					url:"<%= request.getContextPath()%>/member/count",
 					success:function(data){
@@ -194,6 +201,7 @@
 						console.log(xhr, status, error);
 					}
 				});
+				<%}%>
 			});
 			
 			//검색창 엔터

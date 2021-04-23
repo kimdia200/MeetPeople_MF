@@ -5,7 +5,8 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/meetingList.css" />
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%
 	List<Meeting> list = (List<Meeting>)request.getAttribute("list");
@@ -57,39 +58,43 @@
 
 <div id="listWrapper">
 	<div id="leftWrapper">
-		<h4><%= cName+" > "+lName%></h4>
+		<div class="leftName">
+		<h3><%= cName+" > "+lName%></h3>
+		</div>
 		<%
 			if(search.length()!=0){
 		%>
-			<h4>제목 검색 : <%=search %></h4>
-			<button type="button" onclick="location.href='<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=<%=location%>'">초기화</button>	
+			<h4 class="reset">제목 검색 : <%=search %>
+			<button class="resetbtn" type="button" onclick="location.href='<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=<%=location%>'">초기화</button>
+			</h4>	
 		<%}%>
-		<hr />
 		<div>
-			<h4>지역</h4>
+			<h2 class="leftATag">지역</h2>
 		</div>
 		<ol>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&search=<%=search%>">전국</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L1&search=<%=search%>">서울</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L2&search=<%=search%>">경기</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L3&search=<%=search%>">인천</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L4&search=<%=search%>">대전·충청</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L5&search=<%=search%>">대구·경북</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L6&search=<%=search%>">부산·경남</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L7&search=<%=search%>">울산</a></li>
-			<li><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L8&search=<%=search%>">광주</a></li>
+			<li id="L0"><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&search=<%=search%>">전국</a></li>
+			<li id="L1"><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L1&search=<%=search%>">서울</a></li>
+			<li id="L2"><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L2&search=<%=search%>">경기</a></li>
+			<li id="L3"><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L3&search=<%=search%>">인천</a></li>
+			<li id="L4"><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L4&search=<%=search%>">대전·충청</a></li>
+			<li id="L5"><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L5&search=<%=search%>">대구·경북</a></li>
+			<li id="L6"><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L6&search=<%=search%>">부산·경남</a></li>
+			<li id="L7"><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L7&search=<%=search%>">울산</a></li>
+			<li id="L8"><a href="<%=request.getContextPath()%>/meeting/meetingList?category=<%=category%>&location=L8&search=<%=search%>">광주</a></li>
 		</ol>
 	</div>
 	
 	<div id="rightWrapper">
-		<h3>미플 모임</h3>
+		<h1>미플 모임</h1>
 		<div id="search">
-			<input type="text" name="" id="searchKeyword2" placeholder="검색할 키워드를 입력하세요!"/>
-			<button type="button" id="searchBtn">검색</button>
+		<br />
 			<%if(loginMember != null){ %>
-			<button type="button" id="createMeeting" onclick="createMeeting();">모임생성</button>
+			<div>
+			<button type="button" id="createMeeting" onclick="createMeeting();">모임생성</button><br />
+			</div>
 			<%} %>
 		</div>
+		<div class="allBox">
 		<%if(list.isEmpty()==false && list!=null){ %>
 		<div class="boxWrapper">
 		<%int i=0; int loop=list.size() >=3 ? 3 : list.size(); %>
@@ -191,77 +196,16 @@
 		<%}else{ %>
 			<h1 style="line-height: 500px;">조회결과가 없습니다</h1>
 		<% } %>
+		<div class="searchBar">
+		<input type="text" name="" id="searchKeyword2" placeholder="검색할 키워드를 입력하세요!" onkeyup="enterkey();"/>
+			<button type="button" id="searchBtn">검색</button>
+		</div>
 		<div id='pageBar'>
 			<%= request.getAttribute("pageBar") != null ? request.getAttribute("pageBar") : ""%>
 		</div>
 	</div>
 </div>
-<style>
-		.boxWrapper{
-			width:900px;
-			height:194px;
-			display: flex;
-			transition-duration: 1s;
-			transition-timing-function: ease;
-			margin:0 auto;
-		}
-		.boxContents{
-			position:relative;
-			width:220px;
-			height:150px;
-			margin:40px;
-			padding:0;
-			border:2px solid black;
-			border-radius: 5px;
-			background:black;
-		}
-		.boxContents:hover{
-			animation-name: ani;
-			animation-duration: 0.5s;
-			animation-iteration-count: infinite;
-			animation-timing-function: ease;
-		}
-		.boxContents:hover span{
-			color:black;
-			text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
-		}
-		@keyframes ani{
-			0%{
-				transform: scale(1, 1);
-			}
-			50%{
-				transform: scale(1.1, 1.1);
-			}
-			100%{
-				transform: scale(1, 1);
-			}
-		}
-		.boxContents span{
-			position:absolute;
-			bottom:8px;
-			right:8px;
-			color:white;
-			font-weight: bold;
-			text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
-		}
-		#dDay{
-			top:8px;
-			right:8px;
-			color:red;
-		}
-		.boxContents img{
-			border-radius: 10px;
-		}
-		section{
-			overflow: hidden;
-		}
-		#search{
-			position: absolute;
-			right:10px;
-			top:21px;
-		}
-</style>
-
+</div>
 <script>
 	//searchKeyword, searchBtn
 	$("#searchBtn").click(function(){
@@ -280,67 +224,32 @@
 	function createMeeting(){
 		location.href="<%=request.getContextPath()%>/meeting/meetingEnroll";
 	}
+	function enterkey() {
+        if (window.event.keyCode == 13) {
+        	search();
+        }
+	}
+	function search(){
+		var $keyword = $("#searchKeyword2").val();
+		
+		if(/^.{1,}$/.test($keyword)==false){
+			$("#searchKeyword2").focus();
+			alert("검색 키워드를 1글자 이상 입력해주세요");
+			return;
+		}
+		
+		location.href="<%=request.getContextPath()%>/meeting/meetingList?search="+$keyword;
+	}
+	
+	
+	$(document).ready(function(){
+		var location = "<%=location%>";
+		if(location.length==0){
+			location='L0';
+		}
+		var li = document.querySelector("#"+location);
+		li.classList.add("bold");
+		console.log(li);
+	});
 </script>
-<style>
-#listWrapper{
-	width:1200px;
-	display:flex;
-}
-#leftWrapper{
-	width:200px;
-	height:800px;
-	margin-left:50px;
-	border:1px solid red;
-}
-#rightWrapper{
-	clear:both;
-	width:900px;
-	min-height: 800px;
-	border:1px solid red;
-	position: relative;
-}
-#leftWrapper ol{
-	list-style: none;
-	margin:0;
-	padding-left:30px;
-	text-align:left;
-}
-#leftWrapper ol li{
-	margin-bottom:20px;	
-}
-
-#pageBar{
-	height:50px;
-	margin-top:30px;
-}
-
-#pageBar span{
-    border-radius: 15%;
-    padding: 9px 15px;
-    background-color: skyblue;
-    text-decoration: none;
-    color: white;
-}
-#pageBar a{
-	border-radius: 15%;
-    padding: 9px 15px;
-    background-color: white;
-    text-decoration: none;
-    color: black;
-}
-
-#pageBar a:hover{
-    background-color: skyblue;
-    color: white;
-    transition: all ease 0.5s;
-}
-
-#pageBar a:active{
-    background-color: skyblue;
-    color: gray;
-}
-#search{
-	disdplay:flex;
-}
-</style>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

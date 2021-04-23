@@ -125,7 +125,7 @@ pageEncoding="UTF-8"%>
 			
 			//자유게시판 불러오기
 			$.ajax({
-				url: "<%= request.getContextPath() %>/member/indexUserBoard",
+				url: "<%= request.getContextPath() %>/board/indexUserBoard",
 				success: function(data){
 					$("#userBoard").html(data);
 				},
@@ -137,7 +137,7 @@ pageEncoding="UTF-8"%>
 			
 			//공지사항 불러오기
 			$.ajax({
-				url: "<%= request.getContextPath() %>/member/indexAdminBoard",
+				url: "<%= request.getContextPath() %>/board/indexAdminBoard",
 				success: function(data){
 					$("#adminBoard").html(data);
 				},

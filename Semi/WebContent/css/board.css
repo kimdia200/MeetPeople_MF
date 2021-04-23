@@ -2,11 +2,10 @@
 
 /* BoardList 게시판 게시글 목록 나오는 곳*/
 #boardListWrapper {
-	width: 800px;
+	width: 1200px;
 	/*height: 350px;*/
-	margin: 0 auto;
+	margin: 0;
 	
-	padding-bottom: 50px;
 
 }
 
@@ -37,11 +36,15 @@
 	font-size: 14px;
 	clear: both;
 	border-collapse: collapse;
+	width: 1200px;
+	
 }/*수정*/
 
 #tbl-board th{
-	border-top: 3px solid gray;
-	border-bottom: 2px solid gray;
+	border-top: 2px solid lightgray;
+	border-bottom: 2px solid lightgray;
+	border-left: 2px solid lightgray;
+	border-right: 2px solid lightgray;
 	background-color: lightgray;
     font-size: 13px;
     padding: 10px 4px;
@@ -54,8 +57,9 @@
 #tbl-board td:nth-of-type(1) {
 	width: 50px;
 	/*border: 1px solid black;*/
-	border-top: 2px solid gray;
-	border-bottom: 2px solid gray;
+	border-top: 2px solid lightgray;
+	border-bottom: 2px solid lightgray;
+	border-left: 2px solid lightgray;
 	background-color : rgb(255, 214, 136);
 	font-size:12px;
 }
@@ -64,8 +68,8 @@
 	width: 550px;
 	text-align:left;
 	/*border: 1px solid black;*/
-	border-top: 2px solid gray;
-	border-bottom: 2px solid gray;
+	border-top: 2px solid lightgray;
+	border-bottom: 2px solid lightgray;
 	font-size: 15px;
 	padding: 9px 10px 9px 20px;
 }/*수정*/
@@ -73,22 +77,23 @@
 #tbl-board td:nth-of-type(3) {
 	width: 100px;
 	/*border: 1px solid black;*/
-	border-top: 2px solid gray;
-	border-bottom: 2px solid gray;
+	border-top: 2px solid lightgray;
+	border-bottom: 2px solid lightgray;
 }
 
 #tbl-board td:nth-of-type(4) {
 	width: 100px;
 	/*border: 1px solid black;*/
-	border-top: 2px solid gray;
-	border-bottom: 2px solid gray;
+	border-top: 2px solid lightgray;
+	border-bottom: 2px solid lightgray;
 }
 
 #tbl-board td:nth-of-type(5) {
 	width: 55px;
 	/*border: 1px solid black;*/
-	border-top: 2px solid gray;
-	border-bottom: 2px solid gray;
+	border-top: 2px solid lightgray;
+	border-bottom: 2px solid lightgray;
+	border-right: 2px solid lightgray;
 }
 
 /*테이블 크기고정 */
@@ -125,7 +130,7 @@
 div#search-container{
 	padding-top: 20px;
 	padding-bottom: 20px;
-	
+	padding-left: 15px;
 }
 
 input{
@@ -379,4 +384,7 @@ td [name=boardCommentFrm]{
 #pageBar a:active{
     background-color: skyblue;
     color: gray;
+}
+.searchKeyword{
+	width: 300px;
 }

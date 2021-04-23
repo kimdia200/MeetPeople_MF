@@ -203,8 +203,8 @@ public class MeetingDao {
 			e.printStackTrace();
 			throw new SemiException("참여중인 인원 불러오기 실패", e);
 		} finally {
-			close(pstmt);
 			close(rset);
+			close(pstmt);
 		}
 		
 		return cnt;
@@ -230,8 +230,8 @@ public class MeetingDao {
 			e.printStackTrace();
 			throw new SemiException("참여중인 인원목록 불러오기 실패", e);
 		} finally {
-			close(pstmt);
 			close(rset);
+			close(pstmt);
 		}
 		
 		return list;

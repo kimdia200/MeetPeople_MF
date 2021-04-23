@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.model.service.MemberService;
+
 /**
  * Servlet implementation class MemberSendEmailSevlet
  */
@@ -24,17 +26,28 @@ public class MemberSendEmailSevlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	final String username = "meetpeople.kh";
 	final String password = "meetpeople.kh";
+	private MemberService memberService = new MemberService();
 
 	
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 1. 사용자 이메일아이디 받아오기.
-		String memberEamilId = request.getParameter("memberEamilId");
-		System.out.println("memberEamilId@servlet.doPost = " + memberEamilId);
-
 		
+		// 1. 사용자 이메일아이디 받아오기.
+		String memberEmailId = request.getParameter("memberEamilId");
+		System.out.println("memberEamilId@servlet.doPost = " + memberEmailId);
+
+		//블랙리스트 검사
+		response.setContentType("text/plain; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		int result = 0;
+		result = memberService.selectBlackList(memberEmailId);
+		if(result>0) {
+			out.print("Ban");
+			return;
+		}
 		
 		
 		// 2. 업무로직 이메일 보내기(랜덤값 만들기)
@@ -66,7 +79,7 @@ public class MemberSendEmailSevlet extends HttpServlet {
 		try {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("MEPLE"));//
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(memberEamilId));//받는사람이메일 입력받는곳
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(memberEmailId));//받는사람이메일 입력받는곳
 			message.setSubject("[미플] 이메일 인증번호입니다.");//제목
 			message.setText("인증번호는 ["+randomNumber + "] 입니다.");// 내용
 			System.out.println("send!!!");
@@ -80,8 +93,6 @@ public class MemberSendEmailSevlet extends HttpServlet {
 		
 		
 		//3. 응답처리
-		response.setContentType("text/plain; charset=utf-8");
-		PrintWriter out = response.getWriter();
 		//이메일보낸 random data 전달하기
 		out.print(randomNumber);
 	}

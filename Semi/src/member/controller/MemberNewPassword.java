@@ -1,8 +1,6 @@
 package member.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.MvcUtils;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
@@ -53,7 +52,7 @@ public class MemberNewPassword extends HttpServlet {
 		String email = request.getParameter("hidden_email");
 		
 		//새로운비밀번호
-		String newpassword = request.getParameter("new_password_input1");
+		String newpassword = MvcUtils.getSha512(request.getParameter("new_password_input1"));
 		
 		Member member = new Member();
 		member.setMemberId(memberId);
@@ -72,6 +71,8 @@ public class MemberNewPassword extends HttpServlet {
 			msg = "성공적으로 비밀번호를 변경했습니다.";
 			//세션의 정보도 갱신
 			session.setAttribute("loginMember", memberService.selectOne(memberId));
+			//인증코드 삭제
+			result=memberService.deleteCertification(memberId);
 		}
 		else 
 			msg = "비밀번호 변경에 실패했습니다.";	

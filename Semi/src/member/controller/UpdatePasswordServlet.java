@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import common.MvcUtils;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
@@ -39,8 +40,8 @@ public class UpdatePasswordServlet extends HttpServlet {
 		
 		//1. 사용자 입력값 처리 : 기존비밀번호/신규비밀번호 암호화처리 필수
 		String memberId = request.getParameter("id");
-		String oldPassword = request.getParameter("password");
-		String newPassword = request.getParameter("newPassword");
+		String oldPassword = MvcUtils.getSha512(request.getParameter("password"));
+		String newPassword = MvcUtils.getSha512(request.getParameter("newPassword"));
 		
 		//2. 기존비밀번호 비교 : session의 loginMember객체 이용할 것
 		HttpSession session = request.getSession();

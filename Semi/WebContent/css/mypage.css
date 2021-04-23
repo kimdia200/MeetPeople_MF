@@ -56,13 +56,12 @@ aside{
 전체 테이블
 */
 table.my {
-  border: 1px solid black;
   border-collapse: collapse;
   
 }
 .my tr,
 .my td {
-  border: 1px solid black;
+	 border: 1px solid lightgray;
 }
 /*
 기본정보, 개인정보수정, 비밀번호변경 테이블
@@ -73,13 +72,13 @@ table.my {
 	top: 100px;
 	height: 300px;
 	width: 700px; 
+	 border: 1px solid lightgray;
 }
 /*
 추가!!!!
 비밀번호변경  테이블
 */
 table.updatePasswordTable{
-	border: 1px solid black;
   border-collapse: collapse;
 }
 .updatePasswordTable{
@@ -88,10 +87,11 @@ table.updatePasswordTable{
 	top: 100px;
 	height: 200px;
 	width: 700px; 
+	border: 1px solid lightgray;
 }
 .updatePasswordTable tr,
 .updatePasswordTable td {
-	border: 1px solid black;
+	border: 1px solid lightgray;
 }
 
 
@@ -102,6 +102,11 @@ table.updatePasswordTable{
 	position: absolute;
 	left: 300px;
 	top: 50px;
+}
+.me2{
+	position: absolute;
+	left: 300px;
+	top: -25px;
 }
 /*
 나의모임 테이블
@@ -158,24 +163,37 @@ table.updatePasswordTable{
 개인정보 수정:btn2,3,4
 */
 .btn{
-	position: absolute;
-	top: 410px;
-	left: 900px;
+	width: 70px;
+    height: 30px;
+    background: white;
+    border-radius: 8px;
 }
 .btn2{
 	position: absolute;
 	top: 410px;
-	left: 765px;
+	left: 740px;
+	width: 70px;
+    height: 30px;
+    background: white;
+    border-radius: 8px;
 }
 .btn3{
 	position: absolute;
 	top: 410px;
-	left: 850px;
+	left: 820px;
+	width: 100px;
+    height: 30px;
+    background: white;
+    border-radius: 8px;
 }
 .btn4{
 	position: absolute;
 	top: 410px;
-	left: 960px;
+	left: 930px;
+	width: 70px;
+    height: 30px;
+    background: white;
+    border-radius: 8px;
 }
 /*
 좌측상단 마이페이지
@@ -200,6 +218,7 @@ table.updatePasswordTable{
 .up{
 	margin: 0px;
 	height: 25px;
+	border: 1px solid lightgray;
 }
 /*
 새로 추가!!!!
@@ -226,4 +245,10 @@ table.updatePasswordTable{
     width: 800px;
     margin: 65px 25% 0;
     padding-bottom: 50px;
+}
+::selection{
+
+background-color:rgba(0, 0, 0, 0.1);
+color:#fd9000;
+
 }

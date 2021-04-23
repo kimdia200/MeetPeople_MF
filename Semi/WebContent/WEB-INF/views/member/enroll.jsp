@@ -202,6 +202,11 @@
 			
 			//성공했을시
 			success: function(data){
+				if(data=="Ban"){
+					alert("가입이 제한된 이메일 입니다.");
+					return;
+				}
+				
 			confirmCode = data;
 			
 			//인증번호 박스, 버튼나타나기			

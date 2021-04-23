@@ -26,14 +26,16 @@ pageEncoding="UTF-8"%>
 	<div id="meetingViewWrapper">
 		<div id="meetingViewLeft">
 			<div id="imgWrapper">
-				<img src="<%=request.getContextPath() %>/upload/<%=m.getAttach().getRenamedFilename()%>"/>
+				<img id="imgTag" src="<%=request.getContextPath() %>/upload/<%=m.getAttach().getRenamedFilename()%>"/>
 			</div>
-			<div style="display:flex;">
+			<div id="imgSrcWrapper">
 				<input type="file" name="upFile">
 				<%if(m.getAttach().getRenamedFilename().equals("no_img.png")==false){ %>
+				<div id="imgSrcInfo">
 	 			<%= m.getAttach().getOriginalFilename()%>
 				<input type="checkbox" name="delfile" id="delFile" value="<%= m.getAttach().getAttachNo()%>"/>
 				<label for="delFile">삭제</label>
+				</div>
 				<% } %>
 			</div>
 			<div id="contentWrapper">
@@ -86,11 +88,22 @@ pageEncoding="UTF-8"%>
 					</tr>
 					<tr>
 						<th>참가비용</th>
-						<td><input type="number" name="cost" id="cost" required min="0" step="1000" value="<%=m.getCost()%>"/>원</td>
+						<td>
+							<div class="flex">
+								<span class="won">￦</span>
+								<input type="number" name="cost" id="cost" required min="0" step="1000" placeholder="참가비용"/>
+								<span class="won2">원</span>
+							</div>
+						</td>
 					</tr>
 					<tr>
 						<th>최대인원</th>
-						<td><input type="number" name="max" id="max" min="1" value="<%=m.getMaxPeople()%>" required/>명</td>
+						<td>
+							<div class="flex">
+								<input type="number" name="max" id="max" min="2" value="2" required/>
+								<span class="person">명</span>
+							</div>
+						</td>
 					</tr>
 				</table>
 				<input type="hidden" name="no" value="<%=m.getMeetingNo()%>" />
@@ -106,6 +119,9 @@ pageEncoding="UTF-8"%>
 	</div>
 	
 	<script>
+	
+	
+	
 	$(document).ready(function(){
 		$("#contentWrapper").summernote({
 	        width: 800,
@@ -113,6 +129,34 @@ pageEncoding="UTF-8"%>
 	        focus: true,
 	        disableResizeEditor: true,
 	    }).summernote("code",'<%=m.getContent()%>');
+		
+		$("[name=upFile]").on('change',function(){
+			var value = $("[name=upFile]").val();
+			if(value.length != 0){
+				var form = $('#updateFrm')[0];
+			    var formData = new FormData(form);
+					$.ajax({
+					url: "<%= request.getContextPath() %>/meeting/tempFile",
+					enctype: 'multipart/form-data',
+		            processData: false,
+		            contentType: false,
+					data : formData,
+					method: "POST",
+					
+					success: function(data){
+						console.log(data);
+						$("#imgTag").attr('src','<%=request.getContextPath() %>/upload/'+data+"?time="+new Date());
+					},
+					
+					error: function(xhr, status, error){
+						console.log("error call!");
+						console.log(xhr, status, error);
+					}
+				});
+			}else{
+				$("#imgTag").attr('src','<%=request.getContextPath() %>/upload/<%=m.getAttach().getRenamedFilename()%>');
+			}
+		});
 	})
 	
 	function updatee(){

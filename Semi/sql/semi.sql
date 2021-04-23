@@ -7,7 +7,10 @@
 --grant connect, resource to semi;
 
 --semi
+drop trigger trig_blackList;
 drop trigger trig_auto_participation;
+drop table blackList;
+drop table faq;
 drop table pwd_certification;
 drop table admin_board;
 drop table user_board_comment;
@@ -19,6 +22,8 @@ drop table member;
 drop table category;
 drop table location;
 
+drop sequence seq_blackList;
+drop sequence seq_faq;
 drop sequence seq_pwd_certification;
 drop sequence seq_admin_board;
 drop sequence seq_user_board_comment;
@@ -201,7 +206,54 @@ create table pwd_certification(
 
 create sequence seq_pwd_certification;
 
+--FAQ
+create table faq(
+    no number,
+    title varchar2(200),
+    content varchar2(4000),
+    constraint pk_faq_no primary key(no)
+);
+
+create sequence seq_faq;
+
+
+--블랙리스트 테이블
+create table blackList(
+    no number,
+    email varchar2(100)
+);
+create sequence seq_blackList;
+
+--블랙리스트 테이블에 insert시 자동으로 member테이블에서는 제외 될수있도록
+create or replace trigger trig_blackList
+    after
+    insert on blackList
+    for each row
+begin
+    delete member where email= :new.email;
+end;
+/
+
+
+
+
+
+
+
+
+
+
+insert into faq values(seq_faq.nextval, '제목제목제목제목제목10','1');
+select * from faq;
+
 commit;
+
+
+
+
+
+
+
 
 insert into meeting values(seq_meeting.nextval, '피아노 배우실분13', 'admin', '피아노 배우실분구합니다.', sysdate, '홍대','2021/05/05', 6, 10000, 'C1', 'L1');
 commit;
@@ -331,6 +383,25 @@ select * from attachment;
 commit;
 rollback;
 
+
 insert into attachment values(seq_attachment.nextval, 13, '11', '22', 'Y');
 
 update meeting set content='게임 하실분?' where meeting_no = 42;
+
+ 
+select * from member order by enroll_date desc;
+
+select * from member;
+
+update member set member_role='A' where member_id = 'kimdia2000';
+
+
+select * from pwd_certification;
+
+
+select * from member;
+
+update member set email='kimdia200@naver.com' where member_id = 'finaltest';
+commit;
+
+select * from blacklist;

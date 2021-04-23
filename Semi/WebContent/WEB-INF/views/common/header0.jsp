@@ -199,9 +199,10 @@
 		
 
 		<script>
-						<%if(msg!=null){%>
+			<%if(msg!=null){%>
 				alert("<%=msg%>");
 			<%}%>
+			<%if(loginMember == null){%>
 			$(signup_button).click(function(){
 				location.href="<%=request.getContextPath()%>/member/enroll";
 			});
@@ -228,7 +229,7 @@
 				$("#login_frame_div").attr('style', 'display:none;');
 				$("#login_frame_wrapper").attr('style', 'display:none;');
 			});
-			
+			<%}%>
 			
 			
 			$(document).ready(function(){
