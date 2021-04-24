@@ -46,10 +46,10 @@ div#search-boardTitle{
 	<h3 class="me2">내가 쓴 글</h3>
 <div id="boardListWrapper">
 	<%if(loginMember != null){ %>
-	<input type="button" value="글쓰기" id="btn-add"
+	<input type="button" value="글쓰기" id="btn-add" style="margin-right:0;"
 		onclick="location.href='<%= request.getContextPath() %>/board/boardEnroll?writer=<%= loginMember.getMemberId() %>'" />
 	<% } %>
-	<table id="tbl-board" style="width:800px;">
+	<table id="tbl-board" style="width:800px; margin-left:0px;">
 		<tr>
 			<th>번호</th>
 			<th>제목</th>
@@ -92,9 +92,9 @@ div#search-boardTitle{
 				</form>
 			</div>
 		</div>
-	</div>
 	<div id='pageBar'>
 		<%= request.getAttribute("pageBar") != null ? request.getAttribute("pageBar") : ""%>
+	</div>
 	</div>
 </div>
 <script>

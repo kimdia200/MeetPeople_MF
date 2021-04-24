@@ -48,7 +48,7 @@ public class MyBoardListServlet extends HttpServlet {
 			b.setCommentCnt(boardService.selectCommentCnt(b.getBoardNo()));
 		}
 		
-		int totalContents = boardService.selectMyBoardTotal();
+		int totalContents = boardService.selectMyBoardTotal(writer);
 		System.out.println("토탈컨텐츠 : " + totalContents);
 		String url = request.getRequestURI();
 		System.out.println(url);

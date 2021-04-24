@@ -404,8 +404,9 @@ select * from member;
 update member set email='kimdia200@naver.com' where member_id = 'finaltest';
 commit;
 
-select * from blacklist;
-
+select * from blacklist order by no asc;
+insert into blacklist values(seq_blacklist.nextval, 'test@naver.com' || seq_blacklist.currval);
+rollback;
 
 select * from member;
 
@@ -414,3 +415,5 @@ commit;
 rollback;
 select * from meeting order by meeting_no desc;
 update meeting set time = '21/04/24 15:04' where meeting_no=61;
+
+update member set password = '1234' where member_id='user2260';

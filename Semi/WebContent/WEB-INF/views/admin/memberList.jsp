@@ -97,7 +97,7 @@ $(document).ready(function(){
 });
 </script>
 <div id="memberList-container">
-    <h2>회원관리</h2>
+    <h2><span style="text-decoration:underline;">회원관리</span> | <a href="<%=request.getContextPath()%>/admin/blackList">블랙리스트</a></h2>
 
     <!-- 검색 -->
     <div id="search-container">

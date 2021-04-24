@@ -5,8 +5,11 @@
 	width: 1200px;
 	/*height: 350px;*/
 	margin: 0;
-	
+}
 
+#tbl-board  a{
+    margin-left: 15px;
+	
 }
 
 #btn-add{
@@ -21,6 +24,7 @@
     outline: 0;
     border-radius: 10%;
     margin: 0 0 15px;
+    margin-right: 111px;
 }/*수정*/
 
 #btn-add:hover{
@@ -33,21 +37,23 @@
 
 
 #tbl-board {
-	font-size: 14px;
-	clear: both;
-	border-collapse: collapse;
-	width: 1200px;
+    font-size: 14px;
+    clear: both;
+    border-collapse: collapse;
+    width: 980px;
+    margin-left: 110px;
+    font-weight: 900;
 	
 }/*수정*/
 
+
 #tbl-board th{
-	border-top: 2px solid lightgray;
-	border-bottom: 2px solid lightgray;
-	border-left: 2px solid lightgray;
-	border-right: 2px solid lightgray;
-	background-color: lightgray;
-    font-size: 13px;
+border-top: 3px solid gray;
+    border-bottom: 2px solid gray;
+    background-color: #ffaa22;
+    font-size: 16px;
     padding: 10px 4px;
+    color: white;
 }
 
 #tbl-board td{
@@ -55,13 +61,14 @@
 }
 
 #tbl-board td:nth-of-type(1) {
-	width: 50px;
-	/*border: 1px solid black;*/
-	border-top: 2px solid lightgray;
-	border-bottom: 2px solid lightgray;
-	border-left: 2px solid lightgray;
-	background-color : rgb(255, 214, 136);
-	font-size:12px;
+width: 50px;
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    font-size: 12px;
+    font-size: 14px;
+    color: black;
+    font-weight: 900;
+        border-right: 2px solid lightgray;
 }
 
 #tbl-board td:nth-of-type(2) {
@@ -93,7 +100,6 @@
 	/*border: 1px solid black;*/
 	border-top: 2px solid lightgray;
 	border-bottom: 2px solid lightgray;
-	border-right: 2px solid lightgray;
 }
 
 /*테이블 크기고정 */
@@ -104,12 +110,11 @@
 
 
 #tbl-board tr:nth-of-type(2n){
-	background-color: rgb(235, 235, 235);
 }
 
 #tbl-board tr:nth-of-type(2n):hover{
 	transition: all 0.3s;
-	background-color: #ff9c8a
+	background-color: #ffaa22e0;
 }
 
 #tbl-board tr:nth-of-type(2n+1){
@@ -118,7 +123,7 @@
 
 #tbl-board tr:nth-of-type(2n+1):hover{
 	transition: all 0.3s;
-	background-color: rgb(255, 228, 179);
+	background-color: #ffaa22e0;
 }
 
 .cPage{
@@ -137,14 +142,15 @@ input{
     height: 20px;
 }
 
-button{
-    width: 60px;
-    height: 30px;
-    background-color: gray;
+section button{
+    cursor: pointer;
+    background-color: #ffaa22;
     color: white;
-    border-radius: 10%;
-    border: 1px solid skyblue;
-    outline: 0;
+    width: 49px;
+    height: 28px;
+    border-color: none;
+    border: none;
+    border-radius: 5px;
 }
 button:hover{
     background-color: skyblue;
@@ -175,26 +181,35 @@ select#searchType{
 	margin: 0 auto; 
 	text-align: left
 }
-form input[value="등록"]{
-	border: 1px solid transparent;
-	outline: 0;
-}
-form input[value="수정"]{
-	border: 1px solid transparent;
-	outline: 0;
-}
+form input[value="등록"],
+form input[value="수정"],
 form input[value="취소"]{
 	border: 1px solid transparent;
 	outline: 0;
 }
+form input[value="등록"]:hover{
+	background-color:#fd9000;
+	transition: all ease 0.3s;
+	color: white;
+}
+form input[value="수정"]:hover{
+	background-color:#fd9000;
+	transition: all ease 0.3s;
+	color: white;
+}
 form input[value="취소"]:hover{
 	background-color:red;
+	transition: all ease 0.3s;
 	color: white;
 }
 
 
 
-
+#boardViewDesc{
+		
+	font-size: 20px;	
+	
+}
 
 
 /* boardView  게시글 볼때*/
@@ -209,9 +224,12 @@ form input[value="취소"]:hover{
 #boardViewRegDate{
 	font-size: x-small;
 	font-weight: bold;
+	font-size: 14px;
 }
 #boardViewWriter{
 	font-weight: bold;
+	font-size: 16px;
+	
 }
 #boardViewContent{
 	text-align:left;
@@ -230,6 +248,8 @@ form input[value="취소"]:hover{
 #boardViewRe{
 	clear:both;
 	min-height: 200px;
+	margin-top: 90px;
+    margin-bottom: 30px;
 }
 #boardViewBtnUpdate, #boardViewBtnDelete{
 	float:right;
@@ -260,32 +280,68 @@ form input[value="취소"]:hover{
 	color:white;
 }/*수정*/
 
-div#boardViewRe #btn-insert{width:60px; height:50px; color:white; background:rgb(255 214 136); position:relative; top:-20px; border: 1px solid lightgray; border-radius:15%; outline: 0;} /*수정*/
-div#boardViewRe #btn-insert:hover{background:#ff9c8a; transition: all ease 0.3s;} /*수정*/
+div#boardViewRe #btn-insert{
+	width: 65px;
+    height: 55px;
+    color: white;
+    background: orange;
+    position: relative;
+    top: -20px;
+    /* border: 1px solid lightgray; */
+    border-radius: 15%;
+    outline: 0;
+    font-size: 15px;
+    font-weight: 900;	
+    } /*수정*/
+div#boardViewRe #btn-insert:hover{background:#ffd88e; transition: all ease 0.3s;} /*수정*/
 
-table#tbl-comment{width:580px; margin:0 auto; border-collapse:collapse; } 
+table#tbl-comment{
+    padding-top: 30px;
+    margin-left: 220px;
+
+} 
 table#tbl-comment tr td{border-bottom:1px solid white; border-top:1px solid white; padding:5px; text-align:left; line-height:120%;}
 table#tbl-comment tr td:first-of-type {padding: 5px 5px 5px 10px;}/*수정*/
-table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;}
+/* table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;} */
 table#tbl-comment button.btn-reply{display:none; outline:0;}/*수정*/
-table#tbl-comment tr:hover {background:lightyellow;}
 table#tbl-comment tr:hover button.btn-reply{display:inline;}/*수정*/
-table#tbl-comment sub.comment-writer {color:navy; font-size:14px}
-table#tbl-comment sub.comment-date {color:tomato; font-size:10px}
+table#tbl-comment sub.comment-writer {
+	color: black;
+    font-weight: 900;
+    display: inline;
+    margin-left: 31px;
+    font-size: 16px;
+	}
+table#tbl-comment sub.comment-date {
+	color: white;
+    font-weight: 900;
+    margin-left: 407px;
+	}
 table#tbl-comment tr.level2 {color:gray; font-size: 14px;}
 table#tbl-comment tr.level2 td:first-of-type{padding-left:75px; text-align:left;}/*수정*/
-table#tbl-comment tr.level2 sub.comment-writer {color:#8e8eff; font-size:14px}
-table#tbl-comment tr.level2 sub.comment-date {color:#ff9c8a; font-size:10px}
+table#tbl-comment tr.level2 sub.comment-writer {
+	color:#0037fff7; font-size:14px; font-weight: 900;
+	
+	font-size: 16px;
+	}
+table#tbl-comment tr.level2 sub.comment-date {	color: white;
+    font-weight: 900;
+    margin-left: 407px;
+    
+    }
 
 /*댓글 말풍선*/
 
 table#tbl-comment tr.level1 .comment-level1{
 	position:relative; 
-	width:385px;
+	width:676px;
 	background:orange;
 	border-radius: 10px;
 	padding: 5px 7.5px 10px;
 	text-align: left;
+	height: 44px;
+	font-size: 18px;
+    line-height: 35px;
 }
 
 table#tbl-comment tr.level1 .comment-level1:after{
@@ -301,10 +357,13 @@ table#tbl-comment tr.level1 .comment-level1:after{
 
 table#tbl-comment tr.level2 .comment-level2{
 	position:relative; 
-	width:385px; 
+	width:676px; 
 	background:#ffd88e;
 	border-radius: 10px;
 	padding: 5px 7.5px 10px;
+	height: 44px;
+	font-size: 18px;
+    line-height: 35px;
 }
 
 table#tbl-comment tr.level2 .comment-level2:after{
@@ -318,13 +377,16 @@ table#tbl-comment tr.level2 .comment-level2:after{
 	left:50px;
 }
 
-table#tbl-comment button.btn-reply{background:lightgray; color:black; display:none; border: 1px solid transparent; border-radius: 15%;} /*수정*/
-table#tbl-comment button.btn-reply:hover{background:blue; color:white; transition: all ease 0.3s;} /*수정*/
-table#tbl-comment button.btn-delete{background:lightgray; color:black; display:none; border: 1px solid transparent; border-radius: 15%;} /*수정*/
+
+table#tbl-comment button.btn-reply{background:lightgray; height: 50px;width: 59px;color:black; display:none; border: 1px solid transparent; border-radius: 15%;} /*수정*/
+table#tbl-comment button.btn-reply:hover{background:#fd9000; color:white; transition: all ease 0.3s;} /*수정*/
+table#tbl-comment button.btn-delete{background:lightgray; width: 59px;color:black; display:none; border: 1px solid transparent; border-radius: 15%; height: 50px;} /*수정*/
 table#tbl-comment button.btn-delete:hover{background:red; color:white; transition: all ease 0.3s;} /*수정*/
 table#tbl-comment tr:hover button.btn-delete{display:inline;}
 textarea{
+	width: 700px;
 	resize:none;
+    margin-top: 14px;
 }
 
 /*대댓글*/
@@ -363,7 +425,7 @@ td [name=boardCommentFrm]{
 #pageBar span{
     border-radius: 15%;
     padding: 9px 15px;
-    background-color: skyblue;
+    background-color: orange;
     text-decoration: none;
     color: white;
 }
@@ -376,7 +438,7 @@ td [name=boardCommentFrm]{
 }
 
 #pageBar a:hover{
-    background-color: skyblue;
+    background-color: orange;
     color: white;
     transition: all ease 0.5s;
 }
@@ -387,4 +449,32 @@ td [name=boardCommentFrm]{
 }
 .searchKeyword{
 	width: 300px;
+}
+
+section h2 {
+	font-size: 32px;
+	
+}
+
+
+#comment-level1 > #text{
+	width:20px;
+	
+}
+
+.comment-content{
+	font-weight: 900;
+	margin-left: 41px;
+	font-size: 16px;
+	color:white;
+	
+}
+
+.btn-insert-reply-textarea{
+    width: 600px;
+    margin-left: 35px;
+}
+
+#boardListWrapper2{
+	
 }

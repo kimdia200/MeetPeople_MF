@@ -341,11 +341,11 @@ public class BoardService {
 
 	/*내가 쓴 글 페이지*/
 	
-	public int selectMyBoardTotal() {
+	public int selectMyBoardTotal(String writer) {
 		int result = 0;
 		Connection conn = getConnection();
 		try {
-			result = boardDao.selectMyBoardTotal(conn);
+			result = boardDao.selectMyBoardTotal(conn, writer);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

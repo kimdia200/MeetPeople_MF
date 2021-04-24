@@ -527,18 +527,20 @@ public class BoardDao {
 
 	/*내가 쓴 글 페이지*/
 	
-	public int selectMyBoardTotal(Connection conn) {
+	public int selectMyBoardTotal(Connection conn, String writer) {
 		int totalContents = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectMyBoardTotal");
+		System.out.println("selectMyBoardTotal@SQL = "+sql);
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			Board b = new Board();
-			pstmt.setString(1, b.getWriter());
-			
+			pstmt.setString(1, writer);
 			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				totalContents = rset.getInt("count(*)");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new SemiException("내가 쓴글 총 글수를 불러오지 못했습니다.",e);

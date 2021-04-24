@@ -601,7 +601,8 @@ left: 135px;
     position: absolute;
     z-index: 10;
     opacity: 0;
-    width: 50px;
+    margin-left: 5px;
+    width: 39px;
 	/* animation:icon_animation 1.5s 1.8s infinite alternate, icon_animation_appear 1.1s 1.2s; */
 }
 

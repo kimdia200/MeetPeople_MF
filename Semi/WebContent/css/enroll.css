@@ -82,16 +82,15 @@ padding-left: 45px;
 /*sumit버튼  */
 #enroll_sumit_button{
     box-shadow: 0px 0px 10px -5px #899599;
-    background-color: #ededed;
+    background-color: #ffa126;
     border-radius: 5px;
     border: 1px solid #d6bcd6;
     display: block;
     cursor: pointer;
-    color: #4c6369;
+    color: white;
     font-size: 17px;
     padding: 12px 60px;
     margin: auto;
-	
 }
 
 #enroll_sumit_button:hover{
