@@ -19,6 +19,7 @@ import java.util.Properties;
 
 import common.SemiException;
 import meeting.model.vo.Attachment;
+import meeting.model.vo.Chat;
 import meeting.model.vo.Meeting;
 
 public class MeetingDao {
@@ -418,6 +419,52 @@ public class MeetingDao {
 		}  catch (SQLException e) {
 			e.printStackTrace();
 			throw new SemiException("첨부파일 삭제 실패했습니다.",e);
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public List<Chat> selectChat(Connection conn, int no){
+		List<Chat> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectChat");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			list=new ArrayList<Chat>();
+			while(rset.next()) {
+				Chat c = new Chat();
+				c.setWriter(rset.getString("writer"));
+				c.setContent(rset.getString("contents"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("채팅 목록을 불러오지 못했습니다",e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public int insertChat(Connection conn, Chat c) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertChat");
+		//insert into meeting_chat values(seq_meeting_chat.nextval, ?, ?, ?, sysdate)
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, c.getMeetingNo());
+			pstmt.setString(2, c.getWriter());
+			pstmt.setNString(3, c.getContent());
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("채팅 추가 실패");
 		} finally {
 			close(pstmt);
 		}

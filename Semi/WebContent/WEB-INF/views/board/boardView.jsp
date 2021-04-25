@@ -18,6 +18,7 @@
 	href="<%=request.getContextPath() %>/css/board.css" />
 	
 	<h2>자유게시판</h2>
+	<br />
 	<hr />
 	<!-- 게시글 번호, 제목 -->
 	<div id="boardViewDesc">
@@ -62,14 +63,13 @@
 			%>  	<tr class="level1">
 						<td>
 							<div class="comment-level1">
-								<sub class="comment-writer"><%= bc.getWriter() %></sub>
+								<sub class="comment-writer"><%= bc.getWriter()!=null ? bc.getWriter() : "탈퇴회원" %></sub>
+								<sub class="comment-content"><%= bc.getContent() %></sub>
 								<sub class="comment-date"><%= bc.getRegDate() %></sub>
-								<br />
-								<%= bc.getContent() %>
 							</div>
 						</td>
 						<td>
-							<button class="btn-reply" value="<%= bc.getCommentNo() %>">답글</button>
+							<button class="btn-reply" value="<%= bc.getCommentNo() %>" style="margin-left:-72px;">답글</button>
 							<% if(removable){ %>
 							<button class="btn-delete" value="<%= bc.getCommentNo() %>">삭제</button>
 							<%} %>
@@ -79,10 +79,9 @@
 			   			<tr class="level2">
 						<td>
 							<div class="comment-level2">
-								<sub class="comment-writer"><%= bc.getWriter() %></sub>
+								<sub class="comment-writer"><%= bc.getWriter()!=null ? bc.getWriter() : "탈퇴회원" %></sub>
+								<sub class="comment-content"><%= bc.getContent() %></sub>
 								<sub class="comment-date"><%= bc.getRegDate() %></sub>
-								<br />
-								<%= bc.getContent() %>
 							</div>
 						</td>
 						<% if(removable){ %>
@@ -154,8 +153,8 @@
 		html += '<input type="hidden" name="writer" value="<%= loginMember != null ? loginMember.getMemberId() : "" %>" />';
 		html += '<input type="hidden" name="commentLevel" value="2" />';
 		html += '<input type="hidden" name="commentRef" value="' + $(this).val() + '" />';    
-		html += '<textarea name="content" cols="60" rows="2"></textarea>';
-		html += '<button type="submit" class="btn-insert-reply" style="background:blue; color:white;">등록</button>';
+		html += '<textarea class="btn-insert-reply-textarea" name="content" cols="60" rows="2"></textarea>';
+		html += '<button type="submit" class="btn-insert-reply" style="background-color: #fd9000;; color:white;">등록</button>';
 		html += '</form>';
 		html += "</td>";
 		html += "</tr>";

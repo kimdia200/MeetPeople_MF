@@ -129,5 +129,113 @@ pageEncoding="UTF-8"%>
 			}
 		}
 	</script>
+	<%if(loginMember!=null && (list.contains(loginMember.getMemberId())) || loginMember.getMemberRole().equals(MemberService.ADMIN_ROLE)){ %>
+	<div id="section2">
+      <div id="messagnerWrapper">
+        <div id="openMsg">
+          <img src="<%=request.getContextPath() %>/images/chatImg.png" alt="" onclick="openn();" />
+        </div>
+        <input type="button" id="closee" value="X　" onclick="closee()" />
+        <div id="backimg">
+          <img src="<%=request.getContextPath() %>/images/massanger.png" alt="" />
+        </div>
+        <div id="abss">
+          <div id="contextArea">
 
+			<div id="ajaxx">
+	            <div class="notme">
+	              <p class="chatwriter">writer</p>
+	              <div class="chatNotMe">
+	                <span>
+	                  conversation conversation conversation conversation
+	                </span>
+	              </div>
+	              <div style="clear: both"></div>
+	            </div>
+	
+	            <div class="me">
+	              <p class="chatwriter">writer</p>
+	              <div class="chatMe">
+	                <span>
+	                  conversation conversation conversation conversation
+	                </span>
+	              </div>
+	              <div style="clear: both"></div>
+	            </div>
+	          </div>
+          </div>
+
+          <div id="inputArea" class="msgFrm">
+              <input type="text" name="msgInput" id="msgInput" onkeyup="if(window.event.keyCode==13){inputSubmit()}" />
+              <input type="button" value="전송" onclick="inputSubmit();" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <%} %>
+  </body>
+  <script>
+  	var chat='';
+  
+    $(document).ready(function () {
+    	//마지막 대화상자가 표시되게 스크롤 맨밑으로
+    	ajaxx();
+    	setInterval(function () {
+            ajaxx();
+          }, 1000);
+    });
+    function inputSubmit(){
+    	if(confirm("메시지를 전송 하시겠습니까?")){
+    		$.ajax({
+    			url:"<%= request.getContextPath()%>/meeting/chat",
+    			method:"post",
+    			data:{
+    				no:<%=m.getMeetingNo()%>,
+    				contents:$("#msgInput").val(),
+    				writer:'<%=loginMember.getMemberId()%>'
+    			},
+    			success:function(data){
+    				//실패시 F, 성공시 T
+    				$("#msgInput").val("");
+    				ajaxx();
+    			},
+    			error:function(xhr, status, error){
+    				console.log(xhr, status, error);
+    			}
+    		});
+    	}
+    }
+    function ajaxx(){
+		$.ajax({
+			url:"<%= request.getContextPath()%>/meeting/chat",
+			data:{
+				no:<%=m.getMeetingNo()%>,
+				login:'<%=loginMember.getMemberId()%>'
+			},
+			success:function(data){
+				if(chat!=data){
+					$("#ajaxx").html(data);
+		    		settingChat();
+		    		chat=data;
+				}
+			},
+			error:function(xhr, status, error){
+				console.log(xhr, status, error);
+			}
+		});    	
+    }
+    function settingChat(){
+    	$("#contextArea").scrollTop($("#contextArea")[0].scrollHeight);
+    }
+    function closee() {
+    	//메신저 닫기
+      $("#section2").attr("style", "transform:translateY(0px);");
+      $("#openMsg").attr("style", "visibility: visible;");
+    }
+    function openn() {
+    	//메신저 열기
+      $("#section2").attr("style", "transform:translateY(-500px);");
+      $("#openMsg").attr("style", "visibility: hidden;");
+    }
+  </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

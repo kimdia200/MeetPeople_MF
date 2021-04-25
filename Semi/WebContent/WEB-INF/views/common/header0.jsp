@@ -192,7 +192,7 @@
 			<li class="header_title_li" onclick="location.href='<%=request.getContextPath()%>/admin/memberList';">
 			<img src="<%=request.getContextPath() %>/images/manage.png" id="li_manage_image" class="li_image"/>
 			<br />
-			<a href="<%=request.getContextPath()%>/admin/memberList">회원관리</a></li>
+			<a href="<%=request.getContextPath()%>/admin/memberList">관리</a></li>
 			<%} %>
 			<%-- <li><a href="<%=request.getContextPath()%>/admin/memberList">회원관리</a></li> --%>
 		</ol>

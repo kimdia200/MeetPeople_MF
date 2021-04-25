@@ -10,6 +10,7 @@ import java.util.List;
 
 import meeting.model.dao.MeetingDao;
 import meeting.model.vo.Attachment;
+import meeting.model.vo.Chat;
 import meeting.model.vo.Meeting;
 
 public class MeetingService {
@@ -202,6 +203,34 @@ public class MeetingService {
 			if(m.getAttach()!=null) {
 				result=meetingDao.insertAttach2(conn,m.getAttach());
 			}
+			commit(conn);
+		} catch (Exception e) {
+			rollback(conn);
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
+	public List<Chat> selectChat(int no) {
+		List<Chat> list = null;
+		Connection conn = getConnection();
+		try {
+			list = meetingDao.selectChat(conn, no);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return list;
+	}
+
+	public int insertChat(Chat c) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = meetingDao.insertChat(conn, c);
 			commit(conn);
 		} catch (Exception e) {
 			rollback(conn);

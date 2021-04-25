@@ -46,7 +46,6 @@
 	
 }/*수정*/
 
-
 #tbl-board th{
 border-top: 3px solid gray;
     border-bottom: 2px solid gray;
@@ -473,8 +472,4 @@ section h2 {
 .btn-insert-reply-textarea{
     width: 600px;
     margin-left: 35px;
-}
-
-#boardListWrapper2{
-	
 }

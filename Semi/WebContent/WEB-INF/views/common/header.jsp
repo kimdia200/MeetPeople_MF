@@ -132,7 +132,7 @@
 			<li><a href="<%=request.getContextPath()%>/board/adminBoardList" id="header_li10">공지사항</a></li>
 			
 			<%if(loginMember!=null && loginMember.getMemberRole().equals(MemberService.ADMIN_ROLE)) { %>
-			<li><a href="<%=request.getContextPath()%>/admin/memberList" id="header_li11">회원관리</a></li>
+			<li><a href="<%=request.getContextPath()%>/admin/memberList" id="header_li11">관리</a></li>
 			<%} %>
 		</ol>
 		</div>

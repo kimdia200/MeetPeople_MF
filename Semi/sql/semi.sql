@@ -9,6 +9,7 @@
 --semi
 drop trigger trig_blackList;
 drop trigger trig_auto_participation;
+drop table meeting_chat;
 drop table blackList;
 drop table faq;
 drop table pwd_certification;
@@ -22,6 +23,7 @@ drop table member;
 drop table category;
 drop table location;
 
+drop sequence seq_meeting_chat;
 drop sequence seq_blackList;
 drop sequence seq_faq;
 drop sequence seq_pwd_certification;
@@ -234,6 +236,20 @@ begin
 end;
 /
 
+--meeting테이블에 추가적으로 달아줄 실시간채팅테이블
+create table meeting_chat(
+    no number,
+    meeting_no number,
+    writer varchar2(100),
+    contents varchar2(2000),
+    reg_date date default sysdate,
+    constraint pk_meeting_chat_no primary key(no),
+    constraint fk_meeting_chat_mNo foreign key(meeting_no) references meeting(meeting_no) on delete cascade,
+    constraint fk_meeting_chat_writer foreign key(writer) references member(member_id) on delete cascade
+);
+--시퀀스 생성
+create sequence seq_meeting_chat;
+
 
 
 
@@ -417,3 +433,9 @@ select * from meeting order by meeting_no desc;
 update meeting set time = '21/04/24 15:04' where meeting_no=61;
 
 update member set password = '1234' where member_id='user2260';
+
+
+
+select * from meeting_chat order by reg_date asc    ;
+update meeting_chat set contents='~~~~시 까지 입니다.~~~~시 까지 입니다.~~~~시 까지 입니다.~~~~시 까지 입니다.~~~~시 까지 입니다.' where writer='dygks12';
+commit;
