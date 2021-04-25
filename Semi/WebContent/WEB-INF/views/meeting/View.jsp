@@ -129,7 +129,7 @@ pageEncoding="UTF-8"%>
 			}
 		}
 	</script>
-	<%if(loginMember!=null && (list.contains(loginMember.getMemberId())) || loginMember.getMemberRole().equals(MemberService.ADMIN_ROLE)){ %>
+	<%if(loginMember!=null && (list.contains(loginMember.getMemberId()) || loginMember.getMemberRole().equals(MemberService.ADMIN_ROLE))){ %>
 	<div id="section2">
       <div id="messagnerWrapper">
         <div id="openMsg">
@@ -175,6 +175,7 @@ pageEncoding="UTF-8"%>
     <%} %>
   </body>
   <script>
+  <%if(loginMember!=null && (list.contains(loginMember.getMemberId()) || loginMember.getMemberRole().equals(MemberService.ADMIN_ROLE))){ %>
   	var chat='';
   
     $(document).ready(function () {
@@ -237,5 +238,6 @@ pageEncoding="UTF-8"%>
       $("#section2").attr("style", "transform:translateY(-500px);");
       $("#openMsg").attr("style", "visibility: hidden;");
     }
+    <%}%>
   </script>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
