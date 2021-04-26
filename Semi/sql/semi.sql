@@ -439,3 +439,18 @@ update member set password = '1234' where member_id='user2260';
 select * from meeting_chat order by reg_date asc    ;
 update meeting_chat set contents='~~~~시 까지 입니다.~~~~시 까지 입니다.~~~~시 까지 입니다.~~~~시 까지 입니다.~~~~시 까지 입니다.' where writer='dygks12';
 commit;
+
+select * from meeting order by reg_date desc;
+update meeting set content ='dddd' where content='';
+
+commit;
+
+select * from tab;
+
+select * from anw_board;
+select * from claim_board;
+
+select * from meeting order by meeting_no desc;
+
+update meeting set content='동호회 모집!!!' where meeting_no = 146;
+commit;

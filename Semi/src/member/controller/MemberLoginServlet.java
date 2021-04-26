@@ -38,7 +38,7 @@ public class MemberLoginServlet extends HttpServlet {
 		if(member != null && memberPassword.equals(member.getPassword())) {
 			session.setAttribute("loginMember", member);
 			Cookie c = new Cookie("saveId", memberId);
-			c.setPath(request.getContextPath()); //path 쿠키를 전송할 url
+			c.setPath(request.getContextPath()+"/"); //path 쿠키를 전송할 url
 			
 			if(saveId != null) {
 				c.setMaxAge(60 * 60 * 24 * 7); //7일짜리 영속쿠키로 지정 

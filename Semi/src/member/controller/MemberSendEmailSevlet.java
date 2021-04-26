@@ -82,10 +82,10 @@ public class MemberSendEmailSevlet extends HttpServlet {
 			}
 		});
 		try {
-			Message message = new MimeMessage(session);
+			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("MEPLE"));//
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(memberEmailId));//받는사람이메일 입력받는곳
-			message.setSubject("[미플] 이메일 인증번호입니다.");//제목
+			message.setSubject("[미플] 이메일 인증번호입니다.","utf-8");//제목
 			message.setContent(new MimeMultipart());
 			Multipart mp = (Multipart) message.getContent();
 			mp.addBodyPart(

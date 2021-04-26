@@ -104,7 +104,7 @@ section{
 #pageBar span{
     border-radius: 15%;
     padding: 9px 15px;
-    background-color: skyblue;
+    background-color: #fd9000;
     text-decoration: none;
     color: white;
 }
@@ -117,13 +117,13 @@ section{
 }
 
 #pageBar a:hover{
-    background-color: skyblue;
+    background-color: #fd9000;
     color: white;
     transition: all ease 0.5s;
 }
 
 #pageBar a:active{
-    background-color: skyblue;
+    background-color: #fd9000;
     color: gray;
 }
 #search{

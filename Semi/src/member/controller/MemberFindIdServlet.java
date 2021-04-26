@@ -35,7 +35,7 @@ public class MemberFindIdServlet extends HttpServlet {
 			member = sendEmail.sendEmailId(member);
 			msg = "아이디가 이메일로 발송되었습니다.";
 			request.getSession().setAttribute("msg", msg);
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath()+"/");
 
 		} else {
 			msg = "아이디가 찾기가 실패하였습니다.";

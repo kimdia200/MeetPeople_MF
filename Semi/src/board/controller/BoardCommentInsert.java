@@ -27,6 +27,9 @@ public class BoardCommentInsert extends HttpServlet {
 		int commentLevel = Integer.parseInt(request.getParameter("commentLevel"));
 		int commentRef = Integer.parseInt(request.getParameter("commentRef"));
 		String content = request.getParameter("content");
+		if(content==null) {
+			content=" ";
+		}
 		
 		BoardComment bc = new BoardComment(0, commentLevel, writer, content, boardNo, commentRef, null);
 		

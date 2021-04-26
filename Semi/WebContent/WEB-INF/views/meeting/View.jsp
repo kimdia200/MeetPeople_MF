@@ -144,20 +144,10 @@ pageEncoding="UTF-8"%>
 
 			<div id="ajaxx">
 	            <div class="notme">
-	              <p class="chatwriter">writer</p>
+	              <p class="chatwriter">운영자</p>
 	              <div class="chatNotMe">
 	                <span>
-	                  conversation conversation conversation conversation
-	                </span>
-	              </div>
-	              <div style="clear: both"></div>
-	            </div>
-	
-	            <div class="me">
-	              <p class="chatwriter">writer</p>
-	              <div class="chatMe">
-	                <span>
-	                  conversation conversation conversation conversation
+	                  		대화를 시작해주세요!!
 	                </span>
 	              </div>
 	              <div style="clear: both"></div>

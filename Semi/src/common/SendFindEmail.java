@@ -68,10 +68,10 @@ public class SendFindEmail {
 			}
 		});
 		try {
-			Message message = new MimeMessage(session);
+			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("MEPLE"));//
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));// 받는사람이메일 입력받는곳
-			message.setSubject("[미플] 비밀번호 변경 링크 메일입니다!");// 제목
+			message.setSubject("[미플] 비밀번호 변경 링크 메일입니다!","utf-8");// 제목
 //			message.setText(mail+"  해당링크를 클릭해서 비밀번호를 변경하세요.");// 내용
 
 			message.setContent(new MimeMultipart());
@@ -171,10 +171,10 @@ public class SendFindEmail {
 			}
 		});
 		try {
-			Message message = new MimeMessage(session);
+			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("MEPLE"));//
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));// 받는사람이메일 입력받는곳
-			message.setSubject("[미플] 아이디 찾기 메일입니다.");// 제목
+			message.setSubject("[미플] 아이디 찾기 메일입니다.","utf-8");// 제목
 			message.setContent(new MimeMultipart());
 			Multipart mp = (Multipart) message.getContent();
 			mp.addBodyPart(

@@ -89,8 +89,8 @@
 			<h1 id="information_in_image1">지금 바로 원하는 지역의 모임 </h1>
 			
 			<h1 id="information_in_image2">미플 </h1>
-			<h1 id="login_count1">현재 <a id="memberCount"></a>명의 회원이 미플과 함께하고 있어요.</h1>
-			<h1 id="login_count2"><a id="meetingCount"></a>개의 모임에 지금 바로참여하세요  :)</h1>
+			<h1 id="login_count1" class="background_ment">현재 <a id="memberCount"></a>명의 회원이 미플과 함께하고 있어요.</h1>
+			<h1 id="login_count2" class="background_ment"><a id="meetingCount"></a>개의 모임에 지금 바로참여하세요  :)</h1>
 			</div>
 			<img src="<%=request.getContextPath()%>/images/meet.jpg" id="login_image">
 			</div>

@@ -51,6 +51,9 @@ public class MeetingEnrollServlet extends HttpServlet {
 		
 		String title = multipartRequest.getParameter("title");
 		String content = multipartRequest.getParameter("content");
+		if(content.equals("") || content.length()==0) {
+			content=" "; 
+		}
 		String category = multipartRequest.getParameter("category");
 		String location = multipartRequest.getParameter("location");
 		String place = multipartRequest.getParameter("place");

@@ -7,9 +7,8 @@
 	margin: 0;
 }
 
+/*수정*/
 #tbl-board  a{
-    margin-left: 15px;
-	
 }
 
 #btn-add{
@@ -302,19 +301,23 @@ table#tbl-comment{
 table#tbl-comment tr td{border-bottom:1px solid white; border-top:1px solid white; padding:5px; text-align:left; line-height:120%;}
 table#tbl-comment tr td:first-of-type {padding: 5px 5px 5px 10px;}/*수정*/
 /* table#tbl-comment tr td:last-of-type {text-align:right; width: 100px;} */
-table#tbl-comment button.btn-reply{display:none; outline:0;}/*수정*/
+table#tbl-comment button.btn-reply{display:none; outline:0; margin:0}/*수정*/
 table#tbl-comment tr:hover button.btn-reply{display:inline;}/*수정*/
 table#tbl-comment sub.comment-writer {
 	color: black;
     font-weight: 900;
     display: inline;
-    margin-left: 31px;
     font-size: 16px;
+    position:absolute;
+    left:10px;
+    top:10px;
 	}
 table#tbl-comment sub.comment-date {
 	color: white;
     font-weight: 900;
-    margin-left: 407px;
+    position:absolute;
+    right:10px;
+    top:10px;
 	}
 table#tbl-comment tr.level2 {color:gray; font-size: 14px;}
 table#tbl-comment tr.level2 td:first-of-type{padding-left:75px; text-align:left;}/*수정*/
@@ -338,7 +341,7 @@ table#tbl-comment tr.level1 .comment-level1{
 	border-radius: 10px;
 	padding: 5px 7.5px 10px;
 	text-align: left;
-	height: 44px;
+	min-height: 44px;
 	font-size: 18px;
     line-height: 35px;
 }
@@ -360,7 +363,7 @@ table#tbl-comment tr.level2 .comment-level2{
 	background:#ffd88e;
 	border-radius: 10px;
 	padding: 5px 7.5px 10px;
-	height: 44px;
+	min-height: 44px;
 	font-size: 18px;
     line-height: 35px;
 }
@@ -377,7 +380,7 @@ table#tbl-comment tr.level2 .comment-level2:after{
 }
 
 
-table#tbl-comment button.btn-reply{background:lightgray; height: 50px;width: 59px;color:black; display:none; border: 1px solid transparent; border-radius: 15%;} /*수정*/
+table#tbl-comment button.btn-reply{background:lightgray; height: 50px;width: 59px;color:black; display:none; border: 1px solid transparent; border-radius: 15%; margin-left:-72px;} /*수정*/
 table#tbl-comment button.btn-reply:hover{background:#fd9000; color:white; transition: all ease 0.3s;} /*수정*/
 table#tbl-comment button.btn-delete{background:lightgray; width: 59px;color:black; display:none; border: 1px solid transparent; border-radius: 15%; height: 50px;} /*수정*/
 table#tbl-comment button.btn-delete:hover{background:red; color:white; transition: all ease 0.3s;} /*수정*/
@@ -463,13 +466,21 @@ section h2 {
 
 .comment-content{
 	font-weight: 900;
-	margin-left: 41px;
-	font-size: 16px;
-	color:white;
-	
+    width: 494px;
+    font-size: 16px;
+    color: white;
+    margin-left: 100px;
+    margin-top: 6px
 }
 
 .btn-insert-reply-textarea{
     width: 600px;
     margin-left: 35px;
+}
+
+/*newBoard css*/
+
+span#newBoard{
+	font-size:10px;
+	color:red;
 }

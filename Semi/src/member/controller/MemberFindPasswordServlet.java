@@ -2,7 +2,6 @@ package member.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +35,7 @@ public class MemberFindPasswordServlet extends HttpServlet {
 			member = sendEmail.sendEmailPassword(member);
 			msg = "이메일로 비밀번호 변경링크 메일이 발송되었습니다.";
 			request.getSession().setAttribute("msg", msg);
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath()+"/");
 
 
 		} else {

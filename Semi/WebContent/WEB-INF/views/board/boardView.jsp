@@ -64,12 +64,12 @@
 						<td>
 							<div class="comment-level1">
 								<sub class="comment-writer"><%= bc.getWriter()!=null ? bc.getWriter() : "탈퇴회원" %></sub>
-								<sub class="comment-content"><%= bc.getContent() %></sub>
+								<div class="comment-content"><%= bc.getContent() %></div>
 								<sub class="comment-date"><%= bc.getRegDate() %></sub>
 							</div>
 						</td>
 						<td>
-							<button class="btn-reply" value="<%= bc.getCommentNo() %>" style="margin-left:-72px;">답글</button>
+							<button class="btn-reply" value="<%= bc.getCommentNo() %>">답글</button>
 							<% if(removable){ %>
 							<button class="btn-delete" value="<%= bc.getCommentNo() %>">삭제</button>
 							<%} %>
@@ -80,7 +80,7 @@
 						<td>
 							<div class="comment-level2">
 								<sub class="comment-writer"><%= bc.getWriter()!=null ? bc.getWriter() : "탈퇴회원" %></sub>
-								<sub class="comment-content"><%= bc.getContent() %></sub>
+								<div class="comment-content"><%= bc.getContent() %></div>
 								<sub class="comment-date"><%= bc.getRegDate() %></sub>
 							</div>
 						</td>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.BoardService;
 import board.model.vo.Board;
+import board.model.vo.BoardComment;
 
 @WebServlet("/board/boardUpdate")
 public class BoardUpdateServlet extends HttpServlet {
@@ -60,7 +61,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		request.setAttribute("board", board);
 		
 		List<Integer> list = boardService.selectBoardNumList();
-		
+		List<BoardComment> commentList = boardService.selectCommentList(board.getBoardNo());
 		int prev=0;
 		int next=0;
 		
@@ -100,6 +101,7 @@ public class BoardUpdateServlet extends HttpServlet {
 		request.setAttribute("prev", prevBoard);
 		request.setAttribute("next", nextBoard);
 		request.setAttribute("cPage", cPage);
+		request.setAttribute("commentList", commentList);
 		
 		//3. 이동
 		request.getRequestDispatcher("/WEB-INF/views/board/boardView.jsp").forward(request, response);

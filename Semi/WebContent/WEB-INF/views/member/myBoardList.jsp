@@ -1,3 +1,5 @@
+<%@page import="java.util.GregorianCalendar"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="board.model.vo.Board"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -67,6 +69,15 @@ div#search-boardTitle{
 		<tr>
 			<td><%= b.getBoardNo()%></td>
 			<td>
+				<% 
+					//new 구현
+					Calendar cal1 = Calendar.getInstance();
+					Calendar cal2 = new GregorianCalendar(cal1.get(Calendar.YEAR), cal1.get(Calendar.MONTH), cal1.get(Calendar.DAY_OF_MONTH));
+					long now = cal2.getTimeInMillis();
+					long regDate = b.getRegDate().getTime();
+					if(now - regDate <= (1000*60*60*24*3)) {%>
+					<span id="newBoard">[new]</span>
+				<%} %>
 				<a
 				href="<%= request.getContextPath()%>/board/boardView?no=<%=b.getBoardNo()%>&cPage=<%=cPage %>">
 					<%= b.getTitle() %> <%= b.getCommentCnt() != 0 ? " ("+b.getCommentCnt()+")":"" %>
