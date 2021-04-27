@@ -50,7 +50,11 @@ public class BoardDao {
 				Board b = new Board();
 				b.setBoardNo(rset.getInt("board_no"));
 				b.setTitle(rset.getString("title"));
-				b.setWriter(rset.getString("writer"));
+				String writer = rset.getString("writer");
+				if(writer==null) {
+					writer = "탈퇴회원";
+				}
+				b.setWriter(writer);
 //				b.setContent(rset.getString("content"));
 				b.setRegDate(rset.getDate("reg_date"));
 				b.setReadCnt(rset.getInt("read_cnt"));
@@ -146,7 +150,11 @@ public class BoardDao {
 //				board = new Board(boardNo, title, writer, content, regDate, commentCnt)
 				board.setBoardNo(boardNo);
 				board.setTitle(rset.getString("title"));
-				board.setWriter(rset.getString("writer"));
+				String writer = rset.getString("writer");
+				if(writer==null) {
+					writer = "탈퇴회원";
+				}
+				board.setWriter(writer);
 				board.setContent(rset.getString("content"));
 				board.setRegDate(rset.getDate("reg_date"));
 				board.setReadCnt(rset.getInt("read_cnt"));
@@ -237,7 +245,11 @@ public class BoardDao {
 				BoardComment bc = new BoardComment();
 				bc.setCommentNo(rset.getInt("comment_no"));
 				bc.setCommentLevel(rset.getInt("comment_level"));
-				bc.setWriter(rset.getString("writer"));
+				String writer = rset.getString("writer");
+				if(writer==null) {
+					writer = "탈퇴회원";
+				}
+				bc.setWriter(writer);
 				bc.setContent(rset.getString("content"));
 				bc.setBoardNo(rset.getInt("board_no"));
 				bc.setCommentRef(rset.getInt("comment_ref"));
@@ -308,7 +320,11 @@ public class BoardDao {
 				Board b = new Board();
 				b.setBoardNo(rset.getInt("board_no"));
 				b.setTitle(rset.getString("title"));
-				b.setWriter(rset.getString("writer"));
+				String writer = rset.getString("writer");
+				if(writer==null) {
+					writer = "탈퇴회원";
+				}
+				b.setWriter(writer);
 //				b.setContent(rset.getString("content"));
 				b.setRegDate(rset.getDate("reg_date"));
 				b.setReadCnt(rset.getInt("read_cnt"));
@@ -381,7 +397,11 @@ public class BoardDao {
 //				board = new Board(boardNo, title, writer, content, regDate, commentCnt)
 				board.setBoardNo(boardNo);
 				board.setTitle(rset.getString("title"));
-				board.setWriter(rset.getString("writer"));
+				String writer = rset.getString("writer");
+				if(writer==null) {
+					writer = "탈퇴회원";
+				}
+				board.setWriter(writer);
 				board.setContent(rset.getString("content"));
 				board.setRegDate(rset.getDate("reg_date"));
 			}

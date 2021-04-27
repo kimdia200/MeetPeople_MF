@@ -28,7 +28,7 @@
         <div class="contact">
             <h1>고객센터</h1>
             <hr>
-            <a href="<%= request.getContextPath() %>/claim/claimMenu">문의하기 <i class="fas fa-external-link-alt"></i></a>
+            <a href="<%= request.getContextPath() %>/claim/claimEnroll">문의하기 <i class="fas fa-external-link-alt"></i></a>
             <p>Tel : 010-6353-4583 (평일 09:00 ~ 18:00)</p>
             <p>Mail : meetpeople_kh@gmail.com</p>
         </div>

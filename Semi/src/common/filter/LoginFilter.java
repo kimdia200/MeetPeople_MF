@@ -34,7 +34,12 @@ import member.model.vo.Member;
 	"/member/myBoardFinder",
 	"/member/myBoardList",
 	"/member/mypage",
-	"/member/updatePassword"
+	"/member/updatePassword",
+	"/claim/claimEnroll",
+    "/claim/claimList",
+    "/claim/claimView",
+    "/claim/answer",
+    "/claim/claimMenu"
 })
 public class LoginFilter implements Filter {
 

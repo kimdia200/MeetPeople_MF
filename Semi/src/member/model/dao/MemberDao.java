@@ -661,7 +661,34 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memberEmailId);
-			result = pstmt.executeUpdate();
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				result=rset.getInt("count(*)");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new SemiException("블랙리스트 조회 실패",e);
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int selectEmail(Connection conn, String memberEmailId) {
+		int result =0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectEmail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memberEmailId);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				result=rset.getInt("count(*)");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new SemiException("블랙리스트 조회 실패",e);

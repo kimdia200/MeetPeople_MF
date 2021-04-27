@@ -352,4 +352,17 @@ public class MemberService {
 		return result;
 	}
 
+	public int selectEmail(String memberEmailId) {
+		int result = 0;
+		Connection conn = getConnection();
+		try {
+			result = memberDao.selectEmail(conn, memberEmailId);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			close(conn);
+		}
+		return result;
+	}
+
 }

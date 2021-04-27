@@ -43,11 +43,19 @@ public class MemberSendEmailSevlet extends HttpServlet {
 		String memberEmailId = request.getParameter("memberEamilId");
 		System.out.println("memberEamilId@servlet.doPost = " + memberEmailId);
 
-		//블랙리스트 검사
 		response.setContentType("text/plain; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
+		//이메일 중복검사
 		int result = 0;
+		result = memberService.selectEmail(memberEmailId);
+		if(result>0) {
+			out.print("overlap");
+			return;
+		}
+		
+		//블랙리스트 검사
+		result=0;
 		result = memberService.selectBlackList(memberEmailId);
 		if(result>0) {
 			out.print("Ban");

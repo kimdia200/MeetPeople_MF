@@ -1,13 +1,9 @@
 package common;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Properties;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -19,20 +15,9 @@ import javax.sql.DataSource;
  * 예외처리를 공통 부분에서 작성 하므로, 사용(호출)하는 쪽의 코드를 간결히 할 수 있다.
  */
 public class JDBCTemplate {
-	private static String driverClass;
+	private static String driverClass = "oracle.jdbc.OracleDriver";
 	
 	static{
-		Properties prop = new Properties();
-		String fileName = JDBCTemplate.class.getResource("/data-source.properties").getPath();
-		try {
-			prop.load(new FileReader(fileName));
-			driverClass = prop.getProperty("driverClass");
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		
 		try {
 			Class.forName(driverClass);
 		} catch (ClassNotFoundException e) {
