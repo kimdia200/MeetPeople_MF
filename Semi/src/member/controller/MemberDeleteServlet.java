@@ -43,7 +43,7 @@ public class MemberDeleteServlet extends HttpServlet {
 				response.addCookie(c);
 				session.invalidate();
 			}
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath()+"/");
 		}
 		else {
 			session.setAttribute("msg", "회원정보삭제에 실패했습니다.");
