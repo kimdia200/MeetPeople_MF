@@ -1,4 +1,4 @@
-# KH-SEMI_Project(MeetPeople) 미트피플 사이트 [클릭](http://meetpeople.com)
+# KH-SEMI_Project(MeetPeople) 미트피플 사이트 [클릭](http://meetpeople.kro.kr)
 
 ## 1. 개요
 
