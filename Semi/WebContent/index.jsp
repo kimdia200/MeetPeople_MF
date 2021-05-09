@@ -4,7 +4,7 @@
 pageEncoding="UTF-8"%>
 
 
-<%@ include file="/WEB-INF/views/common/header0.jsp"%>
+<jsp:include page="/WEB-INF/views/common/header0.jsp"></jsp:include>
 	<!-- 지역별 -->
 	<div class="titleWrapper">
 		<h4>지역　　</h4> <div onclick="left1()">&lt</div><div onclick="right1()">&gt</div>
@@ -179,4 +179,4 @@ pageEncoding="UTF-8"%>
 		//#recent 좌우 움직이는 스크립트(AJax동적생성)
 	</script>
 	
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
